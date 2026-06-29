@@ -1,0 +1,3730 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>우라가미 6국면 · 한국·일본 현재 국면</title>
+<style>
+  :root{
+    --bg:#F7F6F2; --surface:#FFFFFF; --surface-0:#F1EFE9;
+    --ink:#1C1C1A; --ink2:#56554F; --ink3:#8A8983;
+    --line:#E4E2DB; --line2:#D0CDC4;
+    --blue:#1F6BB5; --blue-bg:#E8F0F9; --blue-line:#9FC3E6; --blue-stroke:#2E7BC4;
+    --amber:#945610; --amber-bg:#F7EEDD; --amber-line:#E0B878; --amber-stroke:#BE7A1C;
+    --gray:#6E6D67; --gray-bg:#ECEAE4; --gray-line:#CFCCC3; --gray-stroke:#A6A49C;
+    --mono:"SF Mono",ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Malgun Gothic","Segoe UI",sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#1A1A18; --surface:#222220; --surface-0:#2A2A27;
+      --ink:#ECEBE4; --ink2:#A8A69D; --ink3:#74726A;
+      --line:#34332F; --line2:#45443F;
+      --blue:#75B2EF; --blue-bg:#16314A; --blue-line:#2C5478; --blue-stroke:#4F97DD;
+      --amber:#E2A44C; --amber-bg:#3A2B12; --amber-line:#6C5120; --amber-stroke:#CE8A2A;
+      --gray:#A8A69D; --gray-bg:#2B2B28; --gray-line:#3E3D39; --gray-stroke:#8E8C84;
+    }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); -webkit-font-smoothing:antialiased; line-height:1.6; padding:32px 20px;}
+  .wrap{max-width:880px; margin:0 auto;}
+  .eyebrow{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink3); margin:0 0 4px;}
+  h1{font-size:24px; font-weight:600; margin:0 0 4px; letter-spacing:-0.01em;}
+  .sub{font-size:14px; color:var(--ink2); margin:0 0 22px; max-width:64ch;}
+  .secrow{display:flex; align-items:baseline; justify-content:space-between; margin:0 0 12px; gap:12px; flex-wrap:wrap;}
+  .sectitle{font-size:13px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink3);}
+  .asof{font-size:12px; color:var(--ink3); font-family:var(--mono);}
+  .reads{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:26px;}
+  .mcard{border:0.5px solid var(--line); border-radius:14px; padding:16px 18px; background:var(--surface); cursor:pointer; transition:border-color .15s;}
+  .mcard:hover{border-color:var(--line2);}
+  .mcard.act{border-width:1.5px;}
+  .mctop{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:2px;}
+  .cc{font-size:16px; font-weight:600;}
+  .mkt{font-size:11px; color:var(--ink3); font-family:var(--mono);}
+  .badge{font-size:11.5px; font-weight:600; padding:3px 9px; border-radius:999px; white-space:nowrap;}
+  .phase{font-size:19px; font-weight:600; letter-spacing:-0.01em; margin:6px 0 2px;}
+  .leadline{font-size:12.5px; color:var(--ink2); margin-bottom:12px;}
+  .leadline b{font-weight:600;}
+  .mtab{display:grid; grid-template-columns:auto 1fr; gap:5px 12px; font-size:12.5px; margin-bottom:12px;}
+  .mtab .ml{color:var(--ink3);}
+  .mtab .mv{text-align:right; font-variant-numeric:tabular-nums;}
+  .mtab .mv b{font-weight:600;}
+  .mtab .mn{color:var(--ink3); font-size:11px;}
+  .mtab .msrc{color:var(--ink3); font-size:11px; text-decoration:none; border-bottom:0.5px dotted var(--line2); cursor:pointer; transition:color .12s,border-color .12s;}
+  .mtab .msrc:hover{color:var(--blue); border-bottom-color:var(--blue);}
+  .mtab .msrc .lk{font-size:9px; vertical-align:1px; opacity:0.7;}
+  .why{font-size:12.5px; color:var(--ink2); border-top:0.5px solid var(--line); padding-top:10px;}
+  .csec{font-size:11.5px; color:var(--ink2); margin-top:10px; padding-top:9px; border-top:0.5px dashed var(--line2); line-height:1.5;}
+  .csec .cl{font-size:10px; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; margin-right:7px; white-space:nowrap;}
+  .csec b{color:var(--ink); font-weight:600;}
+  .pxwarn{font-size:11.5px; margin-top:10px; padding:8px 11px; border-radius:9px; background:var(--amber-bg); color:var(--amber); border:0.5px solid var(--amber-line); line-height:1.5;}
+  .pxwarn b{font-weight:700;}
+  .pxok{font-size:11px; color:var(--ink3); margin-top:10px;}
+  .pxinfo{font-size:11.5px; margin-top:10px; padding:8px 11px; border-radius:9px; background:var(--blue-bg); color:var(--blue); border:0.5px solid var(--blue-line); line-height:1.5;}
+  .pxinfo b{font-weight:700;}
+  .histtbl{width:100%; border-collapse:collapse; margin-top:8px; font-size:12.5px;}
+  .histtbl thead th{text-align:left; padding:7px 10px; border-bottom:0.5px solid var(--line2); font-size:11px; letter-spacing:0.03em; text-transform:uppercase; color:var(--ink2); font-weight:600;}
+  .histtbl td{padding:5px 10px; border-bottom:0.5px solid var(--line);}
+  .histtbl .hm{font-family:var(--mono); font-size:11.5px; color:var(--ink2); white-space:nowrap;}
+  .hchip{display:inline-block; padding:2px 9px; border-radius:999px; font-size:11.5px; font-weight:600; white-space:nowrap;}
+  .hgate{font-size:10px; color:var(--ink3); margin-left:5px;}
+  .histtbl .hrow{cursor:pointer; transition:background .12s;}
+  .histtbl .hrow:hover{background:var(--surface-0);}
+  .histtbl .hrow.act{background:var(--surface-0);}
+  .histtbl .hrow.act td:first-child{box-shadow:inset 3px 0 0 var(--ink);}
+  .histtbl .hopen{font-size:11px; color:var(--ink3); text-align:right; white-space:nowrap;}
+  .chartcard{background:var(--surface); border:0.5px solid var(--line); border-radius:14px; padding:10px 8px 4px;}
+  .legend{display:flex; gap:18px; flex-wrap:wrap; font-size:12.5px; color:var(--ink2); margin:0 0 8px; align-items:center; padding:0 4px;}
+  .legend span{display:inline-flex; align-items:center; gap:7px;}
+  .sw{width:16px; height:3px; border-radius:2px; display:inline-block;}
+  .hint{color:var(--ink3); margin-left:auto;}
+  .crect{fill:transparent; cursor:pointer; outline:none;}
+  .crect:hover{fill:var(--ink); fill-opacity:0.05;}
+  .crect:focus-visible{fill:var(--ink); fill-opacity:0.08;}
+  .panel{margin-top:14px; border:0.5px solid var(--line); border-radius:14px; padding:18px 20px; background:var(--surface);}
+  .phead{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:16px;}
+  .ptitle{font-size:19px; font-weight:600; letter-spacing:-0.01em;}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:16px;}
+  .cell{border:0.5px solid var(--line); border-radius:11px; padding:12px; text-align:center; background:var(--surface);}
+  .cell.lead{border-width:1.5px;}
+  .clab{font-size:12px; color:var(--ink3); margin-bottom:6px;}
+  .garrow{font-size:28px; line-height:1; font-weight:500;}
+  .cword{font-size:13px; color:var(--ink2); margin-top:5px;}
+  .ltag{font-size:10px; font-weight:600; margin-top:7px; padding:2px 8px; border-radius:999px; display:inline-block;}
+  .meta{display:grid; grid-template-columns:88px 1fr; gap:9px 14px; font-size:13.5px; align-items:baseline;}
+  .meta .k{color:var(--ink3);}
+  .mono{font-family:var(--mono); font-size:12px; background:var(--surface-0); border:0.5px solid var(--line); border-radius:6px; padding:2px 8px; white-space:nowrap;}
+  .pnote{color:var(--ink2); font-size:12px; margin-left:7px;}
+  .sectors{border-top:0.5px solid var(--line); margin-top:15px; padding-top:13px;}
+  .stitle{font-size:11px; letter-spacing:0.05em; text-transform:uppercase; color:var(--ink3); margin-bottom:9px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .skind{font-size:10px; font-weight:600; padding:2px 8px; border-radius:999px;}
+  .sgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:7px;}
+  .schip{font-size:12.5px; color:var(--ink2); background:var(--surface-0); border:0.5px solid var(--line); border-radius:8px; padding:7px 11px; line-height:1.45;}
+  .schip b{color:var(--ink); font-weight:600;}
+  .snote{font-size:12.5px; color:var(--ink2); line-height:1.55;}
+  /* 섹터 로테이션 & 종목 익스포저 */
+  .exprot{margin:0 0 14px; padding:12px 15px; border-radius:11px; border:0.5px solid var(--amber-line); background:var(--amber-bg); font-size:12.5px; color:var(--ink2); line-height:1.6;}
+  .exprot b{color:var(--amber); font-weight:600;}
+  .exprot .rin b{color:var(--amber);} .exprot .rout b{color:var(--blue);}
+  .expsum{font-size:12px; color:var(--ink3); margin:0 0 13px; font-family:var(--mono); line-height:1.5;}
+  .expdisc{font-size:11px; color:var(--ink3); margin:12px 0 0; line-height:1.55;}
+  .expdisc b{color:var(--ink2); font-weight:600;}
+  /* 핵심 숏리스트 */
+  .shortlist{margin:0 0 16px; display:flex; flex-direction:column; gap:8px;}
+  .shortrow{display:flex; align-items:flex-start; gap:10px;}
+  .shortlab{flex:none; font-size:10.5px; font-weight:700; letter-spacing:0.04em; padding:4px 9px; border-radius:7px; white-space:nowrap; margin-top:1px;}
+  .shortrow.long .shortlab{background:var(--amber-bg); color:var(--amber);}
+  .shortrow.short .shortlab{background:var(--blue-bg); color:var(--blue);}
+  /* 섹터 타일 (접힘/펼침) */
+  .expgrid{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  @media (max-width:760px){ .expgrid{grid-template-columns:1fr;} }
+  .expside{border:0.5px solid var(--line); border-radius:13px; padding:6px 15px 10px; background:var(--surface);}
+  .expside.long{border-color:var(--amber-line);} .expside.short{border-color:var(--blue-line);}
+  .exphead{font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; padding:11px 0 4px; display:flex; align-items:center; justify-content:space-between; gap:8px;}
+  .expside.long .exphead{color:var(--amber);} .expside.short .exphead{color:var(--blue);}
+  .expcnt{font-size:10.5px; font-weight:600; padding:2px 8px; border-radius:999px;}
+  .expside.long .expcnt{background:var(--amber-bg); color:var(--amber);}
+  .expside.short .expcnt{background:var(--blue-bg); color:var(--blue);}
+  .exprow{border-top:0.5px solid var(--line); padding:9px 0; cursor:pointer;}
+  .exprow:hover .expsname{color:var(--ink);}
+  .exprowhd{display:flex; align-items:baseline; justify-content:space-between; gap:10px;}
+  .expsname{flex:none; font-size:12.5px; color:var(--ink); font-weight:600; white-space:nowrap;}
+  .exprowmeta{display:flex; align-items:baseline; gap:8px; min-width:0; font-size:11px; color:var(--ink3);}
+  .exprowmeta .sc{flex:none; font-family:var(--mono); white-space:nowrap;}
+  .exppv{color:var(--ink2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .exptog{flex:none; font-family:var(--mono); color:var(--ink3); font-weight:600;}
+  .exprowbody{margin-top:8px;}
+  .expchips{display:flex; flex-wrap:wrap; gap:5px;}
+  .expchip{font-size:11.5px; color:var(--ink2); background:var(--surface-0); border:0.5px solid var(--line); border-radius:7px; padding:4px 8px; line-height:1.3; white-space:nowrap;}
+  .expchip b{color:var(--ink); font-weight:600;} .expchip .mc{color:var(--ink3); font-family:var(--mono); font-size:10px; margin-left:4px;}
+  .expnote{font-size:12.5px; color:var(--ink3); line-height:1.55; padding:4px 0 6px;}
+  table{width:100%; border-collapse:collapse; margin-top:24px; font-size:13px;}
+  caption{text-align:left; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink3); margin-bottom:8px;}
+  th,td{text-align:left; padding:9px 10px; border-bottom:0.5px solid var(--line);}
+  thead th{font-weight:600; color:var(--ink2); font-size:11.5px; letter-spacing:0.03em; text-transform:uppercase; border-bottom:0.5px solid var(--line2);}
+  tbody tr{cursor:pointer;}
+  tbody tr:hover{background:var(--surface-0);}
+  tbody tr.active{background:var(--surface-0);}
+  tbody tr.active td:first-child{box-shadow:inset 3px 0 0 var(--rowcol, var(--ink));}
+  td .nm{font-weight:600;}
+  td .mn{font-family:var(--mono); font-size:11.5px; color:var(--ink2);}
+  tbody td:nth-child(-n+5){white-space:nowrap;}  /* 국면·실질금리·실적·주가·주도 한 줄 고정 */
+  .sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);}
+  .foot{font-size:12px; color:var(--ink3); margin-top:20px; line-height:1.7;}
+  .foot b{color:var(--ink2); font-weight:600;}
+  @media (max-width:640px){ .reads{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Uragami four-season cycle · 실질금리 재해석 · live read</p>
+  <h1>한국·일본 현재 국면</h1>
+  <p class="sub">매크로(금리·물가·실적) 입력으로 두 시장을 6국면 사이클 위에 찍었습니다. 주가 화살표는 분류 입력이 아니라 기대 페이오프·포지션으로만 씁니다. 아래 데이터는 2026년 6월 말 기준 스냅샷이며, 카드와 곡선·표는 모두 연동됩니다.</p>
+
+  <div class="secrow">
+    <span class="sectitle">현재 국면<span id="viewtag" style="text-transform:none;letter-spacing:0"></span></span>
+    <span class="asof">as of 2026-06-28</span>
+  </div>
+  <div class="reads" id="reads"></div>
+
+  <div class="secrow">
+    <span class="sectitle">6국면 사이클 · 위치</span>
+  </div>
+  <div class="legend">
+    <span><i class="sw" style="background:var(--blue-stroke)"></i>금리 주도</span>
+    <span><i class="sw" style="background:var(--amber-stroke)"></i>실적 주도</span>
+    <span><i class="sw" style="background:var(--gray-stroke)"></i>전이</span>
+    <span class="hint">국면 클릭 · ● 현재 위치</span>
+  </div>
+
+  <div class="chartcard">
+  <svg width="100%" viewBox="0 0 680 272" role="img" aria-labelledby="svgt svgd">
+    <title id="svgt">주가 사이클 파동 위의 6국면과 한국·일본 현재 위치</title>
+    <desc id="svgd">한국·일본의 현재 국면을 6국면 곡선 위에 점으로 표시.</desc>
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    </defs>
+
+    <line x1="40" y1="210" x2="640" y2="210" stroke="var(--line2)" stroke-width="0.5"/>
+    <line x1="330" y1="40" x2="330" y2="210" stroke="var(--line)" stroke-width="0.5" stroke-dasharray="3 4"/>
+
+    <rect id="hlband" x="40" y="34" width="100" height="176" rx="7" fill="var(--ink)" fill-opacity="0.06"/>
+
+    <line x1="40"  y1="200" x2="140" y2="90"  stroke="var(--blue-stroke)"  stroke-width="3" stroke-linecap="round"/>
+    <line x1="140" y1="90"  x2="230" y2="100" stroke="var(--gray-stroke)"  stroke-width="3" stroke-linecap="round"/>
+    <line x1="230" y1="100" x2="330" y2="40"  stroke="var(--amber-stroke)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="330" y1="40"  x2="440" y2="150" stroke="var(--blue-stroke)"  stroke-width="3" stroke-linecap="round"/>
+    <line x1="440" y1="150" x2="540" y2="140" stroke="var(--gray-stroke)"  stroke-width="3" stroke-linecap="round"/>
+    <line x1="540" y1="140" x2="640" y2="200" stroke="var(--amber-stroke)" stroke-width="3" stroke-linecap="round"/>
+
+    <circle id="hldot" cx="280" cy="52" r="5" fill="var(--surface)" stroke="var(--amber-stroke)" stroke-width="2"/>
+
+    <circle cx="330" cy="40" r="3.5" fill="var(--ink)"/>
+    <text x="330" y="29" text-anchor="middle" font-size="12" fill="var(--ink2)" font-family="var(--sans)">천장 · 급반전</text>
+    <circle cx="640" cy="200" r="3.5" fill="var(--ink)"/>
+    <text x="628" y="194" text-anchor="end" font-size="12" fill="var(--ink2)" font-family="var(--sans)">바닥 · 급반전</text>
+
+    <!-- 시장별 현재 위치 점 — READS.pin 으로 동적 렌더(buildPins). 하드코딩 금지 -->
+    <g id="pins"></g>
+
+    <text x="90"  y="231" text-anchor="middle" font-size="12.5" id="t0" fill="var(--ink2)" font-family="var(--sans)">금융장세</text>
+    <text x="185" y="231" text-anchor="middle" font-size="12.5" id="t1" fill="var(--ink3)" font-family="var(--sans)">중간반락</text>
+    <text x="280" y="231" text-anchor="middle" font-size="12.5" id="t2" fill="var(--ink2)" font-family="var(--sans)">실적장세</text>
+    <text x="385" y="231" text-anchor="middle" font-size="12.5" id="t3" fill="var(--ink2)" font-family="var(--sans)">역금융장세</text>
+    <text x="490" y="231" text-anchor="middle" font-size="12.5" id="t4" fill="var(--ink3)" font-family="var(--sans)">중간반등</text>
+    <text x="590" y="231" text-anchor="middle" font-size="12.5" id="t5" fill="var(--ink2)" font-family="var(--sans)">역실적장세</text>
+
+    <path d="M640 246 C 640 268, 40 268, 40 246" fill="none" stroke="var(--ink3)" stroke-width="0.5" stroke-dasharray="4 4" marker-end="url(#arr)"/>
+    <text x="340" y="264" text-anchor="middle" font-size="12" fill="var(--ink3)" font-family="var(--sans)">순환 반복 · 바닥에서 금융장세로</text>
+
+    <rect class="crect" x="40"  y="34" width="100" height="176" tabindex="0" role="button" aria-label="금융장세"   onclick="sel(0)" onkeydown="kd(event,0)"/>
+    <rect class="crect" x="140" y="34" width="90"  height="176" tabindex="0" role="button" aria-label="중간반락"   onclick="sel(1)" onkeydown="kd(event,1)"/>
+    <rect class="crect" x="230" y="34" width="100" height="176" tabindex="0" role="button" aria-label="실적장세"   onclick="sel(2)" onkeydown="kd(event,2)"/>
+    <rect class="crect" x="330" y="34" width="110" height="176" tabindex="0" role="button" aria-label="역금융장세" onclick="sel(3)" onkeydown="kd(event,3)"/>
+    <rect class="crect" x="440" y="34" width="100" height="176" tabindex="0" role="button" aria-label="중간반등"   onclick="sel(4)" onkeydown="kd(event,4)"/>
+    <rect class="crect" x="540" y="34" width="100" height="176" tabindex="0" role="button" aria-label="역실적장세" onclick="sel(5)" onkeydown="kd(event,5)"/>
+  </svg>
+  </div>
+
+  <div class="panel" id="panel" aria-live="polite"></div>
+
+  <table>
+    <caption>통합 룰북</caption>
+    <thead><tr><th>국면</th><th>실질금리</th><th>실적</th><th>주가</th><th>주도</th><th>식별 핵심</th><th>포지션</th></tr></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+  <div class="secrow" style="margin-top:28px">
+    <span class="sectitle">월별 국면 히스토리 · 2024-01~</span>
+    <span class="asof">최근월 상단 · 칩에 dRR·dE</span>
+  </div>
+  <div id="histwrap"></div>
+
+  <div class="secrow" style="margin-top:28px">
+    <span class="sectitle">섹터 로테이션 & 종목 익스포저<span id="expphase" style="text-transform:none;letter-spacing:0"></span></span>
+    <span class="asof">KOSPI 200 · KOSDAQ 150 · 시총순</span>
+  </div>
+  <div id="exposure"></div>
+
+  <p class="foot">
+    <b>데이터</b> 한국 국채10년 4.08%(’26-06-17), CPI 3.1%(5월), 수출 +53.2%·반도체 +169%(5월). 일본 국채10년 ~2.65%(5월 고점 2.8%), 코어CPI ~2.8%, FY26 성장 0.5%로 하향. 출처 Trading Economics, MOTIE/관세청, BOJ, CNBC, Nikkei.<br>
+    <b>한계</b> 브라우저 아티팩트는 ECOS·FRED를 직접 호출할 수 없어(키·CORS) 이 화면은 수동 스냅샷입니다. 진짜 자동 갱신은 ECOS+FRED를 끌어와 이 HTML을 재생성하는 파이썬 잡(스크립트의 READS 객체만 교체)으로 돌리면 됩니다.<br>
+    <b>주의</b> 주가 화살표는 검증축·익스포저 맵으로만 사용. 분류기 피처로 넣으면 순환참조.
+  </p>
+</div>
+
+<script>
+  const G={up2:'\u2191',up1:'\u2197',flat:'\u2192',down1:'\u2198',down2:'\u2193'};
+  const SEG=[[40,200,140,90],[140,90,230,100],[230,100,330,40],[330,40,440,150],[440,150,540,140],[540,140,640,200]];
+  const BAND=[[40,100],[140,90],[230,100],[330,110],[440,100],[540,100]];
+  const P=[
+    {k:'금융장세',c:'blue',lead:'금리',ll:'금리 주도',rate:['down2','강하락'],earn:['down1','완만악화'],px:['up2','강상승'],rule:'dRR<0 & |dRR|>|dE|',ruleko:'실질금리 하락이 주도 (완화)',pos:'최대 롱',note:'그로스·시클리컬 풀 틸트',
+     season:'봄 · 유동성 장세',
+     sectors:{kind:'good',title:'주도 섹터',items:['<b>IT·플랫폼</b> 인터넷·클라우드·AI — 무형자산·장기 듀레이션, 저금리 최대 수혜','<b>제약·바이오</b> 장기 R&D 성장','<b>증권</b> 유동성·거래대금','<b>재정관련</b> 건설·토목·부동산 (사회보장↑·SOC↓로 수혜 축소)','<b>유틸리티</b> 전력·가스 · 항공·방송']}},
+    {k:'중간반락',c:'gray',lead:null,ll:'전이 (주도 없음)',rate:['flat','횡보'],earn:['flat','횡보'],px:['flat','횡보'],rule:'데드존 & 직전=금융',ruleko:'데드존(무신호) · 직전이 금융장세',pos:'그로스 축소',note:'평활화 길게, 휩소 제거',
+     season:'봄→여름 전이',
+     sectors:{kind:'transition',title:'전이 국면',note:'뚜렷한 주도 섹터 없음. 봄(금융) 주도주 차익실현 후 여름(실적) 소재주로 손바꿈 준비.'}},
+    {k:'실적장세',c:'amber',lead:'실적',ll:'실적 주도',rate:['up1','완만상승'],earn:['up2','강개선'],px:['up1','완만상승'],rule:'dE>0 & |dE|>|dRR|',ruleko:'실적 개선이 주도 (가속)',pos:'롱 (강도 ½)',note:'경기민감 이익베타',
+     season:'여름 · 실적 장세',
+     sectors:{kind:'good',title:'주도 섹터',items:['<b>은행</b> 짧은 듀레이션 가치주, 순이자마진(NIM)이 동인 — 실적장세 초과수익','<b>전반(소재)</b> 철강·종합화학·제지·시멘트·비철금속','<b>후반(가공)</b> 산업·정밀기계·로봇·FA·사무기기·소비주','<b>말미</b> 고성장 중소형주']}},
+    {k:'역금융장세',c:'blue',lead:'금리',ll:'금리 주도',rate:['up2','강상승'],earn:['up1','완만개선'],px:['down2','강하락'],rule:'dRR>0 & |dRR|>|dE|',ruleko:'실질금리 상승이 주도 (긴축)',pos:'강한 방어 / 숏',note:'듀레이션 축소, 저변동',
+     season:'가을 · 역금융 장세',
+     sectors:{kind:'avoid',title:'회피·방어 전환',items:['<b>최대 타격</b> 금융·철도·부동산·증권주 (금리 부담)','<b>선하락</b> 재무 취약 소재·전력주','<b>방어 전환</b> 통신·담배·식품·게임 등 내수 방어주']}},
+    {k:'중간반등',c:'gray',lead:null,ll:'전이 (주도 없음)',rate:['flat','횡보'],earn:['flat','횡보'],px:['flat','횡보'],rule:'데드존 & 직전=역금융',ruleko:'데드존(무신호) · 직전이 역금융장세',pos:'중립, 반등 페이드',note:'베어마켓 랠리 경계',
+     season:'가을→겨울 전이',
+     sectors:{kind:'transition',title:'전이 국면',note:'뚜렷한 주도 섹터 없음. 베어마켓 랠리 경계 — 반등은 페이드 대상.'}},
+    {k:'역실적장세',c:'amber',lead:'실적',ll:'실적 주도',rate:['down1','완만하락'],earn:['down2','강악화'],px:['down1','완만하락'],rule:'dE<0 & |dE|>|dRR|',ruleko:'실적 악화가 주도 (둔화)',pos:'방어적 축소',note:'현금·고배당, 저변동',
+     season:'겨울 · 역실적 장세',
+     sectors:{kind:'contrarian',title:'방어 + 역발상 기회',items:['<b>내수 방어주</b> 통신·담배·식품·게임','<b>경기방어</b> 제약 — 필수 헬스케어','<b>구조적 가치(한국)</b> 교육 — 저출산發 저성장 가치주','<b>역발상</b> 무차별 투매 속 우량주(다음 봄 주도주) 저가 매수']}}
+  ];
+
+  /* ── 단일 데이터 소스 (자동 갱신 시 이 객체만 교체) ── */
+  const READS=[
+  {
+    "cc": "한국",
+    "mkt": "KOSPI",
+    "phase": 2,
+    "watch": null,
+    "metrics": [
+      [
+        "국채 10년",
+        "4.07%",
+        "ECOS 국고채10년",
+        "https://ecos.bok.or.kr/",
+        "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+      ],
+      [
+        "CPI (YoY)",
+        "3.14%",
+        "ECOS 총지수",
+        "https://ecos.bok.or.kr/",
+        "ECOS 901Y009 소비자물가지수 총지수"
+      ],
+      [
+        "실질금리",
+        "0.93%",
+        "10Y − CPI",
+        null,
+        null
+      ],
+      [
+        "수출 (YoY)",
+        "56.84%",
+        "ECOS 수출금액지수",
+        "https://ecos.bok.or.kr/",
+        "ECOS 403Y001 수출금액지수"
+      ]
+    ],
+    "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.18, dE=+2.33).",
+    "pin": [
+      280,
+      70
+    ],
+    "pxchk": {
+      "name": "KOSPI",
+      "mom": 115.9,
+      "yoy": 214.2,
+      "expect": 1,
+      "actual": 1,
+      "diverge": false
+    },
+    "gated": null,
+    "hist": [
+      {
+        "m": "2024-01",
+        "phase": 3,
+        "gated": "실적장세",
+        "dRR": -0.2,
+        "dE": 1.18,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "3.35%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.82%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.53%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "15.71%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "매크로 신호는 실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 역금융장세로 판정. dRR=-0.20, dE=+1.18.",
+        "pin": [
+          385,
+          95
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": -5.1,
+          "yoy": 3.0,
+          "expect": -1,
+          "actual": -1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-02",
+        "phase": 3,
+        "gated": "실적장세",
+        "dRR": -0.16,
+        "dE": 0.54,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "3.48%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "3.13%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.35%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "3.59%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "매크로 신호는 실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 역금융장세로 판정. dRR=-0.16, dE=+0.54.",
+        "pin": [
+          385,
+          95
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 3.4,
+          "yoy": 9.5,
+          "expect": -1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-03",
+        "phase": 4,
+        "gated": "실적장세",
+        "dRR": 0.17,
+        "dE": 0.19,
+        "watch": "역실적장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "3.41%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "3.10%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.31%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "1.13%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "매크로 신호는 실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 중간반등로 판정. dRR=+0.17, dE=+0.19.",
+        "pin": [
+          490,
+          145
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 11.4,
+          "yoy": 10.9,
+          "expect": 0,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-04",
+        "phase": 0,
+        "gated": "역금융장세",
+        "dRR": 0.3,
+        "dE": -0.34,
+        "watch": "중간반락 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "3.66%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.92%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.73%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "12.88%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 금융장세로 판정. dRR=+0.30, dE=-0.34.",
+        "pin": [
+          90,
+          145
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 18.2,
+          "yoy": 7.6,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-05",
+        "phase": 1,
+        "gated": "역금융장세",
+        "dRR": 0.59,
+        "dE": -0.03,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "3.58%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.67%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.91%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "9.91%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 중간반락로 판정. dRR=+0.59, dE=-0.03.",
+        "pin": [
+          185,
+          95
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 4.0,
+          "yoy": 2.3,
+          "expect": 0,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-06",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 0.69,
+        "dE": 0.25,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "3.27%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.41%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.86%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "7.89%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.69, dE=+0.25.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 5.4,
+          "yoy": 9.1,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-07",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 0.47,
+        "dE": 0.39,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "3.06%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.55%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.51%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "14.79%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.47, dE=+0.39.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 11.0,
+          "yoy": 5.2,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-08",
+        "phase": 2,
+        "gated": "중간반등",
+        "dRR": 0.26,
+        "dE": 0.11,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "3.09%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.01%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "1.08%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "7.89%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "매크로 신호는 중간반등이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.26, dE=+0.11.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 1.2,
+          "yoy": 4.6,
+          "expect": 1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-09",
+        "phase": 2,
+        "gated": "중간반등",
+        "dRR": 0.26,
+        "dE": -0.22,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "2.99%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "1.60%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "1.40%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "4.55%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "매크로 신호는 중간반등이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.26, dE=-0.22.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": -5.6,
+          "yoy": 5.2,
+          "expect": 1,
+          "actual": -1,
+          "diverge": true
+        }
+      },
+      {
+        "m": "2024-10",
+        "phase": 3,
+        "gated": "중간반등",
+        "dRR": 1.04,
+        "dE": -0.56,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "3.10%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "1.25%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "1.85%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "6.03%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "매크로 신호는 중간반등이나, 주가 강세(검증축)가 하락 국면을 부정 → 역금융장세로 판정. dRR=+1.04, dE=-0.56.",
+        "pin": [
+          385,
+          95
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": -5.0,
+          "yoy": 12.2,
+          "expect": -1,
+          "actual": -1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-11",
+        "phase": 3,
+        "gated": "중간반등",
+        "dRR": 1.03,
+        "dE": -0.75,
+        "watch": "중간반등 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "2.75%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "1.53%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "1.22%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "-0.40%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "매크로 신호는 중간반등이나, 주가 강세(검증축)가 하락 국면을 부정 → 역금융장세로 판정. dRR=+1.03, dE=-0.75.",
+        "pin": [
+          385,
+          95
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": -6.9,
+          "yoy": -3.1,
+          "expect": -1,
+          "actual": -1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-12",
+        "phase": 5,
+        "gated": null,
+        "dRR": 0.52,
+        "dE": -0.53,
+        "watch": "금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "2.85%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "1.93%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.92%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "7.72%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.52, dE=-0.53).",
+        "pin": [
+          590,
+          170
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": -14.2,
+          "yoy": -9.6,
+          "expect": -1,
+          "actual": -1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-01",
+        "phase": 0,
+        "gated": null,
+        "dRR": -0.78,
+        "dE": -0.76,
+        "watch": "중간반락 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "2.86%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.24%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.61%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "-10.84%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=-0.78, dE=-0.76).",
+        "pin": [
+          90,
+          145
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": -9.1,
+          "yoy": 0.8,
+          "expect": 1,
+          "actual": -1,
+          "diverge": true
+        }
+      },
+      {
+        "m": "2025-02",
+        "phase": 0,
+        "gated": null,
+        "dRR": -1.15,
+        "dE": -0.44,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "2.71%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.02%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.68%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "0.68%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=-1.15, dE=-0.44).",
+        "pin": [
+          90,
+          145
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": -5.3,
+          "yoy": -4.1,
+          "expect": 1,
+          "actual": -1,
+          "diverge": true
+        }
+      },
+      {
+        "m": "2025-03",
+        "phase": 0,
+        "gated": null,
+        "dRR": -1.02,
+        "dE": -0.75,
+        "watch": "중간반락 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "2.77%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.05%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.72%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "0.53%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=-1.02, dE=-0.75).",
+        "pin": [
+          90,
+          145
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": -4.3,
+          "yoy": -9.7,
+          "expect": 1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-04",
+        "phase": 0,
+        "gated": null,
+        "dRR": -0.45,
+        "dE": 0.23,
+        "watch": "중간반락 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "2.56%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.08%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.48%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "2.82%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=-0.45, dE=+0.23).",
+        "pin": [
+          90,
+          145
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 0.0,
+          "yoy": -5.0,
+          "expect": 1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-05",
+        "phase": 1,
+        "gated": null,
+        "dRR": -0.05,
+        "dE": 0.09,
+        "watch": "실적장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "2.79%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "1.90%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.88%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "-1.96%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.05, dE=+0.09).",
+        "pin": [
+          185,
+          95
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 9.8,
+          "yoy": 2.3,
+          "expect": 0,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-06",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.04,
+        "dE": 0.37,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "2.81%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.17%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.64%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "2.87%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.04, dE=+0.37).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 28.0,
+          "yoy": 9.8,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-07",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.22,
+        "dE": -0.06,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "2.79%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.09%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.69%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "4.12%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=+0.22, dE=-0.06).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 28.9,
+          "yoy": 17.1,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-08",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.24,
+        "dE": 0.17,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "2.81%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "1.67%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "1.15%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "1.90%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=+0.24, dE=+0.17).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 25.8,
+          "yoy": 19.1,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-09",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.37,
+        "dE": 0.43,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "2.95%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.10%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.85%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "11.96%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.37, dE=+0.43).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 38.0,
+          "yoy": 32.1,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-10",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.25,
+        "dE": 0.24,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "3.06%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.38%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.68%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "-0.63%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=+0.25, dE=+0.24).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 60.7,
+          "yoy": 60.7,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-11",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.03,
+        "dE": 0.37,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "3.34%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.45%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.90%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "8.98%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.03, dE=+0.37).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 45.6,
+          "yoy": 59.9,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-12",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.01,
+        "dE": 0.16,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "3.38%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.31%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "1.07%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "14.73%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.01, dE=+0.16).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 37.2,
+          "yoy": 75.6,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-01",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.48,
+        "dE": 1.63,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "3.61%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.01%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "1.60%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "37.07%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.48, dE=+1.63).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 61.0,
+          "yoy": 107.5,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-02",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.89,
+        "dE": 1.99,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "3.45%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.00%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "1.45%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "28.64%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.89, dE=+1.99).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 96.0,
+          "yoy": 146.5,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-03",
+        "phase": 2,
+        "gated": null,
+        "dRR": 1.08,
+        "dE": 2.92,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "3.88%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.16%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "1.72%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "52.60%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+1.08, dE=+2.92).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 47.5,
+          "yoy": 103.6,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-04",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.43,
+        "dE": 2.08,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "3.92%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.57%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "1.35%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "50.21%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.43, dE=+2.08).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 60.7,
+          "yoy": 158.1,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-05",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.18,
+        "dE": 2.33,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "4.07%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "3.14%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.93%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "56.84%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.18, dE=+2.33).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 115.9,
+          "yoy": 214.2,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      }
+    ]
+  },
+  {
+    "cc": "일본",
+    "mkt": "TOPIX · Nikkei",
+    "phase": 2,
+    "watch": null,
+    "metrics": [
+      [
+        "국채 10년",
+        "2.52%",
+        "FRED JGB10Y",
+        "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+        "FRED IRLTLT01JPM156N · Japan 10Y"
+      ],
+      [
+        "CPI (YoY)",
+        "1.35%",
+        "e-Stat 総合",
+        "https://www.e-stat.go.jp/dbview?sid=0003427113",
+        "e-Stat 0003427113 · 消費者物価指数 全国総合"
+      ],
+      [
+        "실질금리",
+        "1.17%",
+        "10Y − CPI",
+        null,
+        null
+      ],
+      [
+        "수출 (YoY)",
+        "3.97%",
+        "FRED 일본 수출액",
+        "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+        "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+      ],
+      [
+        "생산 (YoY)",
+        "2.36%",
+        "e-Stat 鉱工業 (참고)",
+        "https://www.e-stat.go.jp/dbview?sid=0004052181",
+        "e-Stat 0004052181 · 鉱工業生産指数"
+      ]
+    ],
+    "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.71, dE=-0.50.",
+    "pin": [
+      280,
+      70
+    ],
+    "pxchk": {
+      "name": "Nikkei 225",
+      "mom": 13.1,
+      "yoy": 64.5,
+      "expect": 1,
+      "actual": 1,
+      "diverge": false
+    },
+    "gated": "역금융장세",
+    "hist": [
+      {
+        "m": "2024-01",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 1.02,
+        "dE": 0.12,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "0.73%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "2.10%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.37%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "0.27%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "-1.49%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.02, dE=+0.12.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 9.4,
+          "yoy": 32.8,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-02",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 0.99,
+        "dE": 0.08,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "0.71%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "2.79%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-2.08%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "-4.23%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "-3.67%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.99, dE=+0.08.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 20.1,
+          "yoy": 42.7,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-03",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 0.84,
+        "dE": -0.18,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "0.72%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "2.68%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.96%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "-4.08%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "-6.22%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.84, dE=-0.18.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 26.7,
+          "yoy": 44.0,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-04",
+        "phase": 2,
+        "gated": "역실적장세",
+        "dRR": 0.09,
+        "dE": -0.37,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "0.87%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "2.47%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.60%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "-6.01%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "-1.95%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.09, dE=-0.37.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 24.5,
+          "yoy": 33.1,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-05",
+        "phase": 2,
+        "gated": "역실적장세",
+        "dRR": 0.17,
+        "dE": -0.28,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "1.07%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "2.85%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.78%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "-0.10%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "0.72%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.17, dE=-0.28.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 14.9,
+          "yoy": 24.6,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-06",
+        "phase": 2,
+        "gated": "역실적장세",
+        "dRR": 0.24,
+        "dE": -0.12,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "1.05%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "2.85%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.80%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "-5.70%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "-8.23%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.24, dE=-0.12.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 18.3,
+          "yoy": 19.3,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-07",
+        "phase": 2,
+        "gated": "역실적장세",
+        "dRR": 0.31,
+        "dE": 0.2,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "1.04%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "2.74%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.70%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "-1.56%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "2.57%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.31, dE=+0.20.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 7.8,
+          "yoy": 17.9,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-08",
+        "phase": 2,
+        "gated": "역실적장세",
+        "dRR": -0.08,
+        "dE": 0.21,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "0.89%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "3.02%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-2.13%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "4.29%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "-4.89%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=-0.08, dE=+0.21.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": -1.3,
+          "yoy": 18.5,
+          "expect": 1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-09",
+        "phase": 2,
+        "gated": "금융장세",
+        "dRR": -0.1,
+        "dE": 0.46,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "0.85%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "2.54%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.69%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "1.29%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "-3.18%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=-0.10, dE=+0.46.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": -6.1,
+          "yoy": 19.0,
+          "expect": 1,
+          "actual": -1,
+          "diverge": true
+        }
+      },
+      {
+        "m": "2024-10",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.22,
+        "dE": 0.46,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "0.94%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "2.24%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.31%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "3.06%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "0.85%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=+0.22, dE=+0.46).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 1.8,
+          "yoy": 26.6,
+          "expect": 1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-11",
+        "phase": 3,
+        "gated": null,
+        "dRR": 0.62,
+        "dE": 0.23,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "1.05%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "2.90%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.85%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "1.16%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "-3.27%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=+0.62, dE=+0.23).",
+        "pin": [
+          385,
+          95
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": -0.7,
+          "yoy": 14.1,
+          "expect": -1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-12",
+        "phase": 4,
+        "gated": null,
+        "dRR": -0.01,
+        "dE": -0.13,
+        "watch": "역실적장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "1.09%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "3.65%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-2.56%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "-3.82%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "-2.16%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=-0.01, dE=-0.13).",
+        "pin": [
+          490,
+          145
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 0.8,
+          "yoy": 19.2,
+          "expect": 0,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-01",
+        "phase": 0,
+        "gated": null,
+        "dRR": -1.17,
+        "dE": -0.36,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "1.25%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "4.02%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-2.78%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "-0.17%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "2.06%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=-1.17, dE=-0.36).",
+        "pin": [
+          90,
+          145
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 1.2,
+          "yoy": 9.1,
+          "expect": 1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-02",
+        "phase": 0,
+        "gated": null,
+        "dRR": -1.57,
+        "dE": -0.02,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "1.37%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "3.65%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-2.28%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "9.56%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "0.31%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=-1.57, dE=-0.02).",
+        "pin": [
+          90,
+          145
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": -3.9,
+          "yoy": -5.1,
+          "expect": 1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-03",
+        "phase": 0,
+        "gated": null,
+        "dRR": -0.76,
+        "dE": 0.37,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "1.49%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "3.64%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-2.15%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "4.38%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "0.00%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=-0.76, dE=+0.37).",
+        "pin": [
+          90,
+          145
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": -6.1,
+          "yoy": -11.8,
+          "expect": 1,
+          "actual": -1,
+          "diverge": true
+        }
+      },
+      {
+        "m": "2025-04",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.49,
+        "dE": 0.71,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "1.31%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "3.53%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-2.22%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "8.59%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "-0.70%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=+0.49, dE=+0.71).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": -7.8,
+          "yoy": -6.1,
+          "expect": 1,
+          "actual": -1,
+          "diverge": true
+        }
+      },
+      {
+        "m": "2025-05",
+        "phase": 3,
+        "gated": null,
+        "dRR": 0.97,
+        "dE": 0.32,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "1.50%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "3.42%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.92%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "5.91%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "-2.88%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=+0.97, dE=+0.32).",
+        "pin": [
+          385,
+          95
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": -0.6,
+          "yoy": -1.4,
+          "expect": -1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-06",
+        "phase": 3,
+        "gated": null,
+        "dRR": 0.94,
+        "dE": 0.18,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "1.42%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "3.23%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.81%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "8.74%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "3.42%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=+0.94, dE=+0.18).",
+        "pin": [
+          385,
+          95
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 1.5,
+          "yoy": 2.3,
+          "expect": -1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-07",
+        "phase": 3,
+        "gated": null,
+        "dRR": 1.04,
+        "dE": -0.24,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "1.54%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "3.04%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.49%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "4.51%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "-1.48%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=+1.04, dE=-0.24).",
+        "pin": [
+          385,
+          95
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 3.8,
+          "yoy": 5.0,
+          "expect": -1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-08",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 1.27,
+        "dE": -0.34,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "1.60%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "2.75%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.15%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "-1.02%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "-3.28%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.27, dE=-0.34.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 15.0,
+          "yoy": 10.5,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-09",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 1.4,
+        "dE": -0.71,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "1.65%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "2.85%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.20%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "0.76%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "2.22%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.40, dE=-0.71.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 26.2,
+          "yoy": 18.5,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-10",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 1.04,
+        "dE": -0.62,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "1.66%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "3.01%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.36%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "2.37%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "0.09%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.04, dE=-0.62.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 45.4,
+          "yoy": 34.1,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-11",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 0.62,
+        "dE": -0.17,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "1.80%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "2.91%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.10%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "5.15%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "-4.16%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.62, dE=-0.17.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 32.4,
+          "yoy": 31.5,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-12",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 1.01,
+        "dE": 0.22,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "2.06%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "2.08%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-0.02%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "3.74%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "0.86%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.01, dE=+0.22.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 24.3,
+          "yoy": 26.2,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-01",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 2.16,
+        "dE": 0.79,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "2.24%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "1.53%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "0.71%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "16.75%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "0.74%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+2.16, dE=+0.79.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 29.8,
+          "yoy": 34.7,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-02",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 3.01,
+        "dE": 0.47,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "2.11%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "1.26%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "0.85%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "1.82%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "0.41%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+3.01, dE=+0.47.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 37.8,
+          "yoy": 58.4,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-03",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 2.64,
+        "dE": 0.41,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "2.35%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "1.44%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "0.90%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "4.78%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "2.36%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+2.64, dE=+0.41.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 13.6,
+          "yoy": 43.4,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-04",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 1.71,
+        "dE": -0.5,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "2.52%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "1.35%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "1.17%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "3.97%",
+            "FRED 일본 수출액",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "2.36%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.71, dE=-0.50.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 13.1,
+          "yoy": 64.5,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      }
+    ]
+  }
+];
+
+  /* ── 종목 유니버스 & KRX업종×6국면 스탠스 (파이프라인이 이 두 블록 교체) ── */
+  /* STANCE[업종]={phase:'L'|'S'} · 미기재 phase 및 1·4(전이)는 N(중립) */
+  const STANCE={"IT 서비스": {"0": "L", "3": "S"}, "건설": {"0": "L", "3": "S", "5": "S"}, "금속": {"2": "L", "3": "S", "5": "S"}, "금융": {"0": "L", "3": "S", "5": "S"}, "기계·장비": {"2": "L", "5": "S"}, "기타금융": {"0": "L", "3": "S", "5": "S"}, "보험": {"2": "L", "3": "S", "5": "S"}, "부동산": {"0": "L", "3": "S", "5": "S"}, "비금속": {"2": "L", "3": "S", "5": "S"}, "섬유·의류": {"5": "S"}, "오락·문화": {"0": "L", "5": "L"}, "운송·창고": {"2": "L", "5": "S"}, "운송장비·부품": {"2": "L", "5": "S"}, "유통": {"5": "L"}, "은행": {"2": "L", "3": "S", "5": "S"}, "음식료·담배": {"0": "S", "2": "S", "3": "L", "5": "L"}, "의료·정밀기기": {"0": "L", "3": "S"}, "일반서비스": {}, "전기·가스": {"0": "L", "2": "S", "3": "S", "5": "L"}, "전기·전자": {"2": "L", "5": "S"}, "제약": {"0": "L", "3": "S", "5": "L"}, "증권": {"0": "L", "3": "S", "5": "S"}, "통신": {"2": "S", "3": "L", "5": "L"}, "화학": {"2": "L", "3": "S", "5": "S"}};
+  const STOCKS=[{"code": "005930", "name": "삼성전자", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 1984811587416000}, {"code": "000660", "name": "SK하이닉스", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 1905053421645000}, {"code": "402340", "name": "SK스퀘어", "mkt": "KOSPI", "sector": "기타금융", "mcap": 226968423920000}, {"code": "005935", "name": "삼성전자우", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 176922850261500}, {"code": "009150", "name": "삼성전기", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 148864536128000}, {"code": "005380", "name": "현대차", "mkt": "KOSPI", "sector": "운송장비·부품", "mcap": 98386106563000}, {"code": "032830", "name": "삼성생명", "mkt": "KOSPI", "sector": "보험", "mcap": 86500000000000}, {"code": "028260", "name": "삼성물산", "mkt": "KOSPI", "sector": "유통", "mcap": 80191868804500}, {"code": "373220", "name": "LG에너지솔루션", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 77571000000000}, {"code": "207940", "name": "삼성바이오로직스", "mkt": "KOSPI", "sector": "제약", "mcap": 62168747193000}, {"code": "329180", "name": "HD현대중공업", "mkt": "KOSPI", "sector": "운송장비·부품", "mcap": 59198130900000}, {"code": "034730", "name": "SK", "mkt": "KOSPI", "sector": "기타금융", "mcap": 59089702945000}, {"code": "105560", "name": "KB금융", "mkt": "KOSPI", "sector": "기타금융", "mcap": 52954878686200}, {"code": "000270", "name": "기아", "mkt": "KOSPI", "sector": "운송장비·부품", "mcap": 52822878629400}, {"code": "012450", "name": "한화에어로스페이스", "mkt": "KOSPI", "sector": "운송장비·부품", "mcap": 52130598411000}, {"code": "034020", "name": "두산에너빌리티", "mkt": "KOSPI", "sector": "기계·장비", "mcap": 51949508940600}, {"code": "012330", "name": "현대모비스", "mkt": "KOSPI", "sector": "운송장비·부품", "mcap": 44141401629500}, {"code": "055550", "name": "신한지주", "mkt": "KOSPI", "sector": "기타금융", "mcap": 43478339467600}, {"code": "068270", "name": "셀트리온", "mkt": "KOSPI", "sector": "제약", "mcap": 36768975087600}, {"code": "006400", "name": "삼성SDI", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 36666416150000}, {"code": "066570", "name": "LG전자", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 31909100584200}, {"code": "267260", "name": "HD현대일렉트릭", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 31829620205000}, {"code": "035420", "name": "NAVER", "mkt": "KOSPI", "sector": "IT 서비스", "mcap": 30812737995200}, {"code": "010120", "name": "LS ELECTRIC", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 30450000000000}, {"code": "086790", "name": "하나금융지주", "mkt": "KOSPI", "sector": "기타금융", "mcap": 30098141955600}, {"code": "042660", "name": "한화오션", "mkt": "KOSPI", "sector": "운송장비·부품", "mcap": 30028512612000}, {"code": "298040", "name": "효성중공업", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 28934072444000}, {"code": "000810", "name": "삼성화재", "mkt": "KOSPI", "sector": "보험", "mcap": 28395792828000}, {"code": "042700", "name": "한미반도체", "mkt": "KOSPI", "sector": "기계·장비", "mcap": 24542891500000}, {"code": "009540", "name": "HD한국조선해양", "mkt": "KOSPI", "sector": "기타금융", "mcap": 24452111578000}, {"code": "005490", "name": "POSCO홀딩스", "mkt": "KOSPI", "sector": "금속", "mcap": 24168665735000}, {"code": "015760", "name": "한국전력", "mkt": "KOSPI", "sector": "전기·가스", "mcap": 23816867256700}, {"code": "000150", "name": "두산", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 23351510070000}, {"code": "006800", "name": "미래에셋증권", "mkt": "KOSPI", "sector": "증권", "mcap": 22522566920000}, {"code": "010130", "name": "고려아연", "mkt": "KOSPI", "sector": "금속", "mcap": 22041855264000}, {"code": "011070", "name": "LG이노텍", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 22034076617000}, {"code": "316140", "name": "우리금융지주", "mkt": "KOSPI", "sector": "기타금융", "mcap": 20811063672000}, {"code": "010140", "name": "삼성중공업", "mkt": "KOSPI", "sector": "운송장비·부품", "mcap": 20240000000000}, {"code": "017670", "name": "SK텔레콤", "mkt": "KOSPI", "sector": "통신", "mcap": 19459978801800}, {"code": "051910", "name": "LG화학", "mkt": "KOSPI", "sector": "화학", "mcap": 19130524953000}, {"code": "064350", "name": "현대로템", "mkt": "KOSPI", "sector": "운송장비·부품", "mcap": 18532361351400}, {"code": "033780", "name": "KT&G", "mkt": "KOSPI", "sector": "음식료·담배", "mcap": 17377870334400}, {"code": "011200", "name": "HMM", "mkt": "KOSPI", "sector": "운송·창고", "mcap": 17270687230700}, {"code": "138040", "name": "메리츠금융지주", "mkt": "KOSPI", "sector": "기타금융", "mcap": 16835135663800}, {"code": "079550", "name": "LIG디펜스앤에어로스페이스", "mkt": "KOSPI", "sector": "금속", "mcap": 16170000000000}, {"code": "024110", "name": "기업은행", "mkt": "KOSPI", "sector": "은행", "mcap": 15677392584540}, {"code": "267250", "name": "HD현대", "mkt": "KOSPI", "sector": "기타금융", "mcap": 15221967479500}, {"code": "096770", "name": "SK이노베이션", "mkt": "KOSPI", "sector": "화학", "mcap": 15130224526000}, {"code": "003550", "name": "LG", "mkt": "KOSPI", "sector": "기타금융", "mcap": 14907531594400}, {"code": "018260", "name": "삼성에스디에스", "mkt": "KOSPI", "sector": "IT 서비스", "mcap": 14694044220000}, {"code": "035720", "name": "카카오", "mkt": "KOSPI", "sector": "IT 서비스", "mcap": 14677004507100}, {"code": "003670", "name": "포스코퓨처엠", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 14284762932000}, {"code": "272210", "name": "한화시스템", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 13904467030400}, {"code": "307950", "name": "현대오토에버", "mkt": "KOSPI", "sector": "IT 서비스", "mcap": 13903958874000}, {"code": "047810", "name": "한국항공우주", "mkt": "KOSPI", "sector": "운송장비·부품", "mcap": 13802475151200}, {"code": "278470", "name": "에이피알", "mkt": "KOSPI", "sector": "화학", "mcap": 13590050265000}, {"code": "086280", "name": "현대글로비스", "mkt": "KOSPI", "sector": "운송·창고", "mcap": 13530000000000}, {"code": "030200", "name": "KT", "mkt": "KOSPI", "sector": "통신", "mcap": 13155531957000}, {"code": "000720", "name": "현대건설", "mkt": "KOSPI", "sector": "건설", "mcap": 11503050524500}, {"code": "071050", "name": "한국금융지주", "mkt": "KOSPI", "sector": "기타금융", "mcap": 11145198400000}, {"code": "0126Z0", "name": "삼성에피스홀딩스", "mkt": "KOSPI", "sector": "기타금융", "mcap": 10612620398500}, {"code": "010950", "name": "S-Oil", "mkt": "KOSPI", "sector": "화학", "mcap": 10492716214400}, {"code": "006260", "name": "LS", "mkt": "KOSPI", "sector": "기타금융", "mcap": 10420800000000}, {"code": "003490", "name": "대한항공", "mkt": "KOSPI", "sector": "운송·창고", "mcap": 10328589541050}, {"code": "005940", "name": "NH투자증권", "mkt": "KOSPI", "sector": "증권", "mcap": 9870739021300}, {"code": "443060", "name": "HD현대마린솔루션", "mkt": "KOSPI", "sector": "일반서비스", "mcap": 9706444090000}, {"code": "323410", "name": "카카오뱅크", "mkt": "KOSPI", "sector": "은행", "mcap": 9423128630750}, {"code": "259960", "name": "크래프톤", "mkt": "KOSPI", "sector": "IT 서비스", "mcap": 9412117932000}, {"code": "016360", "name": "삼성증권", "mkt": "KOSPI", "sector": "증권", "mcap": 9269340000000}, {"code": "005830", "name": "DB손해보험", "mkt": "KOSPI", "sector": "보험", "mcap": 8613295893500}, {"code": "003230", "name": "삼양식품", "mkt": "KOSPI", "sector": "음식료·담배", "mcap": 8369179665000}, {"code": "028050", "name": "삼성E&A", "mkt": "KOSPI", "sector": "일반서비스", "mcap": 8124200000000}, {"code": "039490", "name": "키움증권", "mkt": "KOSPI", "sector": "증권", "mcap": 8038978854000}, {"code": "047050", "name": "포스코인터내셔널", "mkt": "KOSPI", "sector": "유통", "mcap": 8030875272200}, {"code": "007660", "name": "이수페타시스", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 7913513808200}, {"code": "180640", "name": "한진칼", "mkt": "KOSPI", "sector": "기타금융", "mcap": 7691014540800}, {"code": "161390", "name": "한국타이어앤테크놀로지", "mkt": "KOSPI", "sector": "화학", "mcap": 7680254278000}, {"code": "352820", "name": "하이브", "mkt": "KOSPI", "sector": "오락·문화", "mcap": 7663579872200}, {"code": "047040", "name": "대우건설", "mkt": "KOSPI", "sector": "건설", "mcap": 7474409935220}, {"code": "005387", "name": "현대차2우B", "mkt": "KOSPI", "sector": "운송장비·부품", "mcap": 7377389230000}, {"code": "064400", "name": "LG씨엔에스", "mkt": "KOSPI", "sector": "IT 서비스", "mcap": 7276134694800}, {"code": "000880", "name": "한화", "mkt": "KOSPI", "sector": "화학", "mcap": 7114249027100}, {"code": "004170", "name": "신세계", "mkt": "KOSPI", "sector": "유통", "mcap": 6989433940000}, {"code": "000990", "name": "DB하이텍", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 6886776280400}, {"code": "062040", "name": "산일전기", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 6582407750000}, {"code": "353200", "name": "대덕전자", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 6582334410000}, {"code": "326030", "name": "SK바이오팜", "mkt": "KOSPI", "sector": "일반서비스", "mcap": 6492168425000}, {"code": "001440", "name": "대한전선", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 6075770476000}, {"code": "021240", "name": "코웨이", "mkt": "KOSPI", "sector": "일반서비스", "mcap": 6064768408200}, {"code": "032640", "name": "LG유플러스", "mkt": "KOSPI", "sector": "통신", "mcap": 6035362349040}, {"code": "078930", "name": "GS", "mkt": "KOSPI", "sector": "기타금융", "mcap": 5805968437500}, {"code": "241560", "name": "두산밥캣", "mkt": "KOSPI", "sector": "기계·장비", "mcap": 5760949506500}, {"code": "034220", "name": "LG디스플레이", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 5685000000000}, {"code": "090430", "name": "아모레퍼시픽", "mkt": "KOSPI", "sector": "화학", "mcap": 5673797623000}, {"code": "454910", "name": "두산로보틱스", "mkt": "KOSPI", "sector": "기계·장비", "mcap": 5509698300000}, {"code": "000500", "name": "가온전선", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 5442684835000}, {"code": "029780", "name": "삼성카드", "mkt": "KOSPI", "sector": "기타금융", "mcap": 5335301930550}, {"code": "000100", "name": "유한양행", "mkt": "KOSPI", "sector": "제약", "mcap": 5288600706400}, {"code": "267270", "name": "HD건설기계", "mkt": "KOSPI", "sector": "기계·장비", "mcap": 5280993049400}, {"code": "009830", "name": "한화솔루션", "mkt": "KOSPI", "sector": "화학", "mcap": 5268506228400}, {"code": "011790", "name": "SKC", "mkt": "KOSPI", "sector": "화학", "mcap": 5158222992000}, {"code": "377300", "name": "카카오페이", "mkt": "KOSPI", "sector": "기타금융", "mcap": 5146731466250}, {"code": "036570", "name": "NC", "mkt": "KOSPI", "sector": "IT 서비스", "mcap": 5127477236000}, {"code": "088980", "name": "맥쿼리인프라", "mkt": "KOSPI", "sector": "기타금융", "mcap": 5071783905870}, {"code": "271560", "name": "오리온", "mkt": "KOSPI", "sector": "음식료·담배", "mcap": 4997367084800}, {"code": "005385", "name": "현대차우", "mkt": "KOSPI", "sector": "운송장비·부품", "mcap": 4994965440000}, {"code": "023530", "name": "롯데쇼핑", "mkt": "KOSPI", "sector": "유통", "mcap": 4942045498500}, {"code": "138930", "name": "BNK금융지주", "mkt": "KOSPI", "sector": "기타금융", "mcap": 4927993284040}, {"code": "128940", "name": "한미약품", "mkt": "KOSPI", "sector": "제약", "mcap": 4688822706000}, {"code": "001040", "name": "CJ", "mkt": "KOSPI", "sector": "기타금융", "mcap": 4376549700000}, {"code": "069960", "name": "현대백화점", "mkt": "KOSPI", "sector": "유통", "mcap": 4323764856000}, {"code": "175330", "name": "JB금융지주", "mkt": "KOSPI", "sector": "기타금융", "mcap": 4301594394400}, {"code": "002380", "name": "KCC", "mkt": "KOSPI", "sector": "화학", "mcap": 4249187072000}, {"code": "066970", "name": "엘앤에프", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 4012169562700}, {"code": "082740", "name": "한화엔진", "mkt": "KOSPI", "sector": "기계·장비", "mcap": 3892809174300}, {"code": "088350", "name": "한화생명", "mkt": "KOSPI", "sector": "보험", "mcap": 3838902600000}, {"code": "052690", "name": "한전기술", "mkt": "KOSPI", "sector": "일반서비스", "mcap": 3818178000000}, {"code": "018880", "name": "한온시스템", "mkt": "KOSPI", "sector": "기계·장비", "mcap": 3653494685120}, {"code": "010060", "name": "OCI홀딩스", "mkt": "KOSPI", "sector": "기타금융", "mcap": 3622025008000}, {"code": "004020", "name": "현대제철", "mkt": "KOSPI", "sector": "금속", "mcap": 3529641013250}, {"code": "012510", "name": "더존비즈온", "mkt": "KOSPI", "sector": "IT 서비스", "mcap": 3494865960000}, {"code": "336260", "name": "두산퓨얼셀", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 3392575006800}, {"code": "051900", "name": "LG생활건강", "mkt": "KOSPI", "sector": "화학", "mcap": 3219737445000}, {"code": "103590", "name": "일진전기", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 3142467201000}, {"code": "111770", "name": "영원무역", "mkt": "KOSPI", "sector": "유통", "mcap": 3119527347200}, {"code": "022100", "name": "포스코DX", "mkt": "KOSPI", "sector": "일반서비스", "mcap": 3071101525800}, {"code": "035250", "name": "강원랜드", "mkt": "KOSPI", "sector": "오락·문화", "mcap": 3022979265000}, {"code": "009420", "name": "한올바이오파마", "mkt": "KOSPI", "sector": "제약", "mcap": 3019508876400}, {"code": "450080", "name": "에코프로머티", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 2997917736800}, {"code": "483650", "name": "달바글로벌", "mkt": "KOSPI", "sector": "화학", "mcap": 2965107937500}, {"code": "036460", "name": "한국가스공사", "mkt": "KOSPI", "sector": "전기·가스", "mcap": 2944784700000}, {"code": "001450", "name": "현대해상", "mkt": "KOSPI", "sector": "보험", "mcap": 2932539800000}, {"code": "251270", "name": "넷마블", "mkt": "KOSPI", "sector": "IT 서비스", "mcap": 2880000170650}, {"code": "011780", "name": "금호석유화학", "mkt": "KOSPI", "sector": "화학", "mcap": 2865419317500}, {"code": "014680", "name": "한솔케미칼", "mkt": "KOSPI", "sector": "화학", "mcap": 2863353740000}, {"code": "383220", "name": "F&F", "mkt": "KOSPI", "sector": "섬유·의류", "mcap": 2815570012500}, {"code": "031210", "name": "서울보증보험", "mkt": "KOSPI", "sector": "보험", "mcap": 2799846079800}, {"code": "085620", "name": "미래에셋생명", "mkt": "KOSPI", "sector": "보험", "mcap": 2798226000000}, {"code": "004800", "name": "효성", "mkt": "KOSPI", "sector": "기타금융", "mcap": 2795647969000}, {"code": "302440", "name": "SK바이오사이언스", "mkt": "KOSPI", "sector": "제약", "mcap": 2742056527350}, {"code": "017800", "name": "현대엘리베이터", "mkt": "KOSPI", "sector": "기계·장비", "mcap": 2701283803500}, {"code": "011170", "name": "롯데케미칼", "mkt": "KOSPI", "sector": "화학", "mcap": 2690573855100}, {"code": "097950", "name": "CJ제일제당", "mkt": "KOSPI", "sector": "음식료·담배", "mcap": 2672118015000}, {"code": "489790", "name": "한화비전", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 2660738153000}, {"code": "012750", "name": "에스원", "mkt": "KOSPI", "sector": "일반서비스", "mcap": 2602943693000}, {"code": "001720", "name": "신영증권", "mkt": "KOSPI", "sector": "증권", "mcap": 2590944000000}, {"code": "005850", "name": "에스엘", "mkt": "KOSPI", "sector": "운송장비·부품", "mcap": 2545378896000}, {"code": "139130", "name": "iM금융지주", "mkt": "KOSPI", "sector": "기타금융", "mcap": 2542687148890}, {"code": "028670", "name": "팬오션", "mkt": "KOSPI", "sector": "운송·창고", "mcap": 2448328364960}, {"code": "005440", "name": "현대지에프홀딩스", "mkt": "KOSPI", "sector": "기타금융", "mcap": 2351036859080}, {"code": "375500", "name": "DL이앤씨", "mkt": "KOSPI", "sector": "건설", "mcap": 2313878655400}, {"code": "026960", "name": "동서", "mkt": "KOSPI", "sector": "유통", "mcap": 2288115000000}, {"code": "004990", "name": "롯데지주", "mkt": "KOSPI", "sector": "기타금융", "mcap": 2287283659200}, {"code": "279570", "name": "케이뱅크", "mkt": "KOSPI", "sector": "은행", "mcap": 2275949797110}, {"code": "009155", "name": "삼성전기우", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 2258726568000}, {"code": "003690", "name": "코리안리", "mkt": "KOSPI", "sector": "보험", "mcap": 2231986621530}, {"code": "020150", "name": "롯데에너지머티리얼즈", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 2204585992300}, {"code": "139480", "name": "이마트", "mkt": "KOSPI", "sector": "유통", "mcap": 2193867610500}, {"code": "007810", "name": "코리아써키트", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 2187214944000}, {"code": "000240", "name": "한국앤컴퍼니", "mkt": "KOSPI", "sector": "기타금융", "mcap": 2150283186000}, {"code": "007340", "name": "DN오토모티브", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 2150274288750}, {"code": "204320", "name": "HL만도", "mkt": "KOSPI", "sector": "운송장비·부품", "mcap": 2145940384000}, {"code": "161890", "name": "한국콜마", "mkt": "KOSPI", "sector": "화학", "mcap": 2140980483900}, {"code": "009970", "name": "영원무역홀딩스", "mkt": "KOSPI", "sector": "기타금융", "mcap": 2132198278200}, {"code": "030000", "name": "제일기획", "mkt": "KOSPI", "sector": "일반서비스", "mcap": 2068441225500}, {"code": "081660", "name": "미스토홀딩스", "mkt": "KOSPI", "sector": "유통", "mcap": 2059963392000}, {"code": "004370", "name": "농심", "mkt": "KOSPI", "sector": "음식료·담배", "mcap": 2004230539000}, {"code": "282330", "name": "BGF리테일", "mkt": "KOSPI", "sector": "유통", "mcap": 1999747924200}, {"code": "006360", "name": "GS건설", "mkt": "KOSPI", "sector": "건설", "mcap": 1994048717000}, {"code": "051600", "name": "한전KPS", "mkt": "KOSPI", "sector": "건설", "mcap": 1977750000000}, {"code": "000155", "name": "두산우", "mkt": "KOSPI", "sector": "전기·전자", "mcap": 1968257535000}, {"code": "001740", "name": "SK네트웍스", "mkt": "KOSPI", "sector": "유통", "mcap": 1947766662190}, {"code": "457190", "name": "이수스페셜티케미컬", "mkt": "KOSPI", "sector": "화학", "mcap": 1924942146400}, {"code": "439260", "name": "대한조선", "mkt": "KOSPI", "sector": "운송장비·부품", "mcap": 1896818754000}, {"code": "071970", "name": "HD현대마린엔진", "mkt": "KOSPI", "sector": "기계·장비", "mcap": 1879250823000}, {"code": "018670", "name": "SK가스", "mkt": "KOSPI", "sector": "유통", "mcap": 1879220532000}, {"code": "097230", "name": "HJ중공업", "mkt": "KOSPI", "sector": "건설", "mcap": 1864598853600}, {"code": "462870", "name": "시프트업", "mkt": "KOSPI", "sector": "IT 서비스", "mcap": 1818284540000}, {"code": "00680K", "name": "미래에셋증권2우B", "mkt": "KOSPI", "sector": "증권", "mcap": 1812720000000}, {"code": "008770", "name": "호텔신라", "mkt": "KOSPI", "sector": "유통", "mcap": 1803451159950}, {"code": "007070", "name": "GS리테일", "mkt": "KOSPI", "sector": "유통", "mcap": 1793379051750}, {"code": "008930", "name": "한미사이언스", "mkt": "KOSPI", "sector": "기타금융", "mcap": 1785019455000}, {"code": "103140", "name": "풍산", "mkt": "KOSPI", "sector": "금속", "mcap": 1771134369600}, {"code": "093370", "name": "후성", "mkt": "KOSPI", "sector": "화학", "mcap": 1760059965300}, {"code": "395400", "name": "SK리츠", "mkt": "KOSPI", "sector": "부동산", "mcap": 1709780081600}, {"code": "120110", "name": "코오롱인더", "mkt": "KOSPI", "sector": "화학", "mcap": 1697940014400}, {"code": "192820", "name": "코스맥스", "mkt": "KOSPI", "sector": "화학", "mcap": 1644543854100}, {"code": "000120", "name": "CJ대한통운", "mkt": "KOSPI", "sector": "운송·창고", "mcap": 1637926299200}, {"code": "281820", "name": "케이씨텍", "mkt": "KOSPI", "sector": "의료·정밀기기", "mcap": 1637349264700}, {"code": "112610", "name": "씨에스윈드", "mkt": "KOSPI", "sector": "금속", "mcap": 1623599015500}, {"code": "011210", "name": "현대위아", "mkt": "KOSPI", "sector": "운송장비·부품", "mcap": 1607229405300}, {"code": "002790", "name": "아모레퍼시픽홀딩스", "mkt": "KOSPI", "sector": "화학", "mcap": 1563569781000}, {"code": "020560", "name": "아시아나항공", "mkt": "KOSPI", "sector": "운송·창고", "mcap": 1546990239610}, {"code": "475150", "name": "SK이터닉스", "mkt": "KOSPI", "sector": "건설", "mcap": 1471694572800}, {"code": "229640", "name": "LS에코에너지", "mkt": "KOSPI", "sector": "기타금융", "mcap": 1463869216200}, {"code": "023590", "name": "다우기술", "mkt": "KOSPI", "sector": "IT 서비스", "mcap": 1463111145600}, {"code": "001800", "name": "오리온홀딩스", "mkt": "KOSPI", "sector": "기타금융", "mcap": 1443976977100}, {"code": "073240", "name": "금호타이어", "mkt": "KOSPI", "sector": "화학", "mcap": 1433428832130}, {"code": "006280", "name": "녹십자", "mkt": "KOSPI", "sector": "제약", "mcap": 1377842830200}, {"code": "006040", "name": "동원산업", "mkt": "KOSPI", "sector": "기타금융", "mcap": 1366158348050}, {"code": "196170", "name": "알테오젠", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 18406908820500}, {"code": "247540", "name": "에코프로비엠", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 13079929025800}, {"code": "086520", "name": "에코프로", "mkt": "KOSDAQ", "sector": "금융", "mcap": 12953044900800}, {"code": "277810", "name": "레인보우로보틱스", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 9311931840000}, {"code": "950160", "name": "코오롱티슈진", "mkt": "KOSDAQ", "sector": "제약", "mcap": 8090219512500}, {"code": "240810", "name": "원익IPS", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 8039942983800}, {"code": "036930", "name": "주성엔지니어링", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 7697273637600}, {"code": "058470", "name": "리노공업", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 6424658955000}, {"code": "028300", "name": "HLB", "mkt": "KOSDAQ", "sector": "제약", "mcap": 6353555237100}, {"code": "039030", "name": "이오테크닉스", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 5974981750000}, {"code": "319660", "name": "피에스케이", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 5451535574800}, {"code": "141080", "name": "리가켐바이오", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 5290074832200}, {"code": "298380", "name": "에이비엘바이오", "mkt": "KOSDAQ", "sector": "제약", "mcap": 4966087968100}, {"code": "000250", "name": "삼천당제약", "mkt": "KOSDAQ", "sector": "제약", "mcap": 4937797856000}, {"code": "222800", "name": "심텍", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 4675498588800}, {"code": "403870", "name": "HPSP", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 4337210000000}, {"code": "440110", "name": "파두", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 4158036641000}, {"code": "084370", "name": "유진테크", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 3955308849200}, {"code": "095340", "name": "ISC", "mkt": "KOSDAQ", "sector": "유통", "mcap": 3900258672000}, {"code": "087010", "name": "펩트론", "mkt": "KOSDAQ", "sector": "제약", "mcap": 3893997450000}, {"code": "095610", "name": "테스", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 3548688000000}, {"code": "214370", "name": "케어젠", "mkt": "KOSDAQ", "sector": "제약", "mcap": 3469989000000}, {"code": "347850", "name": "디앤디파마텍", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 3450955911900}, {"code": "080220", "name": "제주반도체", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 3416729033600}, {"code": "108490", "name": "로보티즈", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 3401358496000}, {"code": "214450", "name": "파마리서치", "mkt": "KOSDAQ", "sector": "제약", "mcap": 3366245952000}, {"code": "067310", "name": "하나마이크론", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 3230851503600}, {"code": "310210", "name": "보로노이", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 3146298089200}, {"code": "178320", "name": "서진시스템", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 3109338502450}, {"code": "145020", "name": "휴젤", "mkt": "KOSDAQ", "sector": "제약", "mcap": 3106768332500}, {"code": "214150", "name": "클래시스", "mkt": "KOSDAQ", "sector": "의료·정밀기기", "mcap": 2948651786800}, {"code": "031980", "name": "피에스케이홀딩스", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 2919548283000}, {"code": "064760", "name": "티씨케이", "mkt": "KOSDAQ", "sector": "비금속", "mcap": 2811623124000}, {"code": "005290", "name": "동진쎄미켐", "mkt": "KOSDAQ", "sector": "화학", "mcap": 2803356930000}, {"code": "226950", "name": "올릭스", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 2735406211800}, {"code": "089970", "name": "브이엠", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 2665466662000}, {"code": "357780", "name": "솔브레인", "mkt": "KOSDAQ", "sector": "화학", "mcap": 2590262478000}, {"code": "319400", "name": "현대무벡스", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 2550511293100}, {"code": "131290", "name": "티에스이", "mkt": "KOSDAQ", "sector": "의료·정밀기기", "mcap": 2472229381500}, {"code": "237690", "name": "에스티팜", "mkt": "KOSDAQ", "sector": "제약", "mcap": 2449813741200}, {"code": "290650", "name": "엘앤씨바이오", "mkt": "KOSDAQ", "sector": "제약", "mcap": 2381424863200}, {"code": "131970", "name": "두산테스나", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 2236161436600}, {"code": "263750", "name": "펄어비스", "mkt": "KOSDAQ", "sector": "IT 서비스", "mcap": 2146119526500}, {"code": "420770", "name": "기가비스", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 2113048858600}, {"code": "043260", "name": "성호전자", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 2049669584700}, {"code": "010170", "name": "대한광통신", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 2033752432800}, {"code": "098460", "name": "고영", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 2028748010250}, {"code": "257720", "name": "실리콘투", "mkt": "KOSDAQ", "sector": "유통", "mcap": 1993518060800}, {"code": "089030", "name": "테크윙", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 1919378811000}, {"code": "032820", "name": "우리기술", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 1916829927620}, {"code": "183300", "name": "코미코", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 1816205404000}, {"code": "068760", "name": "셀트리온제약", "mkt": "KOSDAQ", "sector": "제약", "mcap": 1747231764200}, {"code": "035900", "name": "JYP Ent.", "mkt": "KOSDAQ", "sector": "오락·문화", "mcap": 1702006366800}, {"code": "140860", "name": "파크시스템스", "mkt": "KOSDAQ", "sector": "의료·정밀기기", "mcap": 1691096263500}, {"code": "140410", "name": "메지온", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 1689804485200}, {"code": "082920", "name": "비츠로셀", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 1675293675150}, {"code": "218410", "name": "RFHIC", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 1609138585200}, {"code": "058610", "name": "에스피지", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 1605640864000}, {"code": "030530", "name": "원익홀딩스", "mkt": "KOSDAQ", "sector": "화학", "mcap": 1552483418100}, {"code": "007390", "name": "네이처셀", "mkt": "KOSDAQ", "sector": "제약", "mcap": 1533554332800}, {"code": "041510", "name": "에스엠", "mkt": "KOSDAQ", "sector": "오락·문화", "mcap": 1522496885000}, {"code": "083650", "name": "비에이치아이", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 1516274375000}, {"code": "096530", "name": "씨젠", "mkt": "KOSDAQ", "sector": "제약", "mcap": 1462327832000}, {"code": "0009K0", "name": "에임드바이오", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 1451867564450}, {"code": "078600", "name": "대주전자재료", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 1379322756600}, {"code": "039200", "name": "오스코텍", "mkt": "KOSDAQ", "sector": "제약", "mcap": 1344774886400}, {"code": "458870", "name": "씨어스", "mkt": "KOSDAQ", "sector": "의료·정밀기기", "mcap": 1225523628000}, {"code": "323280", "name": "태성", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 1215411604000}, {"code": "127120", "name": "제이에스링크", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 1214211300900}, {"code": "060370", "name": "LS마린솔루션", "mkt": "KOSDAQ", "sector": "건설", "mcap": 1204105584700}, {"code": "031330", "name": "에스에이엠티", "mkt": "KOSDAQ", "sector": "유통", "mcap": 1199940804000}, {"code": "166090", "name": "하나머티리얼즈", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 1160949463800}, {"code": "476830", "name": "알지노믹스", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 1135608123000}, {"code": "101490", "name": "에스앤에스텍", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 1094479292700}, {"code": "195940", "name": "HK이노엔", "mkt": "KOSDAQ", "sector": "제약", "mcap": 1080785341650}, {"code": "475830", "name": "오름테라퓨틱", "mkt": "KOSDAQ", "sector": "제약", "mcap": 1070775787000}, {"code": "437730", "name": "삼현", "mkt": "KOSDAQ", "sector": "운송장비·부품", "mcap": 1032081305850}, {"code": "232140", "name": "와이씨", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 1028848689000}, {"code": "003380", "name": "하림지주", "mkt": "KOSDAQ", "sector": "금융", "mcap": 1022611319730}, {"code": "204270", "name": "제이앤티씨", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 1011191185680}, {"code": "085660", "name": "차바이오텍", "mkt": "KOSDAQ", "sector": "제약", "mcap": 974355426080}, {"code": "100790", "name": "미래에셋벤처투자", "mkt": "KOSDAQ", "sector": "금융", "mcap": 961555875400}, {"code": "036540", "name": "SFA반도체", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 945646742250}, {"code": "417200", "name": "LS머트리얼즈", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 908575210370}, {"code": "038500", "name": "삼표시멘트", "mkt": "KOSDAQ", "sector": "비금속", "mcap": 901101155100}, {"code": "397030", "name": "에이프릴바이오", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 900261609700}, {"code": "347700", "name": "스피어", "mkt": "KOSDAQ", "sector": "IT 서비스", "mcap": 891630962600}, {"code": "281740", "name": "레이크머티리얼즈", "mkt": "KOSDAQ", "sector": "화학", "mcap": 889991619920}, {"code": "090710", "name": "휴림로봇", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 887127995180}, {"code": "099320", "name": "쎄트렉아이", "mkt": "KOSDAQ", "sector": "운송장비·부품", "mcap": 873911984400}, {"code": "083450", "name": "GST", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 869896000000}, {"code": "388210", "name": "씨엠티엑스", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 863106757200}, {"code": "074600", "name": "원익QnC", "mkt": "KOSDAQ", "sector": "비금속", "mcap": 856988800000}, {"code": "491000", "name": "리브스메드", "mkt": "KOSDAQ", "sector": "의료·정밀기기", "mcap": 826395122550}, {"code": "161580", "name": "필옵틱스", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 813445970900}, {"code": "090360", "name": "로보스타", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 806325000000}, {"code": "137400", "name": "피엔티", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 794823924400}, {"code": "388720", "name": "유일로보틱스", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 790528249500}, {"code": "056190", "name": "SFA", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 789992720000}, {"code": "065350", "name": "신성델타테크", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 772298938800}, {"code": "086450", "name": "동국제약", "mkt": "KOSDAQ", "sector": "제약", "mcap": 770274052600}, {"code": "032500", "name": "케이엠더블유", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 762404037070}, {"code": "189300", "name": "인텔리안테크", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 754846039100}, {"code": "213420", "name": "덕산네오룩스", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 753626282650}, {"code": "356860", "name": "티엘비", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 753179458000}, {"code": "115180", "name": "큐리언트", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 738591609690}, {"code": "328130", "name": "루닛", "mkt": "KOSDAQ", "sector": "IT 서비스", "mcap": 735646818400}, {"code": "122870", "name": "와이지엔터테인먼트", "mkt": "KOSDAQ", "sector": "오락·문화", "mcap": 730820015900}, {"code": "048410", "name": "현대바이오", "mkt": "KOSDAQ", "sector": "화학", "mcap": 730547180040}, {"code": "036830", "name": "솔브레인홀딩스", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 729941723600}, {"code": "466100", "name": "클로봇", "mkt": "KOSDAQ", "sector": "IT 서비스", "mcap": 729407197350}, {"code": "252990", "name": "샘씨엔에스", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 715990700210}, {"code": "122640", "name": "예스티", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 712333644000}, {"code": "376900", "name": "로킷헬스케어", "mkt": "KOSDAQ", "sector": "제약", "mcap": 706383610500}, {"code": "490470", "name": "세미파이브", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 706027880000}, {"code": "241710", "name": "코스메카코리아", "mkt": "KOSDAQ", "sector": "화학", "mcap": 705948000000}, {"code": "053610", "name": "프로텍", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 669600000000}, {"code": "035760", "name": "CJ ENM", "mkt": "KOSDAQ", "sector": "오락·문화", "mcap": 668839197000}, {"code": "445680", "name": "큐리옥스바이오시스템즈", "mkt": "KOSDAQ", "sector": "의료·정밀기기", "mcap": 666626131250}, {"code": "014620", "name": "성광벤드", "mkt": "KOSDAQ", "sector": "금속", "mcap": 666589836400}, {"code": "033100", "name": "제룡전기", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 664983732600}, {"code": "019210", "name": "와이지-원", "mkt": "KOSDAQ", "sector": "금속", "mcap": 656097361920}, {"code": "050890", "name": "쏠리드", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 650094913800}, {"code": "222080", "name": "SFA넥셀", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 645575195200}, {"code": "032190", "name": "다우데이타", "mkt": "KOSDAQ", "sector": "유통", "mcap": 642674000000}, {"code": "094170", "name": "동운아나텍", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 626252583200}, {"code": "046890", "name": "서울반도체", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 625616942000}, {"code": "358570", "name": "지아이이노베이션", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 623339372700}, {"code": "293490", "name": "카카오게임즈", "mkt": "KOSDAQ", "sector": "IT 서비스", "mcap": 622223293230}, {"code": "102710", "name": "이엔에프테크놀로지", "mkt": "KOSDAQ", "sector": "화학", "mcap": 620092082400}, {"code": "295310", "name": "에이치브이엠", "mkt": "KOSDAQ", "sector": "금속", "mcap": 617989605300}, {"code": "023160", "name": "태광", "mkt": "KOSDAQ", "sector": "금속", "mcap": 615640359600}, {"code": "041830", "name": "인바디", "mkt": "KOSDAQ", "sector": "의료·정밀기기", "mcap": 608661822300}, {"code": "160190", "name": "하이젠알앤엠", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 606640320000}, {"code": "456160", "name": "지투지바이오", "mkt": "KOSDAQ", "sector": "제약", "mcap": 598659336000}, {"code": "052020", "name": "에스티큐브", "mkt": "KOSDAQ", "sector": "유통", "mcap": 598252960800}, {"code": "253450", "name": "스튜디오드래곤", "mkt": "KOSDAQ", "sector": "오락·문화", "mcap": 593955920480}, {"code": "006730", "name": "서부T&D", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 590834999300}, {"code": "383310", "name": "에코프로에이치엔", "mkt": "KOSDAQ", "sector": "화학", "mcap": 590444335800}, {"code": "059090", "name": "미코", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 580449433860}, {"code": "126340", "name": "비나텍", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 575869202800}, {"code": "052400", "name": "코나아이", "mkt": "KOSDAQ", "sector": "IT 서비스", "mcap": 574521829950}, {"code": "033640", "name": "네패스", "mkt": "KOSDAQ", "sector": "전기·전자", "mcap": 574174129800}, {"code": "053800", "name": "안랩", "mkt": "KOSDAQ", "sector": "IT 서비스", "mcap": 573015059000}, {"code": "476060", "name": "온코닉테라퓨틱스", "mkt": "KOSDAQ", "sector": "일반서비스", "mcap": 569868392000}, {"code": "121600", "name": "나노신소재", "mkt": "KOSDAQ", "sector": "화학", "mcap": 565287005100}, {"code": "041960", "name": "코미팜", "mkt": "KOSDAQ", "sector": "제약", "mcap": 554148712500}, {"code": "171090", "name": "선익시스템", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 553623904800}, {"code": "064290", "name": "인텍플러스", "mkt": "KOSDAQ", "sector": "기계·장비", "mcap": 547361583100}, {"code": "102940", "name": "코오롱생명과학", "mkt": "KOSDAQ", "sector": "제약", "mcap": 543260024500}];
+
+  /* 투자의 사계 섹터 구분 → 라벨·색 (카드·패널 공용) */
+  const KIND={good:{lab:'선호',c:'amber'},avoid:{lab:'회피·숏',c:'blue'},
+              contrarian:{lab:'역발상',c:'amber'},transition:{lab:'전이',c:'gray'}};
+  const V=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  function tint(c){return c==='blue'?{bg:V('--blue-bg'),tx:V('--blue'),bd:V('--blue-line'),st:V('--blue-stroke')}
+    :c==='amber'?{bg:V('--amber-bg'),tx:V('--amber'),bd:V('--amber-line'),st:V('--amber-stroke')}
+    :{bg:V('--gray-bg'),tx:V('--gray'),bd:V('--gray-line'),st:V('--gray-stroke')};}
+
+  /* ── 타임머신: 활성 뷰(CUR) = 현재(최신월) 또는 과거 특정 월의 스냅샷 ── */
+  let VIEW_M=null, CUR=[];
+  function viewAt(m){
+    return READS.map(r=>{
+      if(!m) return {cc:r.cc,mkt:r.mkt,phase:r.phase,watch:r.watch,metrics:r.metrics,why:r.why,pin:r.pin,pxchk:r.pxchk,gated:r.gated};
+      const h=(r.hist||[]).find(x=>x.m===m);
+      return h?{cc:r.cc,mkt:r.mkt,phase:h.phase,watch:h.watch,metrics:h.metrics,why:h.why,pin:h.pin,pxchk:h.pxchk,gated:h.gated}:null;
+    }).filter(Boolean);
+  }
+  function setView(m){
+    VIEW_M=m; CUR=viewAt(m);
+    buildReads(); buildPins(); buildHistory(); updateViewTag();
+    sel(CUR.length?CUR[0].phase:0);
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function updateViewTag(){
+    const tag=document.getElementById('viewtag'); if(!tag) return;
+    tag.innerHTML = VIEW_M
+      ? ` · <b style="color:var(--amber)">${VIEW_M}</b> 시점 <a href="#" onclick="setView(null);return false;" style="color:var(--blue);text-decoration:none">↩ 현재로</a>`
+      : '';
+  }
+
+  function buildReads(){
+    document.getElementById('reads').innerHTML=CUR.map((r,i)=>{
+      const p=P[r.phase], t=tint(p.c);
+      const watch=r.watch?` <span style="color:var(--ink3);font-weight:400">· ${r.watch}</span>`:'';
+      const mets=r.metrics.map(m=>{
+        const note = m[3]
+          ? `<a class="msrc" href="${m[3]}" target="_blank" rel="noopener" title="${m[4]||'원본 데이터 열기'}">${m[2]} <span class="lk">↗</span></a>`
+          : `<span class="mn" title="${m[4]||''}">${m[2]}</span>`;
+        return `<span class="ml">${m[0]}</span><span class="mv"><b>${m[1]}</b> ${note}</span>`;
+      }).join('');
+      return `<div class="mcard" id="mc${i}" onclick="sel(${r.phase})" style="border-color:${t.bd}">
+        <div class="mctop"><span class="cc">${r.cc} <span class="mkt">${r.mkt}</span></span><span class="badge" style="background:${t.bg};color:${t.tx}">${p.ll}</span></div>
+        <div class="phase">${p.k}${watch}</div>
+        <div class="leadline">주도변수 <b style="color:${t.tx}">${p.lead}</b></div>
+        <div class="mtab">${mets}</div>
+        <div class="why">${r.why}</div>
+        ${pxCheck(r)}
+        ${cardSectors(p)}
+      </div>`;
+    }).join('');
+  }
+  /* 주가 검증(검증축) — 분류 국면의 기대 주가방향 vs 실제 지수 추세. 어긋나면 경고 */
+  function pxCheck(r){
+    const px=r.pxchk; if(!px) return '';
+    const EXP={'1':'상승','-1':'하락','0':'횡보'};
+    const yo = (px.yoy!=null) ? `${px.yoy>0?'+':''}${px.yoy}% YoY` : `${px.mom>0?'+':''}${px.mom}% 6M`;
+    if(r.gated)
+      return `<div class="pxinfo"><b>ⓘ 주가 게이트</b> 매크로 신호는 ${r.gated}이나 주가 강세(${px.name} ${yo})가 하락 국면을 부정 → 현 국면으로 보정</div>`;
+    if(px.diverge)
+      return `<div class="pxwarn"><b>⚠ 주가 괴리</b> ${px.name} ${yo} — 분류는 ${EXP[px.expect]} 예상. 분류 재검토 필요</div>`;
+    return `<div class="pxok">주가 검증 · ${px.name} ${yo} · 분류와 일치</div>`;
+  }
+  /* 카드용 압축 섹터 한 줄 — 현재 국면에서 바로 볼 섹터 (상세는 클릭 패널) */
+  function cardSectors(p){
+    const s=p.sectors; if(!s) return '';
+    const meta=KIND[s.kind]||KIND.transition, kt=tint(meta.c);
+    const lab=`<span class="cl" style="color:${kt.tx}">${meta.lab}</span>`;
+    const txt = s.items ? s.items.join(' · ') : (s.note||'');
+    return `<div class="csec">${lab}${txt}</div>`;
+  }
+  function cell(label,data,isLead,c){
+    const t=tint(c); const ac=isLead?t.tx:V('--ink2');
+    const st=isLead?`border-color:${t.bd};background:${t.bg}`:'';
+    const tag=isLead?`<div class="ltag" style="background:${t.bg};color:${t.tx}">주도</div>`:'';
+    return `<div class="cell ${isLead?'lead':''}" style="${st}"><div class="clab">${label}</div><div class="garrow" style="color:${ac}">${G[data[0]]}</div><div class="cword">${data[1]}</div>${tag}</div>`;
+  }
+  function buildTable(){
+    document.getElementById('tbody').innerHTML=P.map((p,i)=>{
+      const t=tint(p.c);
+      return `<tr id="row${i}" onclick="sel(${i})"><td><span class="nm">${p.k}</span></td><td>${G[p.rate[0]]} ${p.rate[1]}</td><td>${G[p.earn[0]]} ${p.earn[1]}</td><td>${G[p.px[0]]} ${p.px[1]}</td><td style="color:${t.tx};font-weight:600">${p.lead||'전이'}</td><td style="color:var(--ink2);line-height:1.45">${p.ruleko||p.rule}</td><td>${p.pos}</td></tr>`;
+    }).join('');
+  }
+  function sel(i){
+    const p=P[i],t=tint(p.c),s=SEG[i],b=BAND[i];
+    const hb=document.getElementById('hlband'); hb.setAttribute('x',b[0]); hb.setAttribute('width',b[1]);
+    const d=document.getElementById('hldot'); d.setAttribute('cx',(s[0]+s[2])/2); d.setAttribute('cy',(s[1]+s[3])/2); d.setAttribute('stroke',t.st);
+    for(let j=0;j<6;j++){const el=document.getElementById('t'+j); el.setAttribute('fill', j===i?V('--ink'):(P[j].lead?V('--ink2'):V('--ink3'))); el.setAttribute('font-weight', j===i?'600':'400');
+      const r=document.getElementById('row'+j); if(r){r.classList.toggle('active',j===i); r.style.setProperty('--rowcol', j===i?t.st:'');}}
+    CUR.forEach((r,k)=>{const mc=document.getElementById('mc'+k); if(mc) mc.classList.toggle('act', r.phase===i);});
+    const badge=`<span class="badge" style="background:${t.bg};color:${t.tx}">${p.ll}</span>`;
+    const season=p.season?`<span class="pnote" style="margin:0">${p.season}</span>`:'';
+    const rows=cell('실질금리',p.rate,p.lead==='금리',p.c)+cell('실적',p.earn,p.lead==='실적',p.c)+cell('주가 (예상)',p.px,false,p.c);
+    document.getElementById('panel').innerHTML=
+      `<div class="phead"><span class="ptitle">${p.k}</span><span style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">${season}${badge}</span></div>`+
+      `<div class="grid3">${rows}</div>`+
+      `<div class="meta"><span class="k">식별 핵심</span><span class="v">${p.ruleko||p.rule}</span>`+
+      `<span class="k">포지션</span><span class="v">${p.pos}<span class="pnote">${p.note}</span></span></div>`+
+      sectorsBlock(p);
+    buildExposure(i);
+  }
+  /* ── 섹터 로테이션 & 종목 익스포저 ──────────────────────────────────────
+     매크로→섹터 오버레이. 종목은 '픽'이 아니라 그 국면 바람을 받는 유니버스.
+     ① 섹터 우선(타일, 기본 접힘) → 클릭 시 전체 종목 ② 핵심 숏리스트(시총 Top)
+     ③ 전환 선제 배너(watch 시) 로 과대주장 없이 actionable 하게 압축. ──────── */
+  function pStance(sector,phase){ return (STANCE[sector]||{})[phase]||'N'; }
+  function mcapText(m){ const t=m/1e12; return t>=10?`${t.toFixed(0)}조`:t>=1?`${t.toFixed(1)}조`:`${(m/1e8).toFixed(0)}억`; }
+  function expChip(s){ return `<span class="expchip" title="${s.code} · ${s.mkt}"><b>${s.name}</b><span class="mc">${mcapText(s.mcap)}</span></span>`; }
+  const SHORTLIST_N=8, PREVIEW_N=2;
+
+  /* 핵심 숏리스트 — 우호/역풍 섹터 통틀어 시총 Top N (가장 ownable·유동성 있는 이름) */
+  function expShortlist(i){
+    const pick=(want)=>STOCKS.filter(s=>pStance(s.sector,i)===want).sort((a,b)=>b.mcap-a.mcap).slice(0,SHORTLIST_N);
+    const longs=pick('L'), shorts=pick('S');
+    if(!longs.length && !shorts.length) return '';
+    const row=(lab,cls,arr)=>arr.length
+      ? `<div class="shortrow ${cls}"><span class="shortlab">${lab}</span><div class="expchips">${arr.map(expChip).join('')}</div></div>`:'';
+    return `<div class="shortlist">${row('핵심 LONG','long',longs)}${row('핵심 SHORT','short',shorts)}</div>`;
+  }
+
+  /* 한쪽(우호/역풍) 섹터 타일 — 기본 접힘(대표 2종목 미리보기), 클릭 시 전체 펼침 */
+  function expSectors(i,want,cls){
+    const head=cls==='long'?'우호 섹터':'역풍 섹터';
+    const map={};
+    STOCKS.forEach(s=>{ if(pStance(s.sector,i)===want)(map[s.sector]=map[s.sector]||[]).push(s); });
+    const secs=Object.keys(map).map(sec=>({sec,list:map[sec].sort((a,b)=>b.mcap-a.mcap),
+                cap:map[sec].reduce((x,y)=>x+y.mcap,0)})).sort((a,b)=>b.cap-a.cap);
+    const n=secs.reduce((x,y)=>x+y.list.length,0);
+    if(!secs.length)
+      return `<div class="expside ${cls}"><div class="exphead">${head}<span class="expcnt">0</span></div>`+
+             `<div class="expnote">전이 국면 — 뚜렷한 ${cls==='long'?'우호':'역풍'} 섹터 없음.</div></div>`;
+    const body=secs.map((o,k)=>{
+      const id=`xs_${cls}_${i}_${k}`;
+      const pv=o.list.slice(0,PREVIEW_N).map(s=>s.name).join(' · ')+(o.list.length>PREVIEW_N?' …':'');
+      return `<div class="exprow" onclick="toggleSec('${id}')">`+
+        `<div class="exprowhd"><span class="expsname">${o.sec}</span>`+
+        `<span class="exprowmeta"><span class="sc">${o.list.length}종목</span><span class="exppv">${pv}</span><span class="exptog" id="${id}_t">＋</span></span></div>`+
+        `<div class="exprowbody" id="${id}" hidden><div class="expchips">${o.list.map(expChip).join('')}</div></div></div>`;
+    }).join('');
+    return `<div class="expside ${cls}"><div class="exphead">${head}<span class="expcnt">${secs.length}섹터 · ${n}종목</span></div>${body}</div>`;
+  }
+  function toggleSec(id){
+    const b=document.getElementById(id), t=document.getElementById(id+'_t'); if(!b) return;
+    const open=b.hasAttribute('hidden');
+    if(open){ b.removeAttribute('hidden'); if(t)t.textContent='－'; }
+    else { b.setAttribute('hidden',''); if(t)t.textContent='＋'; }
+  }
+  /* 전환 선제 — 다음 국면 신규 우호(담을 곳)·현 우호인데 다음 역풍(비울 곳) */
+  function expRotation(cur,nx,watch){
+    const inSec=new Set(), outSec=new Set();
+    Object.keys(STANCE).forEach(s=>{
+      const c=pStance(s,cur), n=pStance(s,nx);
+      if(n==='L' && c!=='L') inSec.add(s);
+      if(c==='L' && n!=='L') outSec.add(s);
+    });
+    const top=set=>[...set].map(s=>{
+      const lead=STOCKS.filter(x=>x.sector===s).sort((a,b)=>b.mcap-a.mcap)[0];
+      return `${s}${lead?`(<b>${lead.name}</b>)`:''}`; }).join(' · ')||'—';
+    return `<div class="exprot"><b>⟳ 전환 선제 · ${watch}</b> — 한국 라이브 국면이 <b>${P[nx].k}</b>로 전환 임박. 한 발 앞서:`+
+      `<div class="rin" style="margin-top:6px">▸ 담을 섹터(${P[nx].k} 신규 우호): ${top(inSec)}</div>`+
+      `<div class="rout">▸ 비울 섹터(현 우호→차익실현): ${top(outSec)}</div></div>`;
+  }
+  function buildExposure(i){
+    const wrap=document.getElementById('exposure'); if(!wrap) return;
+    const tag=document.getElementById('expphase');
+    if(tag) tag.innerHTML=` · <b style="color:var(--ink)">${P[i].k}</b> 기준`;
+    const cnt=w=>STOCKS.filter(s=>pStance(s.sector,i)===w).length;
+    const sec=w=>new Set(STOCKS.filter(s=>pStance(s.sector,i)===w).map(s=>s.sector)).size;
+    const nL=cnt('L'), nS=cnt('S');
+    const kr=READS.find(r=>r.cc==='한국'); let banner='';
+    if(kr && kr.watch && kr.phase===i) banner=expRotation(i,(i+1)%6,kr.watch);
+    const sum=(nL===0 && nS===0)
+      ? '전이 국면 — 뚜렷한 섹터 우열 없음. 총노출(gross) 축소가 정석.'
+      : `우호 ${sec('L')}섹터(${nL}) · 역풍 ${sec('S')}섹터(${nS}) · 중립 ${STOCKS.length-nL-nS} · 섹터 클릭 시 전체 종목`;
+    wrap.innerHTML=banner+`<div class="expsum">${sum}</div>`+expShortlist(i)+
+      `<div class="expgrid">${expSectors(i,'L','long')}${expSectors(i,'S','short')}</div>`+
+      `<div class="expdisc">※ 매크로→섹터 로테이션 오버레이. 표시 종목은 해당 국면의 바람을 받는 <b>유니버스(워치리스트)</b>이며 매수·매도 추천이 아님 — 최종 종목선택은 PM 알파.</div>`;
+  }
+  /* 우라가미 원형 "투자의 사계" — 국면별 섹터 가이드 (클릭 패널, 상세) */
+  function sectorsBlock(p){
+    const s=p.sectors; if(!s) return '';
+    const meta=KIND[s.kind]||KIND.transition, kt=tint(meta.c);
+    const tag=`<span class="skind" style="background:${kt.bg};color:${kt.tx}">${meta.lab}</span>`;
+    const body = s.items
+      ? `<div class="sgrid">${s.items.map(x=>`<div class="schip">${x}</div>`).join('')}</div>`
+      : `<div class="snote">${s.note||''}</div>`;
+    return `<div class="sectors"><div class="stitle">투자의 사계 · ${s.title} ${tag}</div>${body}</div>`;
+  }
+  /* 시장별 위치 점을 활성 뷰(CUR)의 pin 으로 곡선 위에 렌더 (카드 국면과 항상 일치) */
+  function buildPins(){
+    const g=document.getElementById('pins'); if(!g) return;
+    g.innerHTML=CUR.map((r,i)=>{
+      if(!r.pin||r.pin.length<2) return '';
+      const x=r.pin[0], y=r.pin[1], dy=(i%2===0)?-11:18;  // 라벨 위/아래 번갈아 (겹침 방지)
+      return `<circle cx="${x}" cy="${y}" r="5.5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"/>`
+        +`<text x="${x}" y="${y+dy}" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--ink)" font-family="var(--sans)">${r.cc}</text>`;
+    }).join('');
+  }
+  /* 월별 국면 히스토리 — READS[].hist 를 월 기준으로 병합, 색칩으로 표시 */
+  function buildHistory(){
+    const wrap=document.getElementById('histwrap'); if(!wrap) return;
+    const months={};
+    READS.forEach(r=>(r.hist||[]).forEach(h=>{ (months[h.m]=months[h.m]||{})[r.cc]=h; }));
+    const keys=Object.keys(months).sort().reverse();   // 최근월 상단
+    if(!keys.length){ wrap.innerHTML=''; return; }
+    const ccs=READS.map(r=>r.cc);
+    let html='<table class="histtbl"><thead><tr><th>월</th>'+ccs.map(c=>`<th>${c}</th>`).join('')+'<th></th></tr></thead><tbody>';
+    keys.forEach(m=>{
+      const act=(m===VIEW_M)?' act':'';
+      html+=`<tr class="hrow${act}" onclick="setView('${m}')"><td class="hm">${m}</td>`;
+      ccs.forEach(c=>{
+        const h=months[m][c];
+        if(!h){ html+='<td></td>'; return; }
+        const p=P[h.phase], t=tint(p.c);
+        const gmark=h.gated?`<span class="hgate" title="매크로 ${h.gated} → 주가 강세로 보정">·보정</span>`:'';
+        html+=`<td><span class="hchip" style="background:${t.bg};color:${t.tx}" title="dRR=${h.dRR}, dE=${h.dE}">${p.k}</span>${gmark}</td>`;
+      });
+      html+=`<td class="hopen">${m===VIEW_M?'● 보는 중':'상세 ›'}</td></tr>`;
+    });
+    wrap.innerHTML=html+'</tbody></table>';
+  }
+  function kd(e,i){if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(i);}}
+  const DEF=(READS[0]&&typeof READS[0].phase==='number')?READS[0].phase:2;  // 기본 선택=한국 현재 국면
+  CUR=viewAt(null); buildReads(); buildTable(); buildPins(); buildHistory(); updateViewTag(); sel(DEF);
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{const a=document.querySelector('tr.active');CUR=viewAt(VIEW_M);buildReads();buildPins();buildHistory();sel(a?+a.id.slice(3):(CUR[0]?CUR[0].phase:DEF));});
+</script>
+</body>
+</html>
