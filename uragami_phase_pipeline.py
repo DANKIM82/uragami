@@ -351,6 +351,7 @@ class Read:
     pxchk: Optional[dict] = None      # 주가 검증(분류와 괴리 점검). 분류 입력 아님.
     gated: Optional[str] = None       # 주가 게이트로 하락국면이 거부됐을 때 원래(매크로) 국면명
     hist: list = field(default_factory=list)  # 월별 국면 이력 [{m,phase,gated,dRR,dE}]
+    nowcast: bool = False             # 현재 월에 잠정 추정치가 섞였는지
 
 def _watch(dRR: float, dE: float, phase: int) -> Optional[str]:
     """주도 마진이 얇으면 다음 링 국면 근접 경보."""
@@ -373,6 +374,34 @@ PRICE = {
 #   둘째 줄 쉼표구분 월간 값(nan 허용). 키가 OFFLINE에 있으면 라이브 호출 대신 사용.
 OFFLINE: dict[str, pd.Series] = {}
 
+# ── 잠정 추정치(--nowcast FILE) ────────────────────────────────────────────
+#   미발표 월을 컨센서스·직전값 유지 등으로 임시 채워 '현재 월' 국면을 미리 읽음.
+#   실제치가 나오면 data/*.txt를 갱신하고 해당 항목을 nowcast 파일에서 지움.
+#   추정치는 시계열 끝 이후 월에만 덧붙이며, 이미 발표된 월은 절대 덮어쓰지 않음.
+NOWCAST: dict[str, dict] = {}          # key -> {"YYYY-MM": value}
+NOWCAST_MKT: dict[str, set] = {}       # 시장(cc) -> 추정치가 섞인 월 집합
+
+def load_nowcast(path: str):
+    cfg = json.load(open(path, encoding="utf-8"))
+    for key, ent in cfg.get("series", {}).items():
+        NOWCAST[key] = dict(ent["values"])
+        NOWCAST_MKT.setdefault(ent["market"], set()).update(ent["values"].keys())
+    return cfg
+
+def _apply_nowcast(key: str, s: pd.Series) -> pd.Series:
+    add = NOWCAST.get(key)
+    if not add:
+        return s
+    last = s.dropna().index[-1]
+    ext = {pd.Period(m, freq="M"): float(v) for m, v in add.items()
+           if pd.Period(m, freq="M") > last}
+    if not ext:
+        return s
+    s = s.copy()
+    for k, v in ext.items():
+        s.loc[k] = v
+    return s.sort_index()
+
 def load_offline(folder: str) -> dict:
     import glob
     out = {}
@@ -387,7 +416,8 @@ def load_offline(folder: str) -> dict:
 
 def get(key: str, live):
     """오프라인 스냅샷이 있으면 사용, 없으면 라이브 페처 호출."""
-    return OFFLINE[key] if key in OFFLINE else live()
+    s = OFFLINE[key] if key in OFFLINE else live()
+    return _apply_nowcast(key, s)
 
 def _price_series(cc: str) -> Optional[pd.Series]:
     """시장 주가지수(월간) 가져오기. 실패 시 None."""
@@ -465,7 +495,13 @@ def build_read(cc, mkt, real_rate, earn_level, specs, why_tmpl, earn_yoy=None) -
     ph  = classify(df, gate_mom=gate)            # 주가 검증 게이트 적용
     blk = ph.attrs["blocked"]                    # 게이트가 실제로 거부한 월만 기록
 
-    def make_why(p, b, dRR, dE):
+    nc_months = NOWCAST_MKT.get(cc, set())
+
+    def make_why(p, b, dRR, dE, nc=False):
+        pre = "[잠정·추정치 포함] " if nc else ""
+        return pre + _why(p, b, dRR, dE)
+
+    def _why(p, b, dRR, dE):
         if b is not None:
             return (f"매크로 신호는 {PHASES[b]}이나, 주가 강세(검증축)가 하락 국면을 부정 "
                     f"→ {PHASES[p]}로 판정. dRR={dRR:+.2f}, dE={dE:+.2f}.")
@@ -475,21 +511,22 @@ def build_read(cc, mkt, real_rate, earn_level, specs, why_tmpl, earn_yoy=None) -
         p = int(ph[idx]); b = blk[idx]
         b = int(b) if b is not None and not pd.isna(b) else None
         dRR, dE = float(df.loc[idx, "dRR"]), float(df.loc[idx, "dE"])
-        return {"m": str(idx), "phase": p,
+        nc = str(idx) in nc_months
+        return {"m": str(idx), "phase": p, "nowcast": nc,
                 "gated": PHASES[b] if b is not None else None,
                 "dRR": round(dRR, 2), "dE": round(dE, 2),
                 "watch": _watch(dRR, dE, p),
                 "metrics": [[lab, fmt_at(s, idx, suf), note,
                              (sr or {}).get("url"), (sr or {}).get("tip")]
                             for (lab, s, suf, note, sr) in specs],
-                "why": make_why(p, b, dRR, dE),
+                "why": make_why(p, b, dRR, dE, nc),
                 "pin": PIN[p],
                 "pxchk": price_check_at(px_s, idx, p, pname)}
 
     cur  = snap(df.index[-1])
     hist = [snap(idx) for idx in df.index if str(idx) >= HIST_START]
     return Read(cc, mkt, cur["phase"], cur["watch"], cur["metrics"], cur["why"],
-                cur["pin"], cur["pxchk"], cur["gated"], hist)
+                cur["pin"], cur["pxchk"], cur["gated"], hist, cur["nowcast"])
 
 def korea_read() -> Read:
     def _y10():
@@ -677,7 +714,8 @@ def summary(reads: list[Read]):
     print("-" * 56)
     for r in reads:
         w = f"  ⚠ {r.watch}" if r.watch else ""
-        print(f"  {r.cc:<4} {PHASES[r.phase]:<8}{w}")
+        nc = "  [잠정]" if r.nowcast else ""
+        print(f"  {r.cc:<4} {PHASES[r.phase]:<8}{w}{nc}")
         for m in r.metrics:
             print(f"       {m[0]:<10} {m[1]:>9}   {m[2]}")
         if r.gated:
@@ -710,11 +748,16 @@ def main():
                     help="일본 EDINET 영업이익 확산 확증(느림, 3~5초/호출)")
     ap.add_argument("--offline",  default=None,
                     help="API 대신 월간 스냅샷 폴더(data/*.txt) 사용 — 키·네트워크 불필요")
+    ap.add_argument("--nowcast",  default=None,
+                    help="미발표 월 잠정 추정치 JSON(예: data/nowcast.json) — 현재 월 국면 미리보기")
     ap.add_argument("--asof",     default=None, help="as-of 표기 날짜(YYYY-MM-DD), 기본=오늘")
     args = ap.parse_args()
     if args.offline:
         OFFLINE.update(load_offline(args.offline))
         print(f"  오프라인 스냅샷 {len(OFFLINE)}개 시계열 로드 ← {args.offline}")
+    if args.nowcast:
+        load_nowcast(args.nowcast)
+        print(f"  잠정 추정치 {len(NOWCAST)}개 시계열 적용 ← {args.nowcast}")
 
     universe = load_universe(here)
     reads = [korea_read(), japan_read(edinet=args.edinet), us_read()]

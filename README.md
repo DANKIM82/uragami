@@ -94,11 +94,12 @@ python uragami_phase_pipeline.py \
 - `--edinet`   : EDINET 영업이익 확산 신호 포함(느림, 선택)
 - `--offline DIR` : API 대신 저장된 월간 스냅샷(`data/*.txt`)으로 재현 — 키·네트워크 불필요
 - `--asof YYYY-MM-DD` : 화면 as-of 표기 날짜(기본=오늘)
+- `--nowcast FILE` : 미발표 월 잠정 추정치(JSON, 예: `data/nowcast.json`)를 시계열 끝에 덧붙여 현재 월 국면을 미리 읽음. 추정치가 섞인 월은 카드·히스토리에 '잠정'으로 표시되며, 이미 발표된 월은 덮어쓰지 않음. 실제치가 나오면 `data/*.txt`를 갱신하고 해당 월을 nowcast 파일에서 삭제
 
 GitHub Pages용 `index.html` 재생성(오프라인 스냅샷 기준):
 
 ```bash
-python uragami_phase_pipeline.py --offline data --out index.html
+python uragami_phase_pipeline.py --offline data --nowcast data/nowcast.json --out index.html
 ```
 
 `data/*.txt` 형식: 첫 줄 `start=YYYY-MM`, 둘째 줄 쉼표구분 월간 값(`nan` 허용, 내부 결측은 선형보간).

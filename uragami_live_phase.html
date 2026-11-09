@@ -307,9 +307,9 @@
   let VIEW_M=null, CUR=[];
   function viewAt(m){
     return READS.map(r=>{
-      if(!m) return {cc:r.cc,mkt:r.mkt,m:(r.hist&&r.hist.length?r.hist[r.hist.length-1].m:null),phase:r.phase,watch:r.watch,metrics:r.metrics,why:r.why,pin:r.pin,pxchk:r.pxchk,gated:r.gated};
+      if(!m) return {cc:r.cc,mkt:r.mkt,m:(r.hist&&r.hist.length?r.hist[r.hist.length-1].m:null),phase:r.phase,watch:r.watch,metrics:r.metrics,why:r.why,pin:r.pin,pxchk:r.pxchk,gated:r.gated,nowcast:r.nowcast};
       const h=(r.hist||[]).find(x=>x.m===m);
-      return h?{cc:r.cc,mkt:r.mkt,m:h.m,phase:h.phase,watch:h.watch,metrics:h.metrics,why:h.why,pin:h.pin,pxchk:h.pxchk,gated:h.gated}:null;
+      return h?{cc:r.cc,mkt:r.mkt,m:h.m,phase:h.phase,watch:h.watch,metrics:h.metrics,why:h.why,pin:h.pin,pxchk:h.pxchk,gated:h.gated,nowcast:h.nowcast}:null;
     }).filter(Boolean);
   }
   function setView(m){
@@ -336,7 +336,7 @@
         return `<span class="ml">${m[0]}</span><span class="mv"><b>${m[1]}</b> ${note}</span>`;
       }).join('');
       return `<div class="mcard" id="mc${i}" onclick="sel(${r.phase})" style="border-color:${t.bd}">
-        <div class="mctop"><span class="cc">${r.cc} <span class="mkt">${r.mkt}</span>${r.m?`<span class="mmonth">기준 ${r.m}</span>`:''}</span><span class="badge" style="background:${t.bg};color:${t.tx}">${p.ll}</span></div>
+        <div class="mctop"><span class="cc">${r.cc} <span class="mkt">${r.mkt}</span>${r.m?`<span class="mmonth">기준 ${r.m}${r.nowcast?' · 잠정':''}</span>`:''}</span><span class="badge" style="background:${t.bg};color:${t.tx}">${p.ll}</span></div>
         <div class="phase">${p.k}${watch}</div>
         <div class="leadline">주도변수 <b style="color:${t.tx}">${p.lead}</b></div>
         <div class="mtab">${mets}</div>
@@ -521,7 +521,8 @@
         if(!h){ html+='<td></td>'; return; }
         const p=P[h.phase], t=tint(p.c);
         const gmark=h.gated?`<span class="hgate" title="매크로 ${h.gated} → 주가 강세로 보정">·보정</span>`:'';
-        html+=`<td><span class="hchip" style="background:${t.bg};color:${t.tx}" title="dRR=${h.dRR}, dE=${h.dE}">${p.k}</span>${gmark}</td>`;
+        const nmark=h.nowcast?`<span class="hgate" title="미발표 지표를 추정치로 채운 잠정 판정">·잠정</span>`:'';
+        html+=`<td><span class="hchip" style="background:${t.bg};color:${t.tx}" title="dRR=${h.dRR}, dE=${h.dE}">${p.k}</span>${gmark}${nmark}</td>`;
       });
       html+=`<td class="hopen">${m===VIEW_M?'● 보는 중':'상세 ›'}</td></tr>`;
     });
