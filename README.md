@@ -2,12 +2,12 @@
 
 ### 👉 [**라이브 대시보드 바로 보기 (https://dankim82.github.io/uragami/)**](https://dankim82.github.io/uragami/)
 
-> 한국·일본 현재 국면을 데이터가 주입된 대시보드로 바로 확인 (정적 스냅샷).
+> 한국·일본·미국 현재 국면을 데이터가 주입된 대시보드로 바로 확인 (정적 스냅샷).
 
 ---
 
 우라가미 쿠니오(浦上邦雄)의 **주식시장 6국면(사계)** 모델을 라이브 매크로 데이터로
-자동 분류하는 파이프라인입니다. 외생 매크로 지표(금리·실적 프록시)만으로 한국·일본
+자동 분류하는 파이프라인입니다. 외생 매크로 지표(금리·실적 프록시)만으로 한국·일본·미국
 시장의 현재 국면을 판정하고, 대시보드 HTML(`uragami_live_phase.html`)에 결과를 주입해
 `uragami_live_phase.generated.html`을 생성합니다.
 
@@ -30,8 +30,8 @@
 
 ## 동작 개요
 
-1. **데이터 수집** — ECOS(한국), FRED(일본·글로벌 금리/수출), e-Stat(일본 CPI·광공업
-   생산), EDINET(일본 영업이익 YoY 확산, 선택).
+1. **데이터 수집** — ECOS(한국), FRED(일본 금리/수출, 미국 10Y·CPI·소매판매·산업생산·S&P 500),
+   e-Stat(일본 CPI·광공업 생산), EDINET(일본 영업이익 YoY 확산, 선택).
 2. **피처 계산** — 실질금리 변화 `dRR`, 실적 프록시 변화 `dE`를 3M 평활 후 3개월 변화량을
    trailing 60개월 z-score로 표준화.
 3. **분류** — 순서형 6상태 분류기(링 제약 + 히스테리시스). 임계치는 피팅이 아니라 경제적
@@ -39,6 +39,16 @@
 4. **주가 검증 게이트** — 하락 국면(역금융·역실적) 진입을 주가 강세가 거부(예: 일본
    리플레이션을 역금융으로 오분류하는 것을 차단).
 5. **렌더링** — 분류 결과 + 섹터 익스포저 맵을 대시보드 HTML에 주입.
+
+## 시장별 입력
+
+| 시장 | 실질금리 | 실적 프록시(dE) | 주가 검증축 |
+|------|----------|-----------------|-------------|
+| 한국 | 국고채10년 − CPI YoY | 수출금액 YoY | KOSPI |
+| 일본 | JGB10Y − CPI YoY | 수출액 YoY | Nikkei 225 |
+| 미국 | UST10Y − CPI YoY | 명목 소매판매 YoY (산업생산은 참고) | S&P 500 |
+
+미국은 소비 주도 경제라 한·일의 '명목 수출금액'에 대응하는 명목 매출 대용으로 소매판매를 씁니다.
 
 ## 요구사항
 
@@ -82,6 +92,16 @@ python uragami_phase_pipeline.py \
 - `--template` : 입력 대시보드 HTML (기본: `uragami_live_phase.html`)
 - `--out`      : 생성 결과 HTML (기본: `uragami_live_phase.generated.html`)
 - `--edinet`   : EDINET 영업이익 확산 신호 포함(느림, 선택)
+- `--offline DIR` : API 대신 저장된 월간 스냅샷(`data/*.txt`)으로 재현 — 키·네트워크 불필요
+- `--asof YYYY-MM-DD` : 화면 as-of 표기 날짜(기본=오늘)
+
+GitHub Pages용 `index.html` 재생성(오프라인 스냅샷 기준):
+
+```bash
+python uragami_phase_pipeline.py --offline data --out index.html
+```
+
+`data/*.txt` 형식: 첫 줄 `start=YYYY-MM`, 둘째 줄 쉼표구분 월간 값(`nan` 허용, 내부 결측은 선형보간).
 
 ## 구성
 
@@ -90,6 +110,7 @@ uragami_phase_pipeline.py        # 메인 파이프라인 (페처 → 분류 →
 uragami_live_phase.html          # 대시보드 템플릿
 uragami_live_phase.generated.html# 생성 결과(파이프라인이 재생성)
 Stocks/                          # 종목 유니버스(KOSPI/KOSDAQ) — 섹터 익스포저 맵
+data/                            # 오프라인 월간 스냅샷(--offline)
 ```
 
 ## 주의

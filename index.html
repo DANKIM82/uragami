@@ -27,14 +27,15 @@
   }
   *{box-sizing:border-box;}
   body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); -webkit-font-smoothing:antialiased; line-height:1.6; padding:32px 20px;}
-  .wrap{max-width:880px; margin:0 auto;}
+  .wrap{max-width:1000px; margin:0 auto;}
   .eyebrow{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink3); margin:0 0 4px;}
   h1{font-size:24px; font-weight:600; margin:0 0 4px; letter-spacing:-0.01em;}
   .sub{font-size:14px; color:var(--ink2); margin:0 0 22px; max-width:64ch;}
   .secrow{display:flex; align-items:baseline; justify-content:space-between; margin:0 0 12px; gap:12px; flex-wrap:wrap;}
   .sectitle{font-size:13px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink3);}
   .asof{font-size:12px; color:var(--ink3); font-family:var(--mono);}
-  .reads{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:26px;}
+  .reads{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; margin-bottom:26px;}
+  .mmonth{font-size:10.5px; color:var(--ink3); font-family:var(--mono); font-weight:400; margin-left:6px;}
   .mcard{border:0.5px solid var(--line); border-radius:14px; padding:16px 18px; background:var(--surface); cursor:pointer; transition:border-color .15s;}
   .mcard:hover{border-color:var(--line2);}
   .mcard.act{border-width:1.5px;}
@@ -158,12 +159,12 @@
 <body>
 <div class="wrap">
   <p class="eyebrow">Uragami four-season cycle · 실질금리 재해석 · live read</p>
-  <h1>한국·일본 현재 국면</h1>
-  <p class="sub">매크로(금리·물가·실적) 입력으로 두 시장을 6국면 사이클 위에 찍었습니다. 주가 화살표는 분류 입력이 아니라 기대 페이오프·포지션으로만 씁니다. 아래 데이터는 2026년 6월 말 기준 스냅샷이며, 카드와 곡선·표는 모두 연동됩니다.</p>
+  <h1>한국·일본·미국 현재 국면</h1>
+  <p class="sub">매크로(금리·물가·실적) 입력으로 세 시장을 6국면 사이클 위에 찍었습니다. 주가 화살표는 분류 입력이 아니라 기대 페이오프·포지션으로만 씁니다. 각 카드의 기준월은 금리·물가·실적 지표가 모두 발표된 마지막 달이며, 카드와 곡선·표는 모두 연동됩니다.</p>
 
   <div class="secrow">
     <span class="sectitle">현재 국면<span id="viewtag" style="text-transform:none;letter-spacing:0"></span></span>
-    <span class="asof">as of 2026-06-28</span>
+    <span class="asof">as of 2026-11-09</span>
   </div>
   <div class="reads" id="reads"></div>
 
@@ -179,8 +180,8 @@
 
   <div class="chartcard">
   <svg width="100%" viewBox="0 0 680 272" role="img" aria-labelledby="svgt svgd">
-    <title id="svgt">주가 사이클 파동 위의 6국면과 한국·일본 현재 위치</title>
-    <desc id="svgd">한국·일본의 현재 국면을 6국면 곡선 위에 점으로 표시.</desc>
+    <title id="svgt">주가 사이클 파동 위의 6국면과 한국·일본·미국 현재 위치</title>
+    <desc id="svgd">한국·일본·미국의 현재 국면을 6국면 곡선 위에 점으로 표시.</desc>
     <defs>
       <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
     </defs>
@@ -241,14 +242,15 @@
   <div id="histwrap"></div>
 
   <div class="secrow" style="margin-top:28px">
-    <span class="sectitle">섹터 로테이션 & 종목 익스포저<span id="expphase" style="text-transform:none;letter-spacing:0"></span></span>
+    <span class="sectitle">한국 섹터 로테이션 & 종목 익스포저<span id="expphase" style="text-transform:none;letter-spacing:0"></span></span>
     <span class="asof">KOSPI 200 · KOSDAQ 150 · 시총순</span>
   </div>
   <div id="exposure"></div>
 
   <p class="foot">
-    <b>데이터</b> 한국 국채10년 4.08%(’26-06-17), CPI 3.1%(5월), 수출 +53.2%·반도체 +169%(5월). 일본 국채10년 ~2.65%(5월 고점 2.8%), 코어CPI ~2.8%, FY26 성장 0.5%로 하향. 출처 Trading Economics, MOTIE/관세청, BOJ, CNBC, Nikkei.<br>
-    <b>한계</b> 브라우저 아티팩트는 ECOS·FRED를 직접 호출할 수 없어(키·CORS) 이 화면은 수동 스냅샷입니다. 진짜 자동 갱신은 ECOS+FRED를 끌어와 이 HTML을 재생성하는 파이썬 잡(스크립트의 READS 객체만 교체)으로 돌리면 됩니다.<br>
+    <b>데이터</b> 한국 국채10년·CPI·수출(10월, 수출 +94% YoY), 일본 JGB10Y·CPI·통관수출(9월), 미국 UST10Y·CPI-U·명목 소매판매(9월). 주가 검증축은 KOSPI·Nikkei 225·S&P 500 월말 종가(11월은 진행 중). 이번 스냅샷 출처는 TradingView 경제지표(원출처 ECOS·관세청, 재무성·총무성, BLS·Census·연준)이며 라이브 실행 시 ECOS·FRED·e-Stat API로 대체됩니다.<br>
+    <b>미국 정의</b> 실질금리 = UST10Y − CPI YoY(한·일과 동일 정의), 실적 프록시 = 명목 소매판매 YoY(소비 주도 경제의 명목 매출 대용), 산업생산 YoY는 참고 지표.<br>
+    <b>한계</b> 브라우저 아티팩트는 ECOS·FRED를 직접 호출할 수 없어(키·CORS) 이 화면은 스냅샷입니다. 재생성은 <code>python uragami_phase_pipeline.py</code>(라이브 API) 또는 <code>--offline data</code>(저장된 월간 스냅샷)로 READS 객체만 교체합니다.<br>
     <b>주의</b> 주가 화살표는 검증축·익스포저 맵으로만 사용. 분류기 피처로 넣으면 순환참조.
   </p>
 </div>
@@ -288,54 +290,54 @@
     "metrics": [
       [
         "국채 10년",
-        "4.07%",
+        "4.01%",
         "ECOS 국고채10년",
         "https://ecos.bok.or.kr/",
         "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
       ],
       [
         "CPI (YoY)",
-        "3.14%",
+        "2.82%",
         "ECOS 총지수",
         "https://ecos.bok.or.kr/",
         "ECOS 901Y009 소비자물가지수 총지수"
       ],
       [
         "실질금리",
-        "0.93%",
+        "1.19%",
         "10Y − CPI",
         null,
         null
       ],
       [
         "수출 (YoY)",
-        "56.84%",
+        "93.70%",
         "ECOS 수출금액지수",
         "https://ecos.bok.or.kr/",
         "ECOS 403Y001 수출금액지수"
       ]
     ],
-    "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.18, dE=+2.33).",
+    "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.18, dE=+1.73).",
     "pin": [
       280,
       70
     ],
     "pxchk": {
       "name": "KOSPI",
-      "mom": 115.9,
-      "yoy": 214.2,
+      "mom": -13.2,
+      "yoy": 39.5,
       "expect": 1,
-      "actual": 1,
-      "diverge": false
+      "actual": -1,
+      "diverge": true
     },
     "gated": null,
     "hist": [
       {
         "m": "2024-01",
         "phase": 3,
-        "gated": "실적장세",
-        "dRR": -0.2,
-        "dE": 1.18,
+        "gated": null,
+        "dRR": -0.19,
+        "dE": 1.2,
         "watch": null,
         "metrics": [
           [
@@ -361,13 +363,13 @@
           ],
           [
             "수출 (YoY)",
-            "15.71%",
+            "18.06%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "매크로 신호는 실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 역금융장세로 판정. dRR=-0.20, dE=+1.18.",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.19, dE=+1.20).",
         "pin": [
           385,
           95
@@ -384,14 +386,14 @@
       {
         "m": "2024-02",
         "phase": 3,
-        "gated": "실적장세",
+        "gated": null,
         "dRR": -0.16,
-        "dE": 0.54,
+        "dE": 0.58,
         "watch": null,
         "metrics": [
           [
             "국채 10년",
-            "3.48%",
+            "3.47%",
             "ECOS 국고채10년",
             "https://ecos.bok.or.kr/",
             "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
@@ -412,13 +414,13 @@
           ],
           [
             "수출 (YoY)",
-            "3.59%",
+            "4.16%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "매크로 신호는 실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 역금융장세로 판정. dRR=-0.16, dE=+0.54.",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.16, dE=+0.58).",
         "pin": [
           385,
           95
@@ -435,7 +437,7 @@
       {
         "m": "2024-03",
         "phase": 4,
-        "gated": "실적장세",
+        "gated": null,
         "dRR": 0.17,
         "dE": 0.19,
         "watch": "역실적장세 근접",
@@ -463,13 +465,13 @@
           ],
           [
             "수출 (YoY)",
-            "1.13%",
+            "2.98%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "매크로 신호는 실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 중간반등로 판정. dRR=+0.17, dE=+0.19.",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.17, dE=+0.19).",
         "pin": [
           490,
           145
@@ -486,9 +488,9 @@
       {
         "m": "2024-04",
         "phase": 0,
-        "gated": "역금융장세",
+        "gated": "역실적장세",
         "dRR": 0.3,
-        "dE": -0.34,
+        "dE": -0.39,
         "watch": "중간반락 근접",
         "metrics": [
           [
@@ -514,13 +516,13 @@
           ],
           [
             "수출 (YoY)",
-            "12.88%",
+            "13.59%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 금융장세로 판정. dRR=+0.30, dE=-0.34.",
+        "why": "매크로 신호는 역실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 금융장세로 판정. dRR=+0.30, dE=-0.39.",
         "pin": [
           90,
           145
@@ -537,9 +539,9 @@
       {
         "m": "2024-05",
         "phase": 1,
-        "gated": "역금융장세",
-        "dRR": 0.59,
-        "dE": -0.03,
+        "gated": null,
+        "dRR": 0.6,
+        "dE": -0.05,
         "watch": null,
         "metrics": [
           [
@@ -565,13 +567,13 @@
           ],
           [
             "수출 (YoY)",
-            "9.91%",
+            "11.46%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 중간반락로 판정. dRR=+0.59, dE=-0.03.",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=+0.60, dE=-0.05).",
         "pin": [
           185,
           95
@@ -589,13 +591,13 @@
         "m": "2024-06",
         "phase": 2,
         "gated": "역금융장세",
-        "dRR": 0.69,
-        "dE": 0.25,
+        "dRR": 0.7,
+        "dE": 0.1,
         "watch": null,
         "metrics": [
           [
             "국채 10년",
-            "3.27%",
+            "3.28%",
             "ECOS 국고채10년",
             "https://ecos.bok.or.kr/",
             "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
@@ -609,20 +611,20 @@
           ],
           [
             "실질금리",
-            "0.86%",
+            "0.87%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "7.89%",
+            "5.61%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.69, dE=+0.25.",
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.70, dE=+0.10.",
         "pin": [
           280,
           70
@@ -641,12 +643,12 @@
         "phase": 2,
         "gated": "역금융장세",
         "dRR": 0.47,
-        "dE": 0.39,
+        "dE": 0.24,
         "watch": "역금융장세 근접",
         "metrics": [
           [
             "국채 10년",
-            "3.06%",
+            "3.07%",
             "ECOS 국고채10년",
             "https://ecos.bok.or.kr/",
             "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
@@ -667,13 +669,13 @@
           ],
           [
             "수출 (YoY)",
-            "14.79%",
+            "13.87%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.47, dE=+0.39.",
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.47, dE=+0.24.",
         "pin": [
           280,
           70
@@ -690,9 +692,9 @@
       {
         "m": "2024-08",
         "phase": 2,
-        "gated": "중간반등",
-        "dRR": 0.26,
-        "dE": 0.11,
+        "gated": null,
+        "dRR": 0.27,
+        "dE": -0.03,
         "watch": "역금융장세 근접",
         "metrics": [
           [
@@ -718,13 +720,13 @@
           ],
           [
             "수출 (YoY)",
-            "7.89%",
+            "10.86%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "매크로 신호는 중간반등이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.26, dE=+0.11.",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=+0.27, dE=-0.03).",
         "pin": [
           280,
           70
@@ -741,9 +743,9 @@
       {
         "m": "2024-09",
         "phase": 2,
-        "gated": "중간반등",
+        "gated": null,
         "dRR": 0.26,
-        "dE": -0.22,
+        "dE": -0.07,
         "watch": "역금융장세 근접",
         "metrics": [
           [
@@ -762,20 +764,20 @@
           ],
           [
             "실질금리",
-            "1.40%",
+            "1.39%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "4.55%",
+            "7.13%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "매크로 신호는 중간반등이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.26, dE=-0.22.",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=+0.26, dE=-0.07).",
         "pin": [
           280,
           70
@@ -792,14 +794,14 @@
       {
         "m": "2024-10",
         "phase": 3,
-        "gated": "중간반등",
-        "dRR": 1.04,
-        "dE": -0.56,
+        "gated": null,
+        "dRR": 1.05,
+        "dE": -0.39,
         "watch": null,
         "metrics": [
           [
             "국채 10년",
-            "3.10%",
+            "3.14%",
             "ECOS 국고채10년",
             "https://ecos.bok.or.kr/",
             "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
@@ -813,20 +815,20 @@
           ],
           [
             "실질금리",
-            "1.85%",
+            "1.89%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "6.03%",
+            "4.56%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "매크로 신호는 중간반등이나, 주가 강세(검증축)가 하락 국면을 부정 → 역금융장세로 판정. dRR=+1.04, dE=-0.56.",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=+1.05, dE=-0.39).",
         "pin": [
           385,
           95
@@ -843,14 +845,14 @@
       {
         "m": "2024-11",
         "phase": 3,
-        "gated": "중간반등",
-        "dRR": 1.03,
-        "dE": -0.75,
-        "watch": "중간반등 근접",
+        "gated": null,
+        "dRR": 1.05,
+        "dE": -0.68,
+        "watch": null,
         "metrics": [
           [
             "국채 10년",
-            "2.75%",
+            "2.76%",
             "ECOS 국고채10년",
             "https://ecos.bok.or.kr/",
             "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
@@ -864,20 +866,20 @@
           ],
           [
             "실질금리",
-            "1.22%",
+            "1.24%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "-0.40%",
+            "1.31%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "매크로 신호는 중간반등이나, 주가 강세(검증축)가 하락 국면을 부정 → 역금융장세로 판정. dRR=+1.03, dE=-0.75.",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=+1.05, dE=-0.68).",
         "pin": [
           385,
           95
@@ -895,13 +897,13 @@
         "m": "2024-12",
         "phase": 5,
         "gated": null,
-        "dRR": 0.52,
-        "dE": -0.53,
+        "dRR": 0.55,
+        "dE": -0.73,
         "watch": "금융장세 근접",
         "metrics": [
           [
             "국채 10년",
-            "2.85%",
+            "2.87%",
             "ECOS 국고채10년",
             "https://ecos.bok.or.kr/",
             "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
@@ -915,20 +917,20 @@
           ],
           [
             "실질금리",
-            "0.92%",
+            "0.94%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "7.72%",
+            "6.58%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.52, dE=-0.53).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.55, dE=-0.73).",
         "pin": [
           590,
           170
@@ -944,15 +946,15 @@
       },
       {
         "m": "2025-01",
-        "phase": 0,
+        "phase": 5,
         "gated": null,
-        "dRR": -0.78,
-        "dE": -0.76,
-        "watch": "중간반락 근접",
+        "dRR": -0.79,
+        "dE": -0.88,
+        "watch": "금융장세 근접",
         "metrics": [
           [
             "국채 10년",
-            "2.86%",
+            "2.85%",
             "ECOS 국고채10년",
             "https://ecos.bok.or.kr/",
             "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
@@ -973,37 +975,37 @@
           ],
           [
             "수출 (YoY)",
-            "-10.84%",
+            "-10.11%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=-0.78, dE=-0.76).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.79, dE=-0.88).",
         "pin": [
-          90,
-          145
+          590,
+          170
         ],
         "pxchk": {
           "name": "KOSPI",
           "mom": -9.1,
           "yoy": 0.8,
-          "expect": 1,
+          "expect": -1,
           "actual": -1,
-          "diverge": true
+          "diverge": false
         }
       },
       {
         "m": "2025-02",
         "phase": 0,
         "gated": null,
-        "dRR": -1.15,
-        "dE": -0.44,
+        "dRR": -1.16,
+        "dE": -0.57,
         "watch": null,
         "metrics": [
           [
             "국채 10년",
-            "2.71%",
+            "2.72%",
             "ECOS 국고채10년",
             "https://ecos.bok.or.kr/",
             "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
@@ -1017,20 +1019,20 @@
           ],
           [
             "실질금리",
-            "0.68%",
+            "0.70%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "0.68%",
+            "0.41%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=-1.15, dE=-0.44).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=-1.16, dE=-0.57).",
         "pin": [
           90,
           145
@@ -1048,9 +1050,9 @@
         "m": "2025-03",
         "phase": 0,
         "gated": null,
-        "dRR": -1.02,
-        "dE": -0.75,
-        "watch": "중간반락 근접",
+        "dRR": -1.05,
+        "dE": -0.66,
+        "watch": null,
         "metrics": [
           [
             "국채 10년",
@@ -1075,13 +1077,13 @@
           ],
           [
             "수출 (YoY)",
-            "0.53%",
+            "2.74%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=-1.02, dE=-0.75).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=-1.05, dE=-0.66).",
         "pin": [
           90,
           145
@@ -1099,13 +1101,13 @@
         "m": "2025-04",
         "phase": 0,
         "gated": null,
-        "dRR": -0.45,
-        "dE": 0.23,
+        "dRR": -0.44,
+        "dE": 0.27,
         "watch": "중간반락 근접",
         "metrics": [
           [
             "국채 10년",
-            "2.56%",
+            "2.59%",
             "ECOS 국고채10년",
             "https://ecos.bok.or.kr/",
             "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
@@ -1119,20 +1121,20 @@
           ],
           [
             "실질금리",
-            "0.48%",
+            "0.51%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "2.82%",
+            "3.36%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=-0.45, dE=+0.23).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=-0.44, dE=+0.27).",
         "pin": [
           90,
           145
@@ -1151,7 +1153,7 @@
         "phase": 1,
         "gated": null,
         "dRR": -0.05,
-        "dE": 0.09,
+        "dE": 0.22,
         "watch": "실적장세 근접",
         "metrics": [
           [
@@ -1170,20 +1172,20 @@
           ],
           [
             "실질금리",
-            "0.88%",
+            "0.89%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "-1.96%",
+            "-1.31%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.05, dE=+0.09).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.05, dE=+0.22).",
         "pin": [
           185,
           95
@@ -1202,12 +1204,12 @@
         "phase": 2,
         "gated": null,
         "dRR": 0.04,
-        "dE": 0.37,
+        "dE": 0.38,
         "watch": "역금융장세 근접",
         "metrics": [
           [
             "국채 10년",
-            "2.81%",
+            "2.80%",
             "ECOS 국고채10년",
             "https://ecos.bok.or.kr/",
             "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
@@ -1221,20 +1223,20 @@
           ],
           [
             "실질금리",
-            "0.64%",
+            "0.63%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "2.87%",
+            "4.35%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.04, dE=+0.37).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.04, dE=+0.38).",
         "pin": [
           280,
           70
@@ -1252,8 +1254,8 @@
         "m": "2025-07",
         "phase": 2,
         "gated": null,
-        "dRR": 0.22,
-        "dE": -0.06,
+        "dRR": 0.19,
+        "dE": -0.02,
         "watch": "역금융장세 근접",
         "metrics": [
           [
@@ -1272,20 +1274,20 @@
           ],
           [
             "실질금리",
-            "0.69%",
+            "0.70%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "4.12%",
+            "5.68%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=+0.22, dE=-0.06).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=+0.19, dE=-0.02).",
         "pin": [
           280,
           70
@@ -1303,13 +1305,13 @@
         "m": "2025-08",
         "phase": 2,
         "gated": null,
-        "dRR": 0.24,
-        "dE": 0.17,
+        "dRR": 0.22,
+        "dE": 0.13,
         "watch": "역금융장세 근접",
         "metrics": [
           [
             "국채 10년",
-            "2.81%",
+            "2.83%",
             "ECOS 국고채10년",
             "https://ecos.bok.or.kr/",
             "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
@@ -1323,20 +1325,20 @@
           ],
           [
             "실질금리",
-            "1.15%",
+            "1.16%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "1.90%",
+            "1.07%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=+0.24, dE=+0.17).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=+0.22, dE=+0.13).",
         "pin": [
           280,
           70
@@ -1354,13 +1356,13 @@
         "m": "2025-09",
         "phase": 2,
         "gated": null,
-        "dRR": 0.37,
-        "dE": 0.43,
+        "dRR": 0.36,
+        "dE": 0.39,
         "watch": "역금융장세 근접",
         "metrics": [
           [
             "국채 10년",
-            "2.95%",
+            "2.94%",
             "ECOS 국고채10년",
             "https://ecos.bok.or.kr/",
             "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
@@ -1374,20 +1376,20 @@
           ],
           [
             "실질금리",
-            "0.85%",
+            "0.83%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "11.96%",
+            "12.57%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.37, dE=+0.43).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.36, dE=+0.39).",
         "pin": [
           280,
           70
@@ -1405,8 +1407,8 @@
         "m": "2025-10",
         "phase": 2,
         "gated": null,
-        "dRR": 0.25,
-        "dE": 0.24,
+        "dRR": 0.24,
+        "dE": 0.25,
         "watch": "역금융장세 근접",
         "metrics": [
           [
@@ -1432,13 +1434,13 @@
           ],
           [
             "수출 (YoY)",
-            "-0.63%",
+            "3.50%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=금리 (dRR=+0.25, dE=+0.24).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.24, dE=+0.25).",
         "pin": [
           280,
           70
@@ -1456,9 +1458,9 @@
         "m": "2025-11",
         "phase": 2,
         "gated": null,
-        "dRR": -0.03,
-        "dE": 0.37,
-        "watch": "역금융장세 근접",
+        "dRR": -0.04,
+        "dE": 0.43,
+        "watch": null,
         "metrics": [
           [
             "국채 10년",
@@ -1483,13 +1485,13 @@
           ],
           [
             "수출 (YoY)",
-            "8.98%",
+            "7.93%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.03, dE=+0.37).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.04, dE=+0.43).",
         "pin": [
           280,
           70
@@ -1508,7 +1510,7 @@
         "phase": 2,
         "gated": null,
         "dRR": -0.01,
-        "dE": 0.16,
+        "dE": 0.17,
         "watch": "역금융장세 근접",
         "metrics": [
           [
@@ -1534,13 +1536,13 @@
           ],
           [
             "수출 (YoY)",
-            "14.73%",
+            "13.29%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.01, dE=+0.16).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.01, dE=+0.17).",
         "pin": [
           280,
           70
@@ -1558,13 +1560,13 @@
         "m": "2026-01",
         "phase": 2,
         "gated": null,
-        "dRR": 0.48,
-        "dE": 1.63,
+        "dRR": 0.47,
+        "dE": 1.36,
         "watch": null,
         "metrics": [
           [
             "국채 10년",
-            "3.61%",
+            "3.58%",
             "ECOS 국고채10년",
             "https://ecos.bok.or.kr/",
             "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
@@ -1578,20 +1580,20 @@
           ],
           [
             "실질금리",
-            "1.60%",
+            "1.57%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "37.07%",
+            "33.89%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.48, dE=+1.63).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.47, dE=+1.36).",
         "pin": [
           280,
           70
@@ -1609,8 +1611,8 @@
         "m": "2026-02",
         "phase": 2,
         "gated": null,
-        "dRR": 0.89,
-        "dE": 1.99,
+        "dRR": 0.88,
+        "dE": 1.84,
         "watch": null,
         "metrics": [
           [
@@ -1636,13 +1638,13 @@
           ],
           [
             "수출 (YoY)",
-            "28.64%",
+            "29.36%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.89, dE=+1.99).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.88, dE=+1.84).",
         "pin": [
           280,
           70
@@ -1660,8 +1662,8 @@
         "m": "2026-03",
         "phase": 2,
         "gated": null,
-        "dRR": 1.08,
-        "dE": 2.92,
+        "dRR": 1.07,
+        "dE": 2.89,
         "watch": null,
         "metrics": [
           [
@@ -1687,13 +1689,13 @@
           ],
           [
             "수출 (YoY)",
-            "52.60%",
+            "50.41%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+1.08, dE=+2.92).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+1.07, dE=+2.89).",
         "pin": [
           280,
           70
@@ -1711,13 +1713,13 @@
         "m": "2026-04",
         "phase": 2,
         "gated": null,
-        "dRR": 0.43,
-        "dE": 2.08,
+        "dRR": 0.41,
+        "dE": 2.25,
         "watch": null,
         "metrics": [
           [
             "국채 10년",
-            "3.92%",
+            "3.84%",
             "ECOS 국고채10년",
             "https://ecos.bok.or.kr/",
             "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
@@ -1731,20 +1733,20 @@
           ],
           [
             "실질금리",
-            "1.35%",
+            "1.27%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "50.21%",
+            "47.76%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.43, dE=+2.08).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.41, dE=+2.25).",
         "pin": [
           280,
           70
@@ -1762,8 +1764,8 @@
         "m": "2026-05",
         "phase": 2,
         "gated": null,
-        "dRR": -0.18,
-        "dE": 2.33,
+        "dRR": -0.2,
+        "dE": 2.3,
         "watch": null,
         "metrics": [
           [
@@ -1789,13 +1791,13 @@
           ],
           [
             "수출 (YoY)",
-            "56.84%",
+            "52.94%",
             "ECOS 수출금액지수",
             "https://ecos.bok.or.kr/",
             "ECOS 403Y001 수출금액지수"
           ]
         ],
-        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.18, dE=+2.33).",
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.20, dE=+2.30).",
         "pin": [
           280,
           70
@@ -1808,6 +1810,261 @@
           "actual": 1,
           "diverge": false
         }
+      },
+      {
+        "m": "2026-06",
+        "phase": 2,
+        "gated": null,
+        "dRR": -1.02,
+        "dE": 1.84,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "4.10%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "3.16%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "0.94%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "70.40%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-1.02, dE=+1.84).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 101.1,
+          "yoy": 176.0,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-07",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.75,
+        "dE": 1.86,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "4.26%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.79%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "1.47%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "62.97%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.75, dE=+1.86).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 26.2,
+          "yoy": 103.2,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-08",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.31,
+        "dE": 1.55,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "4.31%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "3.09%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "1.22%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "68.90%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=-0.31, dE=+1.55).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 9.2,
+          "yoy": 114.1,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-09",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.46,
+        "dE": 1.29,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "4.40%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.88%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "1.52%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "83.70%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.46, dE=+1.29).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": 35.3,
+          "yoy": 99.7,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-10",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.18,
+        "dE": 1.73,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "4.01%",
+            "ECOS 국고채10년",
+            "https://ecos.bok.or.kr/",
+            "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색"
+          ],
+          [
+            "CPI (YoY)",
+            "2.82%",
+            "ECOS 총지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 901Y009 소비자물가지수 총지수"
+          ],
+          [
+            "실질금리",
+            "1.19%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "93.70%",
+            "ECOS 수출금액지수",
+            "https://ecos.bok.or.kr/",
+            "ECOS 403Y001 수출금액지수"
+          ]
+        ],
+        "why": "수출 모멘텀이 실적축을 끌고 금리·물가가 반대로 작용. 현재 주도=실적 (dRR=+0.18, dE=+1.73).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "KOSPI",
+          "mom": -13.2,
+          "yoy": 39.5,
+          "expect": 1,
+          "actual": -1,
+          "diverge": true
+        }
       }
     ]
   },
@@ -1815,92 +2072,92 @@
     "cc": "일본",
     "mkt": "TOPIX · Nikkei",
     "phase": 2,
-    "watch": null,
+    "watch": "역금융장세 근접",
     "metrics": [
       [
         "국채 10년",
-        "2.52%",
+        "3.05%",
         "FRED JGB10Y",
         "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
         "FRED IRLTLT01JPM156N · Japan 10Y"
       ],
       [
         "CPI (YoY)",
-        "1.35%",
+        "2.10%",
         "e-Stat 総合",
         "https://www.e-stat.go.jp/dbview?sid=0003427113",
         "e-Stat 0003427113 · 消費者物価指数 全国総合"
       ],
       [
         "실질금리",
-        "1.17%",
+        "0.95%",
         "10Y − CPI",
         null,
         null
       ],
       [
         "수출 (YoY)",
-        "3.97%",
-        "FRED 일본 수출액",
+        "16.50%",
+        "재무성 통관수출",
         "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
         "FRED JPNXTEXVA01CXMLM · 일본 수출액"
       ],
       [
         "생산 (YoY)",
-        "2.36%",
+        "1.89%",
         "e-Stat 鉱工業 (참고)",
         "https://www.e-stat.go.jp/dbview?sid=0004052181",
         "e-Stat 0004052181 · 鉱工業生産指数"
       ]
     ],
-    "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.71, dE=-0.50.",
+    "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=-0.29, dE=+0.47).",
     "pin": [
       280,
       70
     ],
     "pxchk": {
       "name": "Nikkei 225",
-      "mom": 13.1,
-      "yoy": 64.5,
+      "mom": 30.7,
+      "yoy": 48.6,
       "expect": 1,
       "actual": 1,
       "diverge": false
     },
-    "gated": "역금융장세",
+    "gated": null,
     "hist": [
       {
         "m": "2024-01",
         "phase": 2,
         "gated": "역금융장세",
-        "dRR": 1.02,
-        "dE": 0.12,
+        "dRR": 1.12,
+        "dE": 0.43,
         "watch": null,
         "metrics": [
           [
             "국채 10년",
-            "0.73%",
+            "0.72%",
             "FRED JGB10Y",
             "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
             "FRED IRLTLT01JPM156N · Japan 10Y"
           ],
           [
             "CPI (YoY)",
-            "2.10%",
+            "2.14%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-1.37%",
+            "-1.42%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "0.27%",
-            "FRED 일본 수출액",
+            "11.90%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -1912,7 +2169,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.02, dE=+0.12.",
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.12, dE=+0.43.",
         "pin": [
           280,
           70
@@ -1930,8 +2187,8 @@
         "m": "2024-02",
         "phase": 2,
         "gated": "역금융장세",
-        "dRR": 0.99,
-        "dE": 0.08,
+        "dRR": 1.06,
+        "dE": 0.61,
         "watch": null,
         "metrics": [
           [
@@ -1943,22 +2200,22 @@
           ],
           [
             "CPI (YoY)",
-            "2.79%",
+            "2.80%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-2.08%",
+            "-2.09%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "-4.23%",
-            "FRED 일본 수출액",
+            "7.80%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -1970,7 +2227,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.99, dE=+0.08.",
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.06, dE=+0.61.",
         "pin": [
           280,
           70
@@ -1988,13 +2245,13 @@
         "m": "2024-03",
         "phase": 2,
         "gated": "역금융장세",
-        "dRR": 0.84,
-        "dE": -0.18,
+        "dRR": 0.86,
+        "dE": 0.39,
         "watch": null,
         "metrics": [
           [
             "국채 10년",
-            "0.72%",
+            "0.73%",
             "FRED JGB10Y",
             "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
             "FRED IRLTLT01JPM156N · Japan 10Y"
@@ -2008,15 +2265,15 @@
           ],
           [
             "실질금리",
-            "-1.96%",
+            "-1.94%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "-4.08%",
-            "FRED 일본 수출액",
+            "7.40%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2028,7 +2285,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.84, dE=-0.18.",
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.86, dE=+0.39.",
         "pin": [
           280,
           70
@@ -2045,9 +2302,9 @@
       {
         "m": "2024-04",
         "phase": 2,
-        "gated": "역실적장세",
-        "dRR": 0.09,
-        "dE": -0.37,
+        "gated": null,
+        "dRR": 0.07,
+        "dE": 0.01,
         "watch": "역금융장세 근접",
         "metrics": [
           [
@@ -2059,22 +2316,22 @@
           ],
           [
             "CPI (YoY)",
-            "2.47%",
+            "2.56%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-1.60%",
+            "-1.69%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "-6.01%",
-            "FRED 일본 수출액",
+            "8.30%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2086,7 +2343,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 역실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.09, dE=-0.37.",
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=+0.07, dE=+0.01).",
         "pin": [
           280,
           70
@@ -2103,9 +2360,9 @@
       {
         "m": "2024-05",
         "phase": 2,
-        "gated": "역실적장세",
-        "dRR": 0.17,
-        "dE": -0.28,
+        "gated": null,
+        "dRR": 0.2,
+        "dE": -0.06,
         "watch": "역금융장세 근접",
         "metrics": [
           [
@@ -2117,22 +2374,22 @@
           ],
           [
             "CPI (YoY)",
-            "2.85%",
+            "2.77%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-1.78%",
+            "-1.70%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "-0.10%",
-            "FRED 일본 수출액",
+            "13.50%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2144,7 +2401,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 역실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.17, dE=-0.28.",
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=+0.20, dE=-0.06).",
         "pin": [
           280,
           70
@@ -2161,9 +2418,9 @@
       {
         "m": "2024-06",
         "phase": 2,
-        "gated": "역실적장세",
-        "dRR": 0.24,
-        "dE": -0.12,
+        "gated": "역금융장세",
+        "dRR": 0.32,
+        "dE": -0.05,
         "watch": "역금융장세 근접",
         "metrics": [
           [
@@ -2175,22 +2432,22 @@
           ],
           [
             "CPI (YoY)",
-            "2.85%",
+            "2.77%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-1.80%",
+            "-1.71%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "-5.70%",
-            "FRED 일본 수출액",
+            "5.40%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2202,7 +2459,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 역실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.24, dE=-0.12.",
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.32, dE=-0.05.",
         "pin": [
           280,
           70
@@ -2219,10 +2476,10 @@
       {
         "m": "2024-07",
         "phase": 2,
-        "gated": "역실적장세",
-        "dRR": 0.31,
-        "dE": 0.2,
-        "watch": "역금융장세 근접",
+        "gated": "역금융장세",
+        "dRR": 0.47,
+        "dE": 0.09,
+        "watch": null,
         "metrics": [
           [
             "국채 10년",
@@ -2233,22 +2490,22 @@
           ],
           [
             "CPI (YoY)",
-            "2.74%",
+            "2.75%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-1.70%",
+            "-1.71%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "-1.56%",
-            "FRED 일본 수출액",
+            "10.20%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2260,7 +2517,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 역실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.31, dE=+0.20.",
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.47, dE=+0.09.",
         "pin": [
           280,
           70
@@ -2277,9 +2534,9 @@
       {
         "m": "2024-08",
         "phase": 2,
-        "gated": "역실적장세",
+        "gated": null,
         "dRR": -0.08,
-        "dE": 0.21,
+        "dE": -0.28,
         "watch": "역금융장세 근접",
         "metrics": [
           [
@@ -2291,22 +2548,22 @@
           ],
           [
             "CPI (YoY)",
-            "3.02%",
+            "3.07%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-2.13%",
+            "-2.18%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "4.29%",
-            "FRED 일본 수출액",
+            "5.50%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2318,7 +2575,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 역실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=-0.08, dE=+0.21.",
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=-0.08, dE=-0.28).",
         "pin": [
           280,
           70
@@ -2334,11 +2591,11 @@
       },
       {
         "m": "2024-09",
-        "phase": 2,
-        "gated": "금융장세",
-        "dRR": -0.1,
-        "dE": 0.46,
-        "watch": null,
+        "phase": 3,
+        "gated": null,
+        "dRR": -0.19,
+        "dE": -0.42,
+        "watch": "중간반등 근접",
         "metrics": [
           [
             "국채 10년",
@@ -2349,22 +2606,22 @@
           ],
           [
             "CPI (YoY)",
-            "2.54%",
+            "2.53%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-1.69%",
+            "-1.67%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "1.29%",
-            "FRED 일본 수출액",
+            "-1.80%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2376,53 +2633,53 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=-0.10, dE=+0.46.",
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=-0.19, dE=-0.42).",
         "pin": [
-          280,
-          70
+          385,
+          95
         ],
         "pxchk": {
           "name": "Nikkei 225",
           "mom": -6.1,
           "yoy": 19.0,
-          "expect": 1,
+          "expect": -1,
           "actual": -1,
-          "diverge": true
+          "diverge": false
         }
       },
       {
         "m": "2024-10",
-        "phase": 2,
+        "phase": 5,
         "gated": null,
-        "dRR": 0.22,
-        "dE": 0.46,
-        "watch": "역금융장세 근접",
+        "dRR": 0.07,
+        "dE": -0.65,
+        "watch": null,
         "metrics": [
           [
             "국채 10년",
-            "0.94%",
+            "0.95%",
             "FRED JGB10Y",
             "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
             "FRED IRLTLT01JPM156N · Japan 10Y"
           ],
           [
             "CPI (YoY)",
-            "2.24%",
+            "2.30%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-1.31%",
+            "-1.35%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "3.06%",
-            "FRED 일본 수출액",
+            "3.10%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2434,53 +2691,53 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=+0.22, dE=+0.46).",
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=+0.07, dE=-0.65).",
         "pin": [
-          280,
-          70
+          590,
+          170
         ],
         "pxchk": {
           "name": "Nikkei 225",
           "mom": 1.8,
           "yoy": 26.6,
-          "expect": 1,
+          "expect": -1,
           "actual": 0,
           "diverge": false
         }
       },
       {
         "m": "2024-11",
-        "phase": 3,
+        "phase": 5,
         "gated": null,
-        "dRR": 0.62,
-        "dE": 0.23,
-        "watch": null,
+        "dRR": 0.56,
+        "dE": -0.48,
+        "watch": "금융장세 근접",
         "metrics": [
           [
             "국채 10년",
-            "1.05%",
+            "1.04%",
             "FRED JGB10Y",
             "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
             "FRED IRLTLT01JPM156N · Japan 10Y"
           ],
           [
             "CPI (YoY)",
-            "2.90%",
+            "2.93%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-1.85%",
+            "-1.89%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "1.16%",
-            "FRED 일본 수출액",
+            "3.80%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2492,10 +2749,10 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=+0.62, dE=+0.23).",
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=+0.56, dE=-0.48).",
         "pin": [
-          385,
-          95
+          590,
+          170
         ],
         "pxchk": {
           "name": "Nikkei 225",
@@ -2508,11 +2765,11 @@
       },
       {
         "m": "2024-12",
-        "phase": 4,
+        "phase": 5,
         "gated": null,
-        "dRR": -0.01,
-        "dE": -0.13,
-        "watch": "역실적장세 근접",
+        "dRR": -0.04,
+        "dE": -0.16,
+        "watch": "금융장세 근접",
         "metrics": [
           [
             "국채 10년",
@@ -2523,22 +2780,22 @@
           ],
           [
             "CPI (YoY)",
-            "3.65%",
+            "3.67%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-2.56%",
+            "-2.57%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "-3.82%",
-            "FRED 일본 수출액",
+            "2.70%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2550,16 +2807,16 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=-0.01, dE=-0.13).",
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=-0.04, dE=-0.16).",
         "pin": [
-          490,
-          145
+          590,
+          170
         ],
         "pxchk": {
           "name": "Nikkei 225",
           "mom": 0.8,
           "yoy": 19.2,
-          "expect": 0,
+          "expect": -1,
           "actual": 0,
           "diverge": false
         }
@@ -2568,35 +2825,35 @@
         "m": "2025-01",
         "phase": 0,
         "gated": null,
-        "dRR": -1.17,
-        "dE": -0.36,
+        "dRR": -1.14,
+        "dE": 0.15,
         "watch": null,
         "metrics": [
           [
             "국채 10년",
-            "1.25%",
+            "1.24%",
             "FRED JGB10Y",
             "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
             "FRED IRLTLT01JPM156N · Japan 10Y"
           ],
           [
             "CPI (YoY)",
-            "4.02%",
+            "3.98%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-2.78%",
+            "-2.74%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "-0.17%",
-            "FRED 일본 수출액",
+            "7.30%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2608,7 +2865,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=-1.17, dE=-0.36).",
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=-1.14, dE=+0.15).",
         "pin": [
           90,
           145
@@ -2626,8 +2883,8 @@
         "m": "2025-02",
         "phase": 0,
         "gated": null,
-        "dRR": -1.57,
-        "dE": -0.02,
+        "dRR": -1.47,
+        "dE": 0.4,
         "watch": null,
         "metrics": [
           [
@@ -2639,22 +2896,22 @@
           ],
           [
             "CPI (YoY)",
-            "3.65%",
+            "3.56%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-2.28%",
+            "-2.19%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "9.56%",
-            "FRED 일본 수출액",
+            "11.40%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2666,7 +2923,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=-1.57, dE=-0.02).",
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=-1.47, dE=+0.40).",
         "pin": [
           90,
           145
@@ -2684,35 +2941,35 @@
         "m": "2025-03",
         "phase": 0,
         "gated": null,
-        "dRR": -0.76,
-        "dE": 0.37,
-        "watch": null,
+        "dRR": -0.58,
+        "dE": 0.31,
+        "watch": "중간반락 근접",
         "metrics": [
           [
             "국채 10년",
-            "1.49%",
+            "1.48%",
             "FRED JGB10Y",
             "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
             "FRED IRLTLT01JPM156N · Japan 10Y"
           ],
           [
             "CPI (YoY)",
-            "3.64%",
+            "3.55%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-2.15%",
+            "-2.07%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "4.38%",
-            "FRED 일본 수출액",
+            "4.00%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2724,7 +2981,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=-0.76, dE=+0.37).",
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=-0.58, dE=+0.31).",
         "pin": [
           90,
           145
@@ -2740,11 +2997,11 @@
       },
       {
         "m": "2025-04",
-        "phase": 2,
+        "phase": 1,
         "gated": null,
-        "dRR": 0.49,
-        "dE": 0.71,
-        "watch": "역금융장세 근접",
+        "dRR": 0.54,
+        "dE": 0.04,
+        "watch": null,
         "metrics": [
           [
             "국채 10년",
@@ -2755,22 +3012,22 @@
           ],
           [
             "CPI (YoY)",
-            "3.53%",
+            "3.64%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-2.22%",
+            "-2.33%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "8.59%",
-            "FRED 일본 수출액",
+            "1.90%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2782,27 +3039,27 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=+0.49, dE=+0.71).",
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=+0.54, dE=+0.04).",
         "pin": [
-          280,
-          70
+          185,
+          95
         ],
         "pxchk": {
           "name": "Nikkei 225",
           "mom": -7.8,
           "yoy": -6.1,
-          "expect": 1,
+          "expect": 0,
           "actual": -1,
-          "diverge": true
+          "diverge": false
         }
       },
       {
         "m": "2025-05",
         "phase": 3,
         "gated": null,
-        "dRR": 0.97,
-        "dE": 0.32,
-        "watch": null,
+        "dRR": 0.78,
+        "dE": -0.55,
+        "watch": "중간반등 근접",
         "metrics": [
           [
             "국채 10년",
@@ -2813,22 +3070,22 @@
           ],
           [
             "CPI (YoY)",
-            "3.42%",
+            "3.63%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-1.92%",
+            "-2.13%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "5.91%",
-            "FRED 일본 수출액",
+            "-1.80%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2840,7 +3097,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=+0.97, dE=+0.32).",
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=+0.78, dE=-0.55).",
         "pin": [
           385,
           95
@@ -2856,37 +3113,37 @@
       },
       {
         "m": "2025-06",
-        "phase": 3,
+        "phase": 5,
         "gated": null,
-        "dRR": 0.94,
-        "dE": 0.18,
-        "watch": null,
+        "dRR": 0.52,
+        "dE": -0.75,
+        "watch": "금융장세 근접",
         "metrics": [
           [
             "국채 10년",
-            "1.42%",
+            "1.43%",
             "FRED JGB10Y",
             "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
             "FRED IRLTLT01JPM156N · Japan 10Y"
           ],
           [
             "CPI (YoY)",
-            "3.23%",
+            "3.42%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-1.81%",
+            "-1.99%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "8.74%",
-            "FRED 일본 수출액",
+            "-0.50%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2898,10 +3155,10 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=+0.94, dE=+0.18).",
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=+0.52, dE=-0.75).",
         "pin": [
-          385,
-          95
+          590,
+          170
         ],
         "pxchk": {
           "name": "Nikkei 225",
@@ -2914,37 +3171,37 @@
       },
       {
         "m": "2025-07",
-        "phase": 3,
+        "phase": 5,
         "gated": null,
-        "dRR": 1.04,
-        "dE": -0.24,
-        "watch": null,
+        "dRR": 0.7,
+        "dE": -0.74,
+        "watch": "금융장세 근접",
         "metrics": [
           [
             "국채 10년",
-            "1.54%",
+            "1.56%",
             "FRED JGB10Y",
             "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
             "FRED IRLTLT01JPM156N · Japan 10Y"
           ],
           [
             "CPI (YoY)",
-            "3.04%",
+            "3.20%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-1.49%",
+            "-1.64%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "4.51%",
-            "FRED 일본 수출액",
+            "-2.80%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -2956,10 +3213,10 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=+1.04, dE=-0.24).",
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=+0.70, dE=-0.74).",
         "pin": [
-          385,
-          95
+          590,
+          170
         ],
         "pxchk": {
           "name": "Nikkei 225",
@@ -2972,37 +3229,37 @@
       },
       {
         "m": "2025-08",
-        "phase": 2,
-        "gated": "역금융장세",
-        "dRR": 1.27,
-        "dE": -0.34,
+        "phase": 0,
+        "gated": "역실적장세",
+        "dRR": 1.19,
+        "dE": -0.31,
         "watch": null,
         "metrics": [
           [
             "국채 10년",
-            "1.60%",
+            "1.61%",
             "FRED JGB10Y",
             "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
             "FRED IRLTLT01JPM156N · Japan 10Y"
           ],
           [
             "CPI (YoY)",
-            "2.75%",
+            "2.87%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-1.15%",
+            "-1.26%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "-1.02%",
-            "FRED 일본 수출액",
+            "-0.10%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -3014,10 +3271,10 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.27, dE=-0.34.",
+        "why": "매크로 신호는 역실적장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 금융장세로 판정. dRR=+1.19, dE=-0.31.",
         "pin": [
-          280,
-          70
+          90,
+          145
         ],
         "pxchk": {
           "name": "Nikkei 225",
@@ -3030,10 +3287,10 @@
       },
       {
         "m": "2025-09",
-        "phase": 2,
-        "gated": "역금융장세",
-        "dRR": 1.4,
-        "dE": -0.71,
+        "phase": 1,
+        "gated": null,
+        "dRR": 1.57,
+        "dE": -0.03,
         "watch": null,
         "metrics": [
           [
@@ -3045,7 +3302,65 @@
           ],
           [
             "CPI (YoY)",
-            "2.85%",
+            "2.88%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "-1.22%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "4.10%",
+            "재무성 통관수출",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "2.22%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=금리 (dRR=+1.57, dE=-0.03).",
+        "pin": [
+          185,
+          95
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 26.2,
+          "yoy": 18.5,
+          "expect": 0,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-10",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 1.39,
+        "dE": 0.31,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "1.66%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "2.86%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
@@ -3059,66 +3374,8 @@
           ],
           [
             "수출 (YoY)",
-            "0.76%",
-            "FRED 일본 수출액",
-            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
-            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
-          ],
-          [
-            "생산 (YoY)",
-            "2.22%",
-            "e-Stat 鉱工業 (참고)",
-            "https://www.e-stat.go.jp/dbview?sid=0004052181",
-            "e-Stat 0004052181 · 鉱工業生産指数"
-          ]
-        ],
-        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.40, dE=-0.71.",
-        "pin": [
-          280,
-          70
-        ],
-        "pxchk": {
-          "name": "Nikkei 225",
-          "mom": 26.2,
-          "yoy": 18.5,
-          "expect": 1,
-          "actual": 1,
-          "diverge": false
-        }
-      },
-      {
-        "m": "2025-10",
-        "phase": 2,
-        "gated": "역금융장세",
-        "dRR": 1.04,
-        "dE": -0.62,
-        "watch": null,
-        "metrics": [
-          [
-            "국채 10년",
-            "1.66%",
-            "FRED JGB10Y",
-            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
-            "FRED IRLTLT01JPM156N · Japan 10Y"
-          ],
-          [
-            "CPI (YoY)",
-            "3.01%",
-            "e-Stat 総合",
-            "https://www.e-stat.go.jp/dbview?sid=0003427113",
-            "e-Stat 0003427113 · 消費者物価指数 全国総合"
-          ],
-          [
-            "실질금리",
-            "-1.36%",
-            "10Y − CPI",
-            null,
-            null
-          ],
-          [
-            "수출 (YoY)",
-            "2.37%",
-            "FRED 일본 수출액",
+            "3.60%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -3130,7 +3387,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.04, dE=-0.62.",
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.39, dE=+0.31.",
         "pin": [
           280,
           70
@@ -3148,8 +3405,8 @@
         "m": "2025-11",
         "phase": 2,
         "gated": "역금융장세",
-        "dRR": 0.62,
-        "dE": -0.17,
+        "dRR": 1.07,
+        "dE": 0.47,
         "watch": null,
         "metrics": [
           [
@@ -3161,22 +3418,22 @@
           ],
           [
             "CPI (YoY)",
-            "2.91%",
+            "2.75%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-1.10%",
+            "-0.94%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "5.15%",
-            "FRED 일본 수출액",
+            "6.10%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -3188,7 +3445,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.62, dE=-0.17.",
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.07, dE=+0.47.",
         "pin": [
           280,
           70
@@ -3206,35 +3463,35 @@
         "m": "2025-12",
         "phase": 2,
         "gated": "역금융장세",
-        "dRR": 1.01,
-        "dE": 0.22,
+        "dRR": 1.41,
+        "dE": 0.38,
         "watch": null,
         "metrics": [
           [
             "국채 10년",
-            "2.06%",
+            "2.08%",
             "FRED JGB10Y",
             "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
             "FRED IRLTLT01JPM156N · Japan 10Y"
           ],
           [
             "CPI (YoY)",
-            "2.08%",
+            "2.02%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "-0.02%",
+            "0.06%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "3.74%",
-            "FRED 일본 수출액",
+            "5.10%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -3246,7 +3503,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.01, dE=+0.22.",
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.41, dE=+0.38.",
         "pin": [
           280,
           70
@@ -3264,35 +3521,35 @@
         "m": "2026-01",
         "phase": 2,
         "gated": "역금융장세",
-        "dRR": 2.16,
-        "dE": 0.79,
+        "dRR": 2.27,
+        "dE": 0.58,
         "watch": null,
         "metrics": [
           [
             "국채 10년",
-            "2.24%",
+            "2.25%",
             "FRED JGB10Y",
             "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
             "FRED IRLTLT01JPM156N · Japan 10Y"
           ],
           [
             "CPI (YoY)",
-            "1.53%",
+            "1.51%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "0.71%",
+            "0.74%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "16.75%",
-            "FRED 일본 수출액",
+            "16.80%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -3304,7 +3561,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+2.16, dE=+0.79.",
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+2.27, dE=+0.58.",
         "pin": [
           280,
           70
@@ -3322,8 +3579,8 @@
         "m": "2026-02",
         "phase": 2,
         "gated": "역금융장세",
-        "dRR": 3.01,
-        "dE": 0.47,
+        "dRR": 2.86,
+        "dE": 0.33,
         "watch": null,
         "metrics": [
           [
@@ -3335,22 +3592,22 @@
           ],
           [
             "CPI (YoY)",
-            "1.26%",
+            "1.31%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "0.85%",
+            "0.80%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "1.82%",
-            "FRED 일본 수출액",
+            "4.00%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -3362,7 +3619,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+3.01, dE=+0.47.",
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+2.86, dE=+0.33.",
         "pin": [
           280,
           70
@@ -3380,8 +3637,8 @@
         "m": "2026-03",
         "phase": 2,
         "gated": "역금융장세",
-        "dRR": 2.64,
-        "dE": 0.41,
+        "dRR": 2.46,
+        "dE": 0.5,
         "watch": null,
         "metrics": [
           [
@@ -3393,22 +3650,22 @@
           ],
           [
             "CPI (YoY)",
-            "1.44%",
+            "1.41%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "0.90%",
+            "0.94%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "4.78%",
-            "FRED 일본 수출액",
+            "11.50%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
@@ -3420,7 +3677,7 @@
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+2.64, dE=+0.41.",
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+2.46, dE=+0.50.",
         "pin": [
           280,
           70
@@ -3438,8 +3695,8 @@
         "m": "2026-04",
         "phase": 2,
         "gated": "역금융장세",
-        "dRR": 1.71,
-        "dE": -0.5,
+        "dRR": 1.61,
+        "dE": 0.06,
         "watch": null,
         "metrics": [
           [
@@ -3451,34 +3708,34 @@
           ],
           [
             "CPI (YoY)",
-            "1.35%",
+            "1.30%",
             "e-Stat 総合",
             "https://www.e-stat.go.jp/dbview?sid=0003427113",
             "e-Stat 0003427113 · 消費者物価指数 全国総合"
           ],
           [
             "실질금리",
-            "1.17%",
+            "1.22%",
             "10Y − CPI",
             null,
             null
           ],
           [
             "수출 (YoY)",
-            "3.97%",
-            "FRED 일본 수출액",
+            "14.80%",
+            "재무성 통관수출",
             "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
             "FRED JPNXTEXVA01CXMLM · 일본 수출액"
           ],
           [
             "생산 (YoY)",
-            "2.36%",
+            "2.00%",
             "e-Stat 鉱工業 (참고)",
             "https://www.e-stat.go.jp/dbview?sid=0004052181",
             "e-Stat 0004052181 · 鉱工業生産指数"
           ]
         ],
-        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.71, dE=-0.50.",
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+1.61, dE=+0.06.",
         "pin": [
           280,
           70
@@ -3487,6 +3744,2269 @@
           "name": "Nikkei 225",
           "mom": 13.1,
           "yoy": 64.5,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-05",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 0.87,
+        "dE": 0.61,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "2.65%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "1.50%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "1.16%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "16.80%",
+            "재무성 통관수출",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "-2.12%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.87, dE=+0.61.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 32.0,
+          "yoy": 74.7,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-06",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.44,
+        "dE": 0.83,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "2.69%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "1.70%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "0.99%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "19.30%",
+            "재무성 통관수출",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "4.87%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=+0.44, dE=+0.83).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 39.2,
+          "yoy": 73.0,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-07",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.02,
+        "dE": 1.4,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "2.79%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "1.90%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "0.89%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "23.20%",
+            "재무성 통관수출",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "3.86%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=+0.02, dE=+1.40).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 20.7,
+          "yoy": 56.7,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-08",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.24,
+        "dE": 0.95,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "2.94%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "1.89%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "1.05%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "19.30%",
+            "재무성 통관수출",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "2.71%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=-0.24, dE=+0.95).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 12.7,
+          "yoy": 55.2,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-09",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.29,
+        "dE": 0.47,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "3.05%",
+            "FRED JGB10Y",
+            "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+            "FRED IRLTLT01JPM156N · Japan 10Y"
+          ],
+          [
+            "CPI (YoY)",
+            "2.10%",
+            "e-Stat 総合",
+            "https://www.e-stat.go.jp/dbview?sid=0003427113",
+            "e-Stat 0003427113 · 消費者物価指数 全国総合"
+          ],
+          [
+            "실질금리",
+            "0.95%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "수출 (YoY)",
+            "16.50%",
+            "재무성 통관수출",
+            "https://fred.stlouisfed.org/series/JPNXTEXVA01CXMLM",
+            "FRED JPNXTEXVA01CXMLM · 일본 수출액"
+          ],
+          [
+            "생산 (YoY)",
+            "1.89%",
+            "e-Stat 鉱工業 (참고)",
+            "https://www.e-stat.go.jp/dbview?sid=0004052181",
+            "e-Stat 0004052181 · 鉱工業生産指数"
+          ]
+        ],
+        "why": "수출(실적)과 금리 정상화가 동시 진행. 현재 주도=실적 (dRR=-0.29, dE=+0.47).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "Nikkei 225",
+          "mom": 30.7,
+          "yoy": 48.6,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      }
+    ]
+  },
+  {
+    "cc": "미국",
+    "mkt": "S&P 500",
+    "phase": 2,
+    "watch": null,
+    "metrics": [
+      [
+        "국채 10년",
+        "5.29%",
+        "FRED UST10Y",
+        "https://fred.stlouisfed.org/series/DGS10",
+        "FRED DGS10 · 10-Year Treasury"
+      ],
+      [
+        "CPI (YoY)",
+        "3.74%",
+        "FRED CPI-U",
+        "https://fred.stlouisfed.org/series/CPIAUCSL",
+        "FRED CPIAUCSL · CPI-U 총지수"
+      ],
+      [
+        "실질금리",
+        "1.55%",
+        "10Y − CPI",
+        null,
+        null
+      ],
+      [
+        "소매판매 (YoY)",
+        "6.29%",
+        "FRED 소매판매",
+        "https://fred.stlouisfed.org/series/RSAFS",
+        "FRED RSAFS · 명목 소매판매(실적 프록시)"
+      ],
+      [
+        "생산 (YoY)",
+        "2.25%",
+        "FRED 산업생산 (참고)",
+        "https://fred.stlouisfed.org/series/INDPRO",
+        "FRED INDPRO · 산업생산지수"
+      ]
+    ],
+    "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.75, dE=+0.20.",
+    "pin": [
+      280,
+      70
+    ],
+    "pxchk": {
+      "name": "S&P 500",
+      "mom": 17.2,
+      "yoy": 14.4,
+      "expect": 1,
+      "actual": 1,
+      "diverge": false
+    },
+    "gated": "역금융장세",
+    "hist": [
+      {
+        "m": "2024-01",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.16,
+        "dE": 0.01,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "3.92%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "3.09%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "0.83%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "-2.08%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "-1.28%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=-0.16, dE=+0.01).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 5.6,
+          "yoy": 18.9,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-02",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.42,
+        "dE": -0.09,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.25%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "3.15%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.10%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "-0.01%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "-0.35%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=-0.42, dE=-0.09).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 13.1,
+          "yoy": 28.4,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-03",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.23,
+        "dE": -0.21,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.21%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "3.48%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "0.73%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "1.40%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "-0.56%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=-0.23, dE=-0.21).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 22.5,
+          "yoy": 27.9,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-04",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.2,
+        "dE": 0.01,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.68%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "3.36%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.32%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "0.89%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "-1.00%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=+0.20, dE=+0.01).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 20.1,
+          "yoy": 20.8,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-05",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.25,
+        "dE": 0.11,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.50%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "3.27%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.23%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "0.81%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "-0.06%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=+0.25, dE=+0.11).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 15.5,
+          "yoy": 26.3,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-06",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 0.39,
+        "dE": 0.12,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.39%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.97%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.42%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "0.24%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "0.77%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.39, dE=+0.12.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 14.5,
+          "yoy": 22.7,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-07",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.16,
+        "dE": 0.03,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.03%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.89%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.14%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "1.55%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "-0.92%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=+0.16, dE=+0.03).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 14.0,
+          "yoy": 20.3,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-08",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.16,
+        "dE": -0.02,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "3.91%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.53%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.38%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "0.45%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "-0.41%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=+0.16, dE=-0.02).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 10.8,
+          "yoy": 25.3,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-09",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.09,
+        "dE": 0.05,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "3.79%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.44%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.35%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "0.73%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "-1.20%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=-0.09, dE=+0.05).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 9.7,
+          "yoy": 34.4,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-10",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.13,
+        "dE": 0.05,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.28%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.60%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.68%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "2.10%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "-0.99%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=+0.13, dE=+0.05).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 13.3,
+          "yoy": 36.0,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-11",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.09,
+        "dE": 0.16,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.18%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.75%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.43%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "2.89%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "-1.56%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=실적 (dRR=+0.09, dE=+0.16).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 14.3,
+          "yoy": 32.1,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2024-12",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.22,
+        "dE": 0.26,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.57%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.89%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.68%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "3.72%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "-0.27%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=실적 (dRR=+0.22, dE=+0.26).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 7.7,
+          "yoy": 23.3,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-01",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.01,
+        "dE": 0.32,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.54%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "3.00%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.54%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "4.00%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "0.85%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=실적 (dRR=-0.01, dE=+0.32).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 9.4,
+          "yoy": 24.7,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-02",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.05,
+        "dE": 0.21,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.20%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.82%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.38%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "2.88%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "0.81%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=실적 (dRR=-0.05, dE=+0.21).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 5.4,
+          "yoy": 16.8,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-03",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.13,
+        "dE": 0.12,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.21%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.39%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.82%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "4.58%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "0.58%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=-0.13, dE=+0.12).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": -2.6,
+          "yoy": 6.8,
+          "expect": 1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-04",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.01,
+        "dE": 0.04,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.17%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.31%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.86%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "4.60%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "0.88%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=실적 (dRR=+0.01, dE=+0.04).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": -2.4,
+          "yoy": 10.6,
+          "expect": 1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-05",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.25,
+        "dE": -0.01,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.40%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.35%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "2.04%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "2.67%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "0.10%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=+0.25, dE=-0.01).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": -2.0,
+          "yoy": 12.0,
+          "expect": 1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-06",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.14,
+        "dE": -0.1,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.23%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.67%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.56%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "3.88%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "0.58%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=+0.14, dE=-0.10).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 5.5,
+          "yoy": 13.6,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-07",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.01,
+        "dE": -0.15,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.38%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.70%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.68%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "3.65%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "1.92%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=실적 (dRR=-0.01, dE=-0.15).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 4.9,
+          "yoy": 14.8,
+          "expect": 1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-08",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.47,
+        "dE": -0.03,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "4.23%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.92%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.32%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "4.43%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "1.19%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=-0.47, dE=-0.03).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 8.5,
+          "yoy": 14.4,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-09",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.53,
+        "dE": 0.02,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "4.15%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "3.01%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.14%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "3.69%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "1.86%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=-0.53, dE=+0.02).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 19.2,
+          "yoy": 16.1,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-10",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.6,
+        "dE": 0.04,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "4.08%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.79%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.29%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "2.78%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "1.76%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=-0.60, dE=+0.04).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 22.8,
+          "yoy": 19.9,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-11",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.37,
+        "dE": -0.12,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.02%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.74%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.28%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "2.88%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "1.75%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=-0.37, dE=-0.12).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 15.9,
+          "yoy": 13.5,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2025-12",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.11,
+        "dE": -0.18,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.16%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.68%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.49%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "2.09%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "1.16%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=실적 (dRR=-0.11, dE=-0.18).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 10.3,
+          "yoy": 16.4,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-01",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.2,
+        "dE": -0.16,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.24%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.39%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.85%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "2.15%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "0.97%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=+0.20, dE=-0.16).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 9.5,
+          "yoy": 14.9,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-02",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.29,
+        "dE": -0.05,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "3.95%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "2.41%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.53%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "3.54%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "0.80%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=+0.29, dE=-0.05).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 6.5,
+          "yoy": 15.5,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-03",
+        "phase": 2,
+        "gated": null,
+        "dRR": 0.03,
+        "dE": 0.12,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.32%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "3.26%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.06%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "3.59%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "0.69%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=실적 (dRR=+0.03, dE=+0.12).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": -2.4,
+          "yoy": 16.3,
+          "expect": 1,
+          "actual": 0,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-04",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.59,
+        "dE": 0.33,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.37%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "3.81%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "0.56%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "4.09%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "1.43%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=-0.59, dE=+0.33).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 5.4,
+          "yoy": 29.4,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-05",
+        "phase": 2,
+        "gated": null,
+        "dRR": -1.16,
+        "dE": 0.71,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "4.44%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "4.25%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "0.19%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "6.70%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "1.74%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=-1.16, dE=+0.71).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 10.7,
+          "yoy": 28.2,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-06",
+        "phase": 2,
+        "gated": null,
+        "dRR": -1.17,
+        "dE": 0.95,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.46%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "3.53%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "0.93%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "5.93%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "1.46%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=금리 (dRR=-1.17, dE=+0.95).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 9.6,
+          "yoy": 20.9,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-07",
+        "phase": 2,
+        "gated": null,
+        "dRR": -0.49,
+        "dE": 0.8,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.72%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "3.36%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.35%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "4.53%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "1.28%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "명목 소비(매출)와 장기금리의 줄다리기. 현재 주도=실적 (dRR=-0.49, dE=+0.80).",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 7.9,
+          "yoy": 18.1,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-08",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 0.47,
+        "dE": 0.45,
+        "watch": "역금융장세 근접",
+        "metrics": [
+          [
+            "국채 10년",
+            "4.75%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "3.40%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.36%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "5.56%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "1.62%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.47, dE=+0.45.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 11.7,
+          "yoy": 19.0,
+          "expect": 1,
+          "actual": 1,
+          "diverge": false
+        }
+      },
+      {
+        "m": "2026-09",
+        "phase": 2,
+        "gated": "역금융장세",
+        "dRR": 0.75,
+        "dE": 0.2,
+        "watch": null,
+        "metrics": [
+          [
+            "국채 10년",
+            "5.29%",
+            "FRED UST10Y",
+            "https://fred.stlouisfed.org/series/DGS10",
+            "FRED DGS10 · 10-Year Treasury"
+          ],
+          [
+            "CPI (YoY)",
+            "3.74%",
+            "FRED CPI-U",
+            "https://fred.stlouisfed.org/series/CPIAUCSL",
+            "FRED CPIAUCSL · CPI-U 총지수"
+          ],
+          [
+            "실질금리",
+            "1.55%",
+            "10Y − CPI",
+            null,
+            null
+          ],
+          [
+            "소매판매 (YoY)",
+            "6.29%",
+            "FRED 소매판매",
+            "https://fred.stlouisfed.org/series/RSAFS",
+            "FRED RSAFS · 명목 소매판매(실적 프록시)"
+          ],
+          [
+            "생산 (YoY)",
+            "2.25%",
+            "FRED 산업생산 (참고)",
+            "https://fred.stlouisfed.org/series/INDPRO",
+            "FRED INDPRO · 산업생산지수"
+          ]
+        ],
+        "why": "매크로 신호는 역금융장세이나, 주가 강세(검증축)가 하락 국면을 부정 → 실적장세로 판정. dRR=+0.75, dE=+0.20.",
+        "pin": [
+          280,
+          70
+        ],
+        "pxchk": {
+          "name": "S&P 500",
+          "mom": 17.2,
+          "yoy": 14.4,
           "expect": 1,
           "actual": 1,
           "diverge": false
@@ -3513,9 +6033,9 @@
   let VIEW_M=null, CUR=[];
   function viewAt(m){
     return READS.map(r=>{
-      if(!m) return {cc:r.cc,mkt:r.mkt,phase:r.phase,watch:r.watch,metrics:r.metrics,why:r.why,pin:r.pin,pxchk:r.pxchk,gated:r.gated};
+      if(!m) return {cc:r.cc,mkt:r.mkt,m:(r.hist&&r.hist.length?r.hist[r.hist.length-1].m:null),phase:r.phase,watch:r.watch,metrics:r.metrics,why:r.why,pin:r.pin,pxchk:r.pxchk,gated:r.gated};
       const h=(r.hist||[]).find(x=>x.m===m);
-      return h?{cc:r.cc,mkt:r.mkt,phase:h.phase,watch:h.watch,metrics:h.metrics,why:h.why,pin:h.pin,pxchk:h.pxchk,gated:h.gated}:null;
+      return h?{cc:r.cc,mkt:r.mkt,m:h.m,phase:h.phase,watch:h.watch,metrics:h.metrics,why:h.why,pin:h.pin,pxchk:h.pxchk,gated:h.gated}:null;
     }).filter(Boolean);
   }
   function setView(m){
@@ -3542,7 +6062,7 @@
         return `<span class="ml">${m[0]}</span><span class="mv"><b>${m[1]}</b> ${note}</span>`;
       }).join('');
       return `<div class="mcard" id="mc${i}" onclick="sel(${r.phase})" style="border-color:${t.bd}">
-        <div class="mctop"><span class="cc">${r.cc} <span class="mkt">${r.mkt}</span></span><span class="badge" style="background:${t.bg};color:${t.tx}">${p.ll}</span></div>
+        <div class="mctop"><span class="cc">${r.cc} <span class="mkt">${r.mkt}</span>${r.m?`<span class="mmonth">기준 ${r.m}</span>`:''}</span><span class="badge" style="background:${t.bg};color:${t.tx}">${p.ll}</span></div>
         <div class="phase">${p.k}${watch}</div>
         <div class="leadline">주도변수 <b style="color:${t.tx}">${p.lead}</b></div>
         <div class="mtab">${mets}</div>
@@ -3556,7 +6076,8 @@
   function pxCheck(r){
     const px=r.pxchk; if(!px) return '';
     const EXP={'1':'상승','-1':'하락','0':'횡보'};
-    const yo = (px.yoy!=null) ? `${px.yoy>0?'+':''}${px.yoy}% YoY` : `${px.mom>0?'+':''}${px.mom}% 6M`;
+    const sg=v=>`${v>0?'+':''}${v}%`;
+    const yo = `${sg(px.mom)} 6M` + (px.yoy!=null ? ` · ${sg(px.yoy)} YoY` : '');
     if(r.gated)
       return `<div class="pxinfo"><b>ⓘ 주가 게이트</b> 매크로 신호는 ${r.gated}이나 주가 강세(${px.name} ${yo})가 하락 국면을 부정 → 현 국면으로 보정</div>`;
     if(px.diverge)
@@ -3691,12 +6212,23 @@
   /* 시장별 위치 점을 활성 뷰(CUR)의 pin 으로 곡선 위에 렌더 (카드 국면과 항상 일치) */
   function buildPins(){
     const g=document.getElementById('pins'); if(!g) return;
-    g.innerHTML=CUR.map((r,i)=>{
-      if(!r.pin||r.pin.length<2) return '';
-      const x=r.pin[0], y=r.pin[1], dy=(i%2===0)?-11:18;  // 라벨 위/아래 번갈아 (겹침 방지)
-      return `<circle cx="${x}" cy="${y}" r="5.5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"/>`
-        +`<text x="${x}" y="${y+dy}" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--ink)" font-family="var(--sans)">${r.cc}</text>`;
-    }).join('');
+    // 같은 국면에 여러 시장이 있으면 해당 곡선 구간을 따라 나란히 배치(겹침 방지).
+    const grp={}; CUR.forEach(r=>{ if(typeof r.phase==='number') (grp[r.phase]=grp[r.phase]||[]).push(r); });
+    let out='';
+    Object.keys(grp).forEach(ph=>{
+      const arr=grp[ph], n=arr.length, sg=SEG[+ph];
+      arr.forEach((r,k)=>{
+        const t=0.5+(k-(n-1)/2)*0.25;                      // 구간 중점 기준 25%씩 간격
+        const x=sg[0]+(sg[2]-sg[0])*t, y=sg[1]+(sg[3]-sg[1])*t;
+        // 1개면 점 위 중앙, 여러 개면 점 왼쪽(곡선 바깥쪽)에 라벨 — 서로·천장 라벨과 겹치지 않게
+        const lab = n===1
+          ? `<text x="${x}" y="${y-11}" text-anchor="middle"`
+          : `<text x="${x-10}" y="${y+4.5}" text-anchor="end"`;
+        out+=`<circle cx="${x}" cy="${y}" r="5.5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"/>`
+          +`${lab} font-size="12.5" font-weight="600" fill="var(--ink)" font-family="var(--sans)">${r.cc}</text>`;
+      });
+    });
+    g.innerHTML=out;
   }
   /* 월별 국면 히스토리 — READS[].hist 를 월 기준으로 병합, 색칩으로 표시 */
   function buildHistory(){

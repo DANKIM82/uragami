@@ -56,6 +56,11 @@ FRED = {
     "jp_exp": "JPNXTEXVA01CXMLM",  # Japan 수출액(엔, 현재가격) — 실적 프록시(한국 수출금액지수와 동일 개념)
     "us_real":"DFII10",            # US 10Y TIPS (글로벌 오버레이, 일간→월말)
     "kr_10y_bk":"IRLTLT01KRM156N", # 한국 10Y 백업
+    # 미국 — 실질금리 = 10Y − CPI YoY (한·일과 동일 정의로 비교 가능성 유지)
+    "us_10y":  "DGS10",            # UST 10Y (일간→월말)
+    "us_cpi":  "CPIAUCSL",         # CPI-U 총지수
+    "us_sales":"RSAFS",            # 소매판매(명목) — 실적 프록시: 미국은 소비 주도 경제라 명목 매출 대용
+    "us_ip":   "INDPRO",           # 산업생산(참고)
 }
 # e-Stat (일본 공식 통계, 월간 지수) — FRED OECD-MEI 일본 피드 중단으로 직접 연동.
 #   각 항목: statsDataId + 카테고리 필터(cdTab/cdCat/cdArea). 검증 완료(2026-06 갱신).
@@ -267,10 +272,13 @@ def zscore(s: pd.Series, win=Z_WIN) -> pd.Series:
     sd = s.rolling(win, min_periods=max(12, win // 3)).std()
     return (s - mu) / sd
 
-def features(real_rate: pd.Series, earn_proxy_level: pd.Series) -> pd.DataFrame:
+def features(real_rate: pd.Series, earn_proxy_level: Optional[pd.Series] = None,
+             earn_yoy: Optional[pd.Series] = None) -> pd.DataFrame:
+    """earn_proxy_level(지수·금액 레벨) 또는 earn_yoy(이미 YoY %) 중 하나를 받음."""
     rr = real_rate.rolling(3, min_periods=1).mean()
     rr_chg = rr.diff(3)
-    e_yoy  = yoy(earn_proxy_level).rolling(3, min_periods=1).mean()
+    ey = earn_yoy if earn_yoy is not None else yoy(earn_proxy_level)
+    e_yoy  = ey.rolling(3, min_periods=1).mean()
     e_chg  = e_yoy.diff(3)                       # 실적 모멘텀(YoY 가속/둔화)
     df = pd.DataFrame({
         "real_rate": real_rate, "rr": rr, "e_yoy": e_yoy,
@@ -303,7 +311,7 @@ def classify(df: pd.DataFrame, gate_mom: Optional[pd.Series] = None,
     주가 강세(모멘텀 > thr)가 거부함. "주가가 강하게 오르는데 가격 하락 국면일 수 없다"
     — 순환참조가 아니라 검증축의 거부권. 거부 시 3→실적(2), 5→금융(0)으로 대체.
     (예: 일본 리플레이션 — 디플레 탈출형 금리 정상화를 역금융으로 오분류하는 것을 차단.)"""
-    out, prev = [], 0
+    out, blk, prev = [], [], 0
     for idx, dRR, dE in zip(df.index, df["dRR"], df["dE"]):
         cand = _raw_phase(float(dRR), float(dE), prev)
         d = (cand - prev) % 6
@@ -313,13 +321,20 @@ def classify(df: pd.DataFrame, gate_mom: Optional[pd.Series] = None,
             nv = (prev + 1) % 6        # 멀리 앞선 신호 → 한 칸씩 전진
         else:
             nv = prev                  # d==0 또는 d in (4,5): 유지
+        b = None
         if gate_mom is not None and nv in (3, 5):
             m = gate_mom.get(idx)
             if m is not None and not pd.isna(m) and m > thr:
+                b = nv                     # 이번 달 게이트가 실제로 거부한 국면
                 nv = 2 if nv == 3 else 0   # 주가 강세 → 하락 국면 거부
         prev = nv
-        out.append(prev)
-    return pd.Series(out, index=df.index, name="phase")
+        out.append(prev); blk.append(b)
+    ph = pd.Series(out, index=df.index, name="phase")
+    # 게이트 발동 기록(해당 월에 거부된 하락 국면 번호, 미발동=None).
+    # 게이트 유무로 두 경로를 따로 돌려 비교하면 링 경로가 한 번 갈라진 뒤 영구히 '보정'으로
+    # 찍히는 오표시가 생기므로(예: 미국 2024~), 발동 월만 표시한다.
+    ph.attrs["blocked"] = pd.Series(blk, index=df.index, dtype=object)
+    return ph
 
 # ──────────────────────────────────────────────────────────────────────────
 # 4. 시장별 현재 국면 빌드
@@ -348,14 +363,39 @@ def _watch(dRR: float, dE: float, phase: int) -> Optional[str]:
 # 검증축: 시장 주가지수. 분류 입력에는 절대 넣지 않음(순환참조 방지). 분류 결과와
 #   주가 추세가 어긋날 때 경고만 띄움 — "역금융인데 지수 급등" 같은 오분류를 잡아냄.
 PRICE = {
-    "한국": {"src": "ecos", "stat": "802Y001", "item": "0001000", "cycle": "D", "name": "KOSPI"},
-    "일본": {"src": "fred", "id": "NIKKEI225", "name": "Nikkei 225"},
+    "한국": {"src": "ecos", "stat": "802Y001", "item": "0001000", "cycle": "D", "name": "KOSPI", "key": "kospi"},
+    "일본": {"src": "fred", "id": "NIKKEI225", "name": "Nikkei 225", "key": "nikkei"},
+    "미국": {"src": "fred", "id": "SP500", "name": "S&P 500", "key": "spx"},
 }
+
+# ── 오프라인 스냅샷 모드(--offline DIR) ─────────────────────────────────────
+#   API 키·네트워크 없이 data/*.txt 로 재현. 파일 형식: 첫 줄 "start=YYYY-MM",
+#   둘째 줄 쉼표구분 월간 값(nan 허용). 키가 OFFLINE에 있으면 라이브 호출 대신 사용.
+OFFLINE: dict[str, pd.Series] = {}
+
+def load_offline(folder: str) -> dict:
+    import glob
+    out = {}
+    for f in sorted(glob.glob(os.path.join(folder, "*.txt"))):
+        lines = [l.strip() for l in open(f, encoding="utf-8") if l.strip()]
+        start = lines[0].split("=", 1)[1]
+        vals = [float(x) for x in ",".join(lines[1:]).split(",") if x.strip()]
+        idx = pd.period_range(start=start, periods=len(vals), freq="M")
+        s = pd.Series(vals, index=idx).interpolate(limit_area="inside")  # 결측(셧다운 등) 선형보간
+        out[os.path.splitext(os.path.basename(f))[0]] = s
+    return out
+
+def get(key: str, live):
+    """오프라인 스냅샷이 있으면 사용, 없으면 라이브 페처 호출."""
+    return OFFLINE[key] if key in OFFLINE else live()
+
 def _price_series(cc: str) -> Optional[pd.Series]:
     """시장 주가지수(월간) 가져오기. 실패 시 None."""
     cfg = PRICE.get(cc)
     if not cfg:
         return None
+    if cfg.get("key") in OFFLINE:
+        return OFFLINE[cfg["key"]].dropna()
     try:
         if cfg["src"] == "ecos":
             s = ecos_series(cfg["stat"], cfg["item"], cycle=cfg.get("cycle", "M"))
@@ -411,35 +451,38 @@ def price_check_at(s: Optional[pd.Series], idx, phase: int, name: str) -> Option
             "yoy": round(yoy_, 1) if yoy_ is not None else None,
             "expect": exp, "actual": actual, "diverge": diverge}
 
-def build_read(cc, mkt, real_rate, earn_level, specs, why_tmpl) -> Read:
+def build_read(cc, mkt, real_rate, earn_level, specs, why_tmpl, earn_yoy=None) -> Read:
     """specs: [(label, series, suffix, note, src), ...] — 월별 값 계산용.
     src: {url,tip} 또는 None(계산값). metrics에 [라벨,값,note,url,tip]로 실림.
-    현재(최신월) Read + HIST_START~ 월별 전체 스냅샷(hist) 생성 → 과거 시점 재현 가능."""
-    df = features(real_rate, earn_level)
+    현재(최신월) Read + HIST_START~ 월별 전체 스냅샷(hist) 생성 → 과거 시점 재현 가능.
+    earn_yoy를 주면 레벨 대신 YoY(%) 시계열을 실적 프록시로 사용."""
+    df = features(real_rate, earn_level, earn_yoy)
+    # 최신월 = 금리·물가·실적 세 입력이 모두 발표된 마지막 달(주가 월은 무관)
     px_s  = _price_series(cc)
     pname = PRICE.get(cc, {}).get("name", "")
     gate = ((px_s / px_s.shift(PX_MOM) - 1) * 100
             if px_s is not None and len(px_s) > PX_MOM else None)
-    ph     = classify(df, gate_mom=gate)        # 주가 검증 게이트 적용
-    ph_raw = classify(df)                        # 게이트 없는 원(매크로) 분류
+    ph  = classify(df, gate_mom=gate)            # 주가 검증 게이트 적용
+    blk = ph.attrs["blocked"]                    # 게이트가 실제로 거부한 월만 기록
 
-    def make_why(p, pr, dRR, dE):
-        if pr != p:
-            return (f"매크로 신호는 {PHASES[pr]}이나, 주가 강세(검증축)가 하락 국면을 부정 "
+    def make_why(p, b, dRR, dE):
+        if b is not None:
+            return (f"매크로 신호는 {PHASES[b]}이나, 주가 강세(검증축)가 하락 국면을 부정 "
                     f"→ {PHASES[p]}로 판정. dRR={dRR:+.2f}, dE={dE:+.2f}.")
         return why_tmpl.format(lead=("금리" if abs(dRR) > abs(dE) else "실적"), dRR=dRR, dE=dE)
 
     def snap(idx) -> dict:
-        p, pr = int(ph[idx]), int(ph_raw[idx])
+        p = int(ph[idx]); b = blk[idx]
+        b = int(b) if b is not None and not pd.isna(b) else None
         dRR, dE = float(df.loc[idx, "dRR"]), float(df.loc[idx, "dE"])
         return {"m": str(idx), "phase": p,
-                "gated": PHASES[pr] if pr != p else None,
+                "gated": PHASES[b] if b is not None else None,
                 "dRR": round(dRR, 2), "dE": round(dE, 2),
                 "watch": _watch(dRR, dE, p),
                 "metrics": [[lab, fmt_at(s, idx, suf), note,
                              (sr or {}).get("url"), (sr or {}).get("tip")]
                             for (lab, s, suf, note, sr) in specs],
-                "why": make_why(p, pr, dRR, dE),
+                "why": make_why(p, b, dRR, dE),
                 "pin": PIN[p],
                 "pxchk": price_check_at(px_s, idx, p, pname)}
 
@@ -449,10 +492,12 @@ def build_read(cc, mkt, real_rate, earn_level, specs, why_tmpl) -> Read:
                 cur["pin"], cur["pxchk"], cur["gated"], hist)
 
 def korea_read() -> Read:
-    try:    y10 = ecos_series(**ECOS["kr_10y"])
-    except Exception: y10 = fred_series(FRED["kr_10y_bk"])
-    cpi = yoy(ecos_series(**ECOS["kr_cpi"]))
-    exp_idx = ecos_series(**ECOS["kr_expamt"])
+    def _y10():
+        try:    return ecos_series(**ECOS["kr_10y"])
+        except Exception: return fred_series(FRED["kr_10y_bk"])
+    y10 = get("kr_10y", _y10)
+    cpi = yoy(get("kr_cpi", lambda: ecos_series(**ECOS["kr_cpi"])))
+    exp_idx = get("kr_exp", lambda: ecos_series(**ECOS["kr_expamt"]))
     real = (y10 - cpi).dropna()
     specs = [("국채 10년", y10, "%", "ECOS 국고채10년",
               src(ECOS_HOME, "ECOS 817Y002 국고채(10년) · ecos.bok.or.kr에서 검색")),
@@ -466,25 +511,50 @@ def korea_read() -> Read:
                       "현재 주도={lead} (dRR={dRR:+.2f}, dE={dE:+.2f}).")
 
 def japan_read(edinet=False) -> Read:
-    y10 = fred_series(FRED["jp_10y"])
-    cpi = yoy(estat_series(ESTAT["jp_cpi"]["id"], ESTAT["jp_cpi"]["filt"]))  # 총합 지수 → YoY
-    exp = fred_series(FRED["jp_exp"])                                        # 수출액(매출) = 실적 프록시
-    ip  = estat_series(ESTAT["jp_ip"]["id"], ESTAT["jp_ip"]["filt"])         # 鉱工業 생산(참고용)
+    y10 = get("jp_10y", lambda: fred_series(FRED["jp_10y"]))
+    cpi = yoy(get("jp_cpi", lambda: estat_series(ESTAT["jp_cpi"]["id"], ESTAT["jp_cpi"]["filt"])))
+    # 수출액(매출) = 실적 프록시. 오프라인 스냅샷은 재무성 통관 수출 YoY(엔화)를 직접 사용.
+    if "jp_exp_yoy" in OFFLINE:
+        exp_yoy = OFFLINE["jp_exp_yoy"]
+    else:
+        exp_yoy = yoy(fred_series(FRED["jp_exp"]))
+    ip_yoy = get("jp_ip_yoy", lambda: yoy(estat_series(ESTAT["jp_ip"]["id"], ESTAT["jp_ip"]["filt"])))
     real = (y10 - cpi).dropna()
     breadth = edinet_opinc_breadth() if edinet else None
-    note_exp = "FRED 일본 수출액" + (f" · EDINET 영익+ {breadth:.0f}%" if breadth is not None else "")
+    note_exp = ("재무성 통관수출" if "jp_exp_yoy" in OFFLINE else "FRED 일본 수출액") + (f" · EDINET 영익+ {breadth:.0f}%" if breadth is not None else "")
     specs = [("국채 10년", y10, "%", "FRED JGB10Y",
               src(FRED_PAGE.format(FRED["jp_10y"]), f"FRED {FRED['jp_10y']} · Japan 10Y")),
              ("CPI (YoY)", cpi, "%", "e-Stat 総合",
               src(ESTAT_PAGE.format(ESTAT["jp_cpi"]["id"]), "e-Stat 0003427113 · 消費者物価指数 全国総合")),
              ("실질금리", real, "%", "10Y − CPI", None),   # 계산값(JGB10Y − CPI YoY)
-             ("수출 (YoY)", yoy(exp), "%", note_exp,
+             ("수출 (YoY)", exp_yoy, "%", note_exp,
               src(FRED_PAGE.format(FRED["jp_exp"]), f"FRED {FRED['jp_exp']} · 일본 수출액")),
-             ("생산 (YoY)", yoy(ip), "%", "e-Stat 鉱工業 (참고)",
+             ("생산 (YoY)", ip_yoy, "%", "e-Stat 鉱工業 (참고)",
               src(ESTAT_PAGE.format(ESTAT["jp_ip"]["id"]), "e-Stat 0004052181 · 鉱工業生産指数"))]
-    return build_read("일본", "TOPIX · Nikkei", real, exp, specs,
+    return build_read("일본", "TOPIX · Nikkei", real, None, specs,
                       "수출(실적)과 금리 정상화가 동시 진행. "
-                      "현재 주도={lead} (dRR={dRR:+.2f}, dE={dE:+.2f}).")
+                      "현재 주도={lead} (dRR={dRR:+.2f}, dE={dE:+.2f}).", earn_yoy=exp_yoy)
+
+def us_read() -> Read:
+    """미국: 실질금리 = UST10Y − CPI YoY, 실적 프록시 = 명목 소매판매 YoY.
+    한·일의 '수출금액'과 같은 명목 매출 개념을 소비 주도 경제에 맞게 치환.
+    산업생산 YoY는 참고 지표(분류 입력 아님)."""
+    y10 = get("us_10y", lambda: fred_series(FRED["us_10y"]))
+    cpi = yoy(get("us_cpi", lambda: fred_series(FRED["us_cpi"])))
+    sales_yoy = get("us_retail_yoy", lambda: yoy(fred_series(FRED["us_sales"])))
+    ip_yoy = get("us_ip_yoy", lambda: yoy(fred_series(FRED["us_ip"])))
+    real = (y10 - cpi).dropna()
+    fp = lambda k: FRED_PAGE.format(FRED[k])
+    specs = [("국채 10년", y10, "%", "FRED UST10Y", src(fp("us_10y"), "FRED DGS10 · 10-Year Treasury")),
+             ("CPI (YoY)", cpi, "%", "FRED CPI-U", src(fp("us_cpi"), "FRED CPIAUCSL · CPI-U 총지수")),
+             ("실질금리", real, "%", "10Y − CPI", None),
+             ("소매판매 (YoY)", sales_yoy, "%", "FRED 소매판매",
+              src(fp("us_sales"), "FRED RSAFS · 명목 소매판매(실적 프록시)")),
+             ("생산 (YoY)", ip_yoy, "%", "FRED 산업생산 (참고)",
+              src(fp("us_ip"), "FRED INDPRO · 산업생산지수"))]
+    return build_read("미국", "S&P 500", real, None, specs,
+                      "명목 소비(매출)와 장기금리의 줄다리기. "
+                      "현재 주도={lead} (dRR={dRR:+.2f}, dE={dE:+.2f}).", earn_yoy=sales_yoy)
 
 # ──────────────────────────────────────────────────────────────────────────
 # 4.5 종목 유니버스(KOSPI200 · KOSDAQ150) + KRX업종 × 6국면 스탠스
@@ -588,7 +658,7 @@ def inject_universe(html: str, universe: list[dict]) -> str:
 # 5. 대시보드 HTML 재생성 (READS 블록만 교체)
 # ──────────────────────────────────────────────────────────────────────────
 def render(template_path: str, out_path: str, reads: list[Read],
-           universe: Optional[list[dict]] = None):
+           universe: Optional[list[dict]] = None, asof: Optional[str] = None):
     html = open(template_path, encoding="utf-8").read()
     payload = json.dumps([asdict(r) for r in reads], ensure_ascii=False, indent=2)
     new_block = "const READS=" + payload + ";"
@@ -597,7 +667,7 @@ def render(template_path: str, out_path: str, reads: list[Read],
         raise RuntimeError("템플릿에서 READS 블록을 찾지 못함")
     if universe:
         html2 = inject_universe(html2, universe)
-    asof = dt.date.today().isoformat()
+    asof = asof or dt.date.today().isoformat()
     html2 = re.sub(r"as of \d{4}-\d{2}-\d{2}", f"as of {asof}", html2)
     open(out_path, "w", encoding="utf-8").write(html2)
     return out_path
@@ -638,13 +708,19 @@ def main():
     ap.add_argument("--out",      default=os.path.join(here, "uragami_live_phase.generated.html"))
     ap.add_argument("--edinet",   action="store_true",
                     help="일본 EDINET 영업이익 확산 확증(느림, 3~5초/호출)")
+    ap.add_argument("--offline",  default=None,
+                    help="API 대신 월간 스냅샷 폴더(data/*.txt) 사용 — 키·네트워크 불필요")
+    ap.add_argument("--asof",     default=None, help="as-of 표기 날짜(YYYY-MM-DD), 기본=오늘")
     args = ap.parse_args()
+    if args.offline:
+        OFFLINE.update(load_offline(args.offline))
+        print(f"  오프라인 스냅샷 {len(OFFLINE)}개 시계열 로드 ← {args.offline}")
 
     universe = load_universe(here)
-    reads = [korea_read(), japan_read(edinet=args.edinet)]
+    reads = [korea_read(), japan_read(edinet=args.edinet), us_read()]
     summary(reads)
     print(f"  유니버스 {len(universe)}종목 로드 (KOSPI200 · KOSDAQ150)")
-    path = render(args.template, args.out, reads, universe)
+    path = render(args.template, args.out, reads, universe, asof=args.asof)
     print(f"대시보드 재생성 완료 → {path}")
 
 if __name__ == "__main__":

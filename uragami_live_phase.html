@@ -27,14 +27,15 @@
   }
   *{box-sizing:border-box;}
   body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); -webkit-font-smoothing:antialiased; line-height:1.6; padding:32px 20px;}
-  .wrap{max-width:880px; margin:0 auto;}
+  .wrap{max-width:1000px; margin:0 auto;}
   .eyebrow{font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink3); margin:0 0 4px;}
   h1{font-size:24px; font-weight:600; margin:0 0 4px; letter-spacing:-0.01em;}
   .sub{font-size:14px; color:var(--ink2); margin:0 0 22px; max-width:64ch;}
   .secrow{display:flex; align-items:baseline; justify-content:space-between; margin:0 0 12px; gap:12px; flex-wrap:wrap;}
   .sectitle{font-size:13px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink3);}
   .asof{font-size:12px; color:var(--ink3); font-family:var(--mono);}
-  .reads{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:26px;}
+  .reads{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; margin-bottom:26px;}
+  .mmonth{font-size:10.5px; color:var(--ink3); font-family:var(--mono); font-weight:400; margin-left:6px;}
   .mcard{border:0.5px solid var(--line); border-radius:14px; padding:16px 18px; background:var(--surface); cursor:pointer; transition:border-color .15s;}
   .mcard:hover{border-color:var(--line2);}
   .mcard.act{border-width:1.5px;}
@@ -158,8 +159,8 @@
 <body>
 <div class="wrap">
   <p class="eyebrow">Uragami four-season cycle · 실질금리 재해석 · live read</p>
-  <h1>한국·일본 현재 국면</h1>
-  <p class="sub">매크로(금리·물가·실적) 입력으로 두 시장을 6국면 사이클 위에 찍었습니다. 주가 화살표는 분류 입력이 아니라 기대 페이오프·포지션으로만 씁니다. 아래 데이터는 2026년 6월 말 기준 스냅샷이며, 카드와 곡선·표는 모두 연동됩니다.</p>
+  <h1>한국·일본·미국 현재 국면</h1>
+  <p class="sub">매크로(금리·물가·실적) 입력으로 세 시장을 6국면 사이클 위에 찍었습니다. 주가 화살표는 분류 입력이 아니라 기대 페이오프·포지션으로만 씁니다. 각 카드의 기준월은 금리·물가·실적 지표가 모두 발표된 마지막 달이며, 카드와 곡선·표는 모두 연동됩니다.</p>
 
   <div class="secrow">
     <span class="sectitle">현재 국면<span id="viewtag" style="text-transform:none;letter-spacing:0"></span></span>
@@ -179,8 +180,8 @@
 
   <div class="chartcard">
   <svg width="100%" viewBox="0 0 680 272" role="img" aria-labelledby="svgt svgd">
-    <title id="svgt">주가 사이클 파동 위의 6국면과 한국·일본 현재 위치</title>
-    <desc id="svgd">한국·일본의 현재 국면을 6국면 곡선 위에 점으로 표시.</desc>
+    <title id="svgt">주가 사이클 파동 위의 6국면과 한국·일본·미국 현재 위치</title>
+    <desc id="svgd">한국·일본·미국의 현재 국면을 6국면 곡선 위에 점으로 표시.</desc>
     <defs>
       <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
     </defs>
@@ -241,14 +242,15 @@
   <div id="histwrap"></div>
 
   <div class="secrow" style="margin-top:28px">
-    <span class="sectitle">섹터 로테이션 & 종목 익스포저<span id="expphase" style="text-transform:none;letter-spacing:0"></span></span>
+    <span class="sectitle">한국 섹터 로테이션 & 종목 익스포저<span id="expphase" style="text-transform:none;letter-spacing:0"></span></span>
     <span class="asof">KOSPI 200 · KOSDAQ 150 · 시총순</span>
   </div>
   <div id="exposure"></div>
 
   <p class="foot">
-    <b>데이터</b> 한국 국채10년 4.08%(’26-06-17), CPI 3.1%(5월), 수출 +53.2%·반도체 +169%(5월). 일본 국채10년 ~2.65%(5월 고점 2.8%), 코어CPI ~2.8%, FY26 성장 0.5%로 하향. 출처 Trading Economics, MOTIE/관세청, BOJ, CNBC, Nikkei.<br>
-    <b>한계</b> 브라우저 아티팩트는 ECOS·FRED를 직접 호출할 수 없어(키·CORS) 이 화면은 수동 스냅샷입니다. 진짜 자동 갱신은 ECOS+FRED를 끌어와 이 HTML을 재생성하는 파이썬 잡(스크립트의 READS 객체만 교체)으로 돌리면 됩니다.<br>
+    <b>데이터</b> 한국 국채10년·CPI·수출(10월, 수출 +94% YoY), 일본 JGB10Y·CPI·통관수출(9월), 미국 UST10Y·CPI-U·명목 소매판매(9월). 주가 검증축은 KOSPI·Nikkei 225·S&P 500 월말 종가(11월은 진행 중). 이번 스냅샷 출처는 TradingView 경제지표(원출처 ECOS·관세청, 재무성·총무성, BLS·Census·연준)이며 라이브 실행 시 ECOS·FRED·e-Stat API로 대체됩니다.<br>
+    <b>미국 정의</b> 실질금리 = UST10Y − CPI YoY(한·일과 동일 정의), 실적 프록시 = 명목 소매판매 YoY(소비 주도 경제의 명목 매출 대용), 산업생산 YoY는 참고 지표.<br>
+    <b>한계</b> 브라우저 아티팩트는 ECOS·FRED를 직접 호출할 수 없어(키·CORS) 이 화면은 스냅샷입니다. 재생성은 <code>python uragami_phase_pipeline.py</code>(라이브 API) 또는 <code>--offline data</code>(저장된 월간 스냅샷)로 READS 객체만 교체합니다.<br>
     <b>주의</b> 주가 화살표는 검증축·익스포저 맵으로만 사용. 분류기 피처로 넣으면 순환참조.
   </p>
 </div>
@@ -305,9 +307,9 @@
   let VIEW_M=null, CUR=[];
   function viewAt(m){
     return READS.map(r=>{
-      if(!m) return {cc:r.cc,mkt:r.mkt,phase:r.phase,watch:r.watch,metrics:r.metrics,why:r.why,pin:r.pin,pxchk:r.pxchk,gated:r.gated};
+      if(!m) return {cc:r.cc,mkt:r.mkt,m:(r.hist&&r.hist.length?r.hist[r.hist.length-1].m:null),phase:r.phase,watch:r.watch,metrics:r.metrics,why:r.why,pin:r.pin,pxchk:r.pxchk,gated:r.gated};
       const h=(r.hist||[]).find(x=>x.m===m);
-      return h?{cc:r.cc,mkt:r.mkt,phase:h.phase,watch:h.watch,metrics:h.metrics,why:h.why,pin:h.pin,pxchk:h.pxchk,gated:h.gated}:null;
+      return h?{cc:r.cc,mkt:r.mkt,m:h.m,phase:h.phase,watch:h.watch,metrics:h.metrics,why:h.why,pin:h.pin,pxchk:h.pxchk,gated:h.gated}:null;
     }).filter(Boolean);
   }
   function setView(m){
@@ -334,7 +336,7 @@
         return `<span class="ml">${m[0]}</span><span class="mv"><b>${m[1]}</b> ${note}</span>`;
       }).join('');
       return `<div class="mcard" id="mc${i}" onclick="sel(${r.phase})" style="border-color:${t.bd}">
-        <div class="mctop"><span class="cc">${r.cc} <span class="mkt">${r.mkt}</span></span><span class="badge" style="background:${t.bg};color:${t.tx}">${p.ll}</span></div>
+        <div class="mctop"><span class="cc">${r.cc} <span class="mkt">${r.mkt}</span>${r.m?`<span class="mmonth">기준 ${r.m}</span>`:''}</span><span class="badge" style="background:${t.bg};color:${t.tx}">${p.ll}</span></div>
         <div class="phase">${p.k}${watch}</div>
         <div class="leadline">주도변수 <b style="color:${t.tx}">${p.lead}</b></div>
         <div class="mtab">${mets}</div>
@@ -348,7 +350,8 @@
   function pxCheck(r){
     const px=r.pxchk; if(!px) return '';
     const EXP={'1':'상승','-1':'하락','0':'횡보'};
-    const yo = (px.yoy!=null) ? `${px.yoy>0?'+':''}${px.yoy}% YoY` : `${px.mom>0?'+':''}${px.mom}% 6M`;
+    const sg=v=>`${v>0?'+':''}${v}%`;
+    const yo = `${sg(px.mom)} 6M` + (px.yoy!=null ? ` · ${sg(px.yoy)} YoY` : '');
     if(r.gated)
       return `<div class="pxinfo"><b>ⓘ 주가 게이트</b> 매크로 신호는 ${r.gated}이나 주가 강세(${px.name} ${yo})가 하락 국면을 부정 → 현 국면으로 보정</div>`;
     if(px.diverge)
@@ -483,12 +486,23 @@
   /* 시장별 위치 점을 활성 뷰(CUR)의 pin 으로 곡선 위에 렌더 (카드 국면과 항상 일치) */
   function buildPins(){
     const g=document.getElementById('pins'); if(!g) return;
-    g.innerHTML=CUR.map((r,i)=>{
-      if(!r.pin||r.pin.length<2) return '';
-      const x=r.pin[0], y=r.pin[1], dy=(i%2===0)?-11:18;  // 라벨 위/아래 번갈아 (겹침 방지)
-      return `<circle cx="${x}" cy="${y}" r="5.5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"/>`
-        +`<text x="${x}" y="${y+dy}" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--ink)" font-family="var(--sans)">${r.cc}</text>`;
-    }).join('');
+    // 같은 국면에 여러 시장이 있으면 해당 곡선 구간을 따라 나란히 배치(겹침 방지).
+    const grp={}; CUR.forEach(r=>{ if(typeof r.phase==='number') (grp[r.phase]=grp[r.phase]||[]).push(r); });
+    let out='';
+    Object.keys(grp).forEach(ph=>{
+      const arr=grp[ph], n=arr.length, sg=SEG[+ph];
+      arr.forEach((r,k)=>{
+        const t=0.5+(k-(n-1)/2)*0.25;                      // 구간 중점 기준 25%씩 간격
+        const x=sg[0]+(sg[2]-sg[0])*t, y=sg[1]+(sg[3]-sg[1])*t;
+        // 1개면 점 위 중앙, 여러 개면 점 왼쪽(곡선 바깥쪽)에 라벨 — 서로·천장 라벨과 겹치지 않게
+        const lab = n===1
+          ? `<text x="${x}" y="${y-11}" text-anchor="middle"`
+          : `<text x="${x-10}" y="${y+4.5}" text-anchor="end"`;
+        out+=`<circle cx="${x}" cy="${y}" r="5.5" fill="var(--ink)" stroke="var(--surface)" stroke-width="2"/>`
+          +`${lab} font-size="12.5" font-weight="600" fill="var(--ink)" font-family="var(--sans)">${r.cc}</text>`;
+      });
+    });
+    g.innerHTML=out;
   }
   /* 월별 국면 히스토리 — READS[].hist 를 월 기준으로 병합, 색칩으로 표시 */
   function buildHistory(){
